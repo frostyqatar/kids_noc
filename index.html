@@ -284,6 +284,7 @@ b{color:var(--hi);font-weight:800}
   <header class="top">
     <div class="brand"><svg viewBox="0 0 120 150" aria-hidden="true"><use href="#qatra"/></svg><span data-i="brand"></span></div>
     <div class="tools">
+      <button class="pill" id="snd" type="button" aria-pressed="true"></button>
       <button class="pill" id="lang" type="button" data-i="langBtn"></button>
       <button class="pill" id="reset" type="button" data-ia="resetBtn"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M19.5 4.2v4.6h-4.6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <button class="pill" id="fs" type="button" data-ia="fs"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -636,7 +637,8 @@ b{color:var(--hi);font-weight:800}
 const T={
  doc_title:['North Oil Company for Kids','شركة نفط الشمال للأطفال'],
  brand:['North Oil Company','شركة نفط الشمال'],
- langBtn:['عربي','English'],
+  langBtn:['عربي','English'],
+  snd_off:['Turn sound off','إيقاف الصوت'], snd_on:['Turn sound on','تشغيل الصوت'],
   back:['Back','رجوع'], next:['Next','التالي'], fs:['Full screen','ملء الشاشة'], slide:['Slide {n}','الشريحة {n}'],
   resetBtn:['Start over from the beginning','لنبدأ من جديد'],
  m_sky:['Sky','السماء'], m_sea:['Sea','البحر'], m_rock:['Rock','الصخور'], m_oil:['Oil','النفط'],
@@ -736,6 +738,34 @@ let lang='en';
 try{const s=localStorage.getItem('noc-kids-lang'); if(s==='ar'||s==='en') lang=s;}catch(e){}
 const tr=(k,n)=>{const v=T[k]; if(!v) return k; let s=v[lang==='ar'?1:0]; if(n!==undefined) s=s.replace('{n}',n); return s;};
 
+/* sound effects */
+const SFX={
+  whoosh:{src:'whoose.mp3', vol:.4, max:3},
+  sparkle:{src:'sparkle.mp3', vol:.55, max:4},
+  win:{src:'winning_board.mp3', vol:.1, max:2}
+};
+const sfxPools={};
+Object.keys(SFX).forEach(k=>{const a=new Audio(SFX[k].src); a.preload='auto'; a.volume=SFX[k].vol; sfxPools[k]=[a];});
+let soundOn=true;
+try{ soundOn=localStorage.getItem('noc-kids-sound')!=='off'; }catch(e){}
+function playSfx(k){
+  if(!soundOn||!sfxPools[k]) return;
+  const cfg=SFX[k], list=sfxPools[k];
+  let a=list.find(x=>x.paused||x.ended);
+  if(!a){
+    if(list.length>=cfg.max) a=list[0];
+    else{ a=new Audio(cfg.src); a.preload='auto'; a.volume=cfg.vol; list.push(a); }
+  }
+  try{ a.currentTime=0; }catch(e){}
+  const p=a.play(); if(p&&p.catch) p.catch(()=>{});
+}
+function updateSound(){
+  const b=$('#snd'); if(!b) return;
+  b.textContent=soundOn?'🔊':'🔇';
+  b.setAttribute('aria-pressed',String(soundOn));
+  b.setAttribute('aria-label',tr(soundOn?'snd_off':'snd_on'));
+}
+
 /* pools */
 const poolBox=$('#pools');
 for(let i=0;i<19;i++){const s=document.createElement('span'); s.className='pool'; s.style.setProperty('--i',i); s.textContent='🏊'; poolBox.appendChild(s);}
@@ -748,7 +778,7 @@ const dots=$$('.dot');
 let cur=-1;
 function go(i){
   i=Math.max(0,Math.min(last,i)); if(i===cur) return;
-  if(cur>=0) slides[cur].classList.remove('on');
+  if(cur>=0){ playSfx('whoosh'); slides[cur].classList.remove('on'); }
   cur=i; const s=slides[i]; s.classList.add('on'); s.scrollTop=0;
   const d=parseFloat(s.dataset.depth||'0');
   depthEl.style.setProperty('--d',d); mk.style.top=(d*100)+'%';
@@ -777,7 +807,7 @@ function runDrill(){
     p.style.strokeDashoffset=L*(1-e);
     const pt=p.getPointAtLength(L*e); bit.setAttribute('cx',pt.x); bit.setAttribute('cy',pt.y);
     if(k<1) drillRAF=requestAnimationFrame(step);
-    else{found.classList.add('show'); void oil.getBBox(); oil.classList.add('glow');}
+    else{found.classList.add('show'); void oil.getBBox(); oil.classList.add('glow'); playSfx('sparkle');}
   }
   drillRAF=requestAnimationFrame(step);
 }
@@ -802,7 +832,7 @@ function confetti(n){
     box.appendChild(s); setTimeout(()=>s.remove(),4200);
   }
 }
-const hooks={drill:runDrill, count:runCount, hero:()=>setTimeout(()=>confetti(90),600)};
+const hooks={drill:runDrill, count:runCount, hero:()=>setTimeout(()=>{playSfx('win'); confetti(90);},600)};
 
 /* safety gear */
 const gearSet=new Set(), dress=$('#dress');
@@ -811,12 +841,13 @@ $$('.gbtn').forEach(b=>b.addEventListener('click',()=>{
   document.getElementById('gears').classList.add('tapped');
   const g=b.dataset.g; if(gearSet.has(g)) gearSet.delete(g); else gearSet.add(g);
   const on=gearSet.has(g); b.setAttribute('aria-pressed',String(on)); dress.classList.toggle('g-'+g,on);
-  updateGear(); if(on&&gearSet.size===6) confetti(50);
+  playSfx('sparkle');
+  updateGear(); if(on&&gearSet.size===6){ playSfx('win'); confetti(50); }
 }));
 function updateGear(){ $('#gcount').textContent=tr('g_count',gearSet.size); $('#gdone').textContent=gearSet.size===6?tr('g_done'):''; }
 
 /* oil tiles */
-$$('.tile').forEach(b=>b.addEventListener('click',()=>{b.setAttribute('aria-pressed','true'); b.classList.remove('wig'); void b.offsetWidth; b.classList.add('wig');}));
+$$('.tile').forEach(b=>b.addEventListener('click',()=>{b.setAttribute('aria-pressed','true'); b.classList.remove('wig'); void b.offsetWidth; b.classList.add('wig'); playSfx('sparkle');}));
 
 /* prize questions */
 function isUnrevealed(){const s=slides[cur]; return !!s && s.dataset.k==='q' && !s.classList.contains('revealed');}
@@ -827,13 +858,13 @@ function reveal(s,on){
   if(on===undefined) on=!s.classList.contains('revealed');
   s.classList.toggle('revealed',on);
   setRevBtn(s,on);
-  if(on) confetti(110);
+  if(on){ playSfx('win'); confetti(110); }
   updateNav();
 }
 $$('.qslide').forEach(s=>{
   s.querySelector('.rev').addEventListener('click',()=>reveal(s));
   const h=s.querySelector('.hintb');
-  h.addEventListener('click',()=>{const on=s.classList.toggle('hinted'); h.setAttribute('aria-expanded',String(on));});
+  h.addEventListener('click',()=>{const on=s.classList.toggle('hinted'); h.setAttribute('aria-expanded',String(on)); if(on) playSfx('sparkle');});
 });
 function advance(){ if(isUnrevealed()) reveal(slides[cur],true); else go(cur+1); }
 
@@ -865,7 +896,7 @@ function applyLang(){
   $$('[data-ia]').forEach(el=>el.setAttribute('aria-label',tr(el.dataset.ia)));
   $('#lang').setAttribute('lang',lang==='ar'?'en':'ar');
   document.title=tr('doc_title');
-  updateGear(); updateNav();
+  updateGear(); updateNav(); updateSound();
 }
 let langBusy=false;
 function toggleLang(){
@@ -890,11 +921,16 @@ function toggleLang(){
 /* controls */
 $('#lang').addEventListener('click',toggleLang);
 $('#reset').addEventListener('click',resetAll);
+$('#snd').addEventListener('click',()=>{
+  soundOn=!soundOn;
+  try{ localStorage.setItem('noc-kids-sound',soundOn?'on':'off'); }catch(e){}
+  updateSound(); if(soundOn) playSfx('sparkle');
+});
 $('#prev').addEventListener('click',()=>go(cur-1));
 $('#next').addEventListener('click',advance);
 $('#start').addEventListener('click',()=>go(1));
 $('#redrill').addEventListener('click',runDrill);
-$('#party').addEventListener('click',()=>confetti(120));
+$('#party').addEventListener('click',()=>{playSfx('win'); confetti(120);});
 const fsb=$('#fs');
 if(!document.fullscreenEnabled) fsb.hidden=true;
 function fsToggle(){try{ if(document.fullscreenElement) document.exitFullscreen(); else { const p=document.documentElement.requestFullscreen(); if(p&&p.catch) p.catch(()=>{}); } }catch(e){}}

@@ -210,6 +210,117 @@ b{color:var(--hi);font-weight:800}
 /* finale */
 .qatra-big{width:min(300px,58vw);margin:0 auto;display:block;animation:bob 2.4s ease-in-out infinite}
 
+/* Qatra narrator */
+.panel{position:relative}
+.qanchor{position:relative}
+.qanchor--map{width:min(380px,100%);margin-inline:auto}
+.qhost{position:absolute;z-index:6;pointer-events:none}
+.qhost--new{width:clamp(54px,6.6vw,92px)}
+.qhost--q.qhost--new{width:clamp(42px,5.4vw,70px)}
+.qhost--mid{left:50%;top:50%;transform:translate(-50%,-50%)}
+.qhost .qsvg{width:100%;height:auto;display:block;filter:drop-shadow(3px 3px 0 rgba(0,0,0,.22));animation:qfloat 2.8s ease-in-out infinite}
+/* eyes: natural saccades + blinks */
+.q-eye{transform-box:fill-box;transform-origin:center;animation:qblink 4.6s cubic-bezier(.4,0,.2,1) infinite}
+.q-eye+.q-eye{animation-delay:.06s}
+.q-pupils{transform-box:fill-box;transform-origin:center;animation:qlook 7.2s ease-in-out infinite}
+@keyframes qblink{0%,90.5%,100%{transform:scaleY(1)}92.5%,96%{transform:scaleY(.06)}}
+@keyframes qlook{
+  0%,15%{transform:translate(0,0)}
+  23%,39%{transform:translate(3.4px,.5px)}
+  47%,61%{transform:translate(-3.6px,.5px)}
+  71%,85%{transform:translate(0,1.6px)}
+  100%{transform:translate(0,0)}
+}
+/* mouth: anime-style jabber — jaw hinge + shape morph + head bob */
+.qm-open{opacity:0;transition:opacity .12s}
+.speaking .qm-shut{opacity:0}
+.speaking .qm-open{opacity:1}
+.qm-jaw,.qm-shape{transform-box:fill-box}
+.qm-jaw{transform-origin:50% 0}
+.qm-shape{transform-origin:50% 35%}
+.speaking .qm-jaw{animation:qjaw .8s cubic-bezier(.45,0,.55,1) infinite}
+.speaking .qm-shape{animation:qshape 1.9s ease-in-out infinite}
+.speaking .qsvg,.qatra.speaking,.qatra-big.speaking{animation:qnod 1.5s ease-in-out infinite}
+@keyframes qjaw{
+  0%{transform:scaleY(.18)}
+  12%{transform:scaleY(1)}
+  22%{transform:scaleY(.3)}
+  34%{transform:scaleY(.95)}
+  46%{transform:scaleY(.22)}
+  58%{transform:scaleY(1.08)}
+  70%{transform:scaleY(.38)}
+  82%{transform:scaleY(.88)}
+  92%{transform:scaleY(.28)}
+  100%{transform:scaleY(.18)}
+}
+@keyframes qshape{
+  0%{transform:scaleX(1) rotate(0deg)}
+  18%{transform:scaleX(1.3) rotate(-5deg) translateX(-.6px)}
+  38%{transform:scaleX(.7) rotate(4deg) translateX(.8px)}
+  58%{transform:scaleX(1.16) rotate(-3deg) translateX(-.4px)}
+  78%{transform:scaleX(.8) rotate(5deg) translateX(.6px)}
+  100%{transform:scaleX(1) rotate(0deg)}
+}
+@keyframes qnod{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  22%{transform:translateY(-3px) rotate(-2.4deg)}
+  48%{transform:translateY(1px) rotate(1.6deg)}
+  72%{transform:translateY(-2px) rotate(-1.2deg)}
+}
+@keyframes qfloat{50%{transform:translateY(-6px)}}
+/* comic speech bubble */
+.qbubble{position:absolute;z-index:7;width:min(250px,58vw);background:var(--panel);border:3px solid var(--edge);border-radius:16px;padding:7px 12px;box-shadow:calc(var(--sx)*4px) 4px 0 var(--drop);opacity:0;transition:opacity .22s;text-align:start}
+.qbubble p{margin:0;font-size:clamp(.84rem,1.3vw,1rem);line-height:1.35;font-weight:700}
+.qbubble::before,.qbubble::after{content:"";position:absolute;border:10px solid transparent}
+.qbubble.on{opacity:1}
+/* bubble above, tail at bottom-right (extends left) */
+.qbubble.br{bottom:calc(100% + 12px);inset-inline-end:0}
+.qbubble.br::after{top:100%;inset-inline-end:16px;border-top-color:var(--edge);margin-top:-1px}
+.qbubble.br::before{top:calc(100% - 4px);inset-inline-end:19px;border-width:7px;border-top-color:var(--panel);z-index:1}
+/* bubble above, tail at bottom-left (extends right) */
+.qbubble.bl{bottom:calc(100% + 12px);inset-inline-start:0}
+.qbubble.bl::after{top:100%;inset-inline-start:16px;border-top-color:var(--edge);margin-top:-1px}
+.qbubble.bl::before{top:calc(100% - 4px);inset-inline-start:19px;border-width:7px;border-top-color:var(--panel);z-index:1}
+/* bubble above, tail centered */
+.qbubble.bc{bottom:calc(100% + 12px);left:50%;transform:translateX(-50%)}
+.qbubble.bc::after{top:100%;left:50%;margin-inline-start:-10px;border-top-color:var(--edge);margin-top:-1px}
+.qbubble.bc::before{top:calc(100% - 4px);left:50%;margin-inline-start:-7px;border-width:7px;border-top-color:var(--panel);z-index:1}
+/* bubble beside, tail points to Qatra (inline-end side) */
+.qbubble.sd{top:50%;inset-inline-end:calc(100% + 12px);transform:translateY(-50%)}
+.qbubble.sd::after{top:50%;inset-inline-end:-11px;transform:translateY(-50%);border:10px solid transparent;border-left-color:var(--edge)}
+.qbubble.sd::before{top:50%;inset-inline-end:-6px;transform:translateY(-50%);border:7px solid transparent;border-left-color:var(--panel);z-index:1}
+:root[dir="rtl"] .qbubble.sd::after{border-left-color:transparent;border-right-color:var(--edge)}
+:root[dir="rtl"] .qbubble.sd::before{border-left-color:transparent;border-right-color:var(--panel)}
+/* title: hero Qatra never mirrors (physical right), keep bubble anchored on the right in RTL too */
+:root[dir="rtl"] .qhost--title{inset-inline-end:auto;right:11%}
+:root[dir="rtl"] .qhost--title .qbubble{inset-inline-end:auto;right:0}
+:root[dir="rtl"] .qhost--title .qbubble::after{inset-inline-end:auto;right:16px}
+:root[dir="rtl"] .qhost--title .qbubble::before{inset-inline-end:auto;right:19px}
+/* comic pop-in */
+.qbubble.br.on{animation:bubInBR .34s cubic-bezier(.3,1.6,.5,1)}
+.qbubble.bl.on{animation:bubInBL .34s cubic-bezier(.3,1.6,.5,1)}
+.qbubble.bc.on{animation:bubInBC .34s cubic-bezier(.3,1.6,.5,1)}
+.qbubble.sd.on{animation:bubInSD .34s cubic-bezier(.3,1.6,.5,1)}
+@keyframes bubInBR{from{opacity:0;transform:translate(16px,14px) scale(.45)}}
+@keyframes bubInBL{from{opacity:0;transform:translate(-16px,14px) scale(.45)}}
+@keyframes bubInBC{from{opacity:0;transform:translateX(-50%) translateY(14px) scale(.45)}}
+@keyframes bubInSD{from{opacity:0;transform:translateY(-50%) translateX(-16px) scale(.45)}}
+.qfig{position:relative;display:flex;justify-content:center}
+/* narrator spots — anchored to artwork / empty corners */
+.qhost--cake{inset-inline-end:2%;bottom:0}
+.qhost--map{inset-inline-end:4%;bottom:5%}
+.qhost--heli{inset-inline-end:5%;bottom:7%}
+.qhost--platform{inset-inline-end:4%;bottom:10%}
+.qhost--well{inset-inline-end:17%;bottom:6%}
+.qhost--sponge,.qhost--tiles{top:7%;inset-inline-end:3%}
+.qhost--q{inset-inline-end:3%;bottom:6%}
+.qhost--title{inset-inline-end:11%;bottom:50%;width:0}
+.qhost--finale{left:50%;bottom:calc(100% - 18px);width:0}
+@media (prefers-reduced-motion:reduce){
+  .qhost .qsvg{animation:none}
+  .q-eye,.q-pupils,.qm-jaw,.qm-shape,.qatra.speaking,.qatra-big.speaking{animation:none}
+}
+
 /* nav */
 .nav{display:flex;align-items:center;justify-content:center;gap:clamp(8px,2vw,18px);padding:6px 12px 12px}
 .navbtn{min-width:52px}
@@ -729,7 +840,21 @@ const T={
  s12_h:['Great job, Offshore Heroes!','أحسنتم يا أبطال البحر!'],
  s12_p:['Today you learned how North Oil Company brings oil up from deep under the sea, safely!','تعلّمتم اليوم كيف تستخرج شركة نفط الشمال النفط من أعماق البحر بأمان!'],
   s12_p2:['Who wants to be an engineer one day? 🙋','من يريد أن يصبح مهندسًا يومًا ما؟ 🙋'],
- s12_btn:['Celebrate! 🎉','لنحتفل! 🎉']
+  s12_btn:['Celebrate! 🎉','لنحتفل! 🎉'],
+ /* Qatra narration — 3 short lines per slide, looped */
+  say0:[['Hi! I’m Qatra.','A tiny drop of oil.','Let’s explore the sea!'],['مرحبًا! أنا قطرة.','قطرة نفط صغيرة.','هيا نستكشف البحر!']],
+  say1:[['We’re a Qatari oil company.','QatarEnergy owns 7 slices.','TotalEnergies owns 3 slices.'],['نحن شركة نفط قطرية.','قطر للطاقة تملك 7 قطع.','وتوتال إنرجيز تملك 3 قطع.']],
+  say2:[['My home is Al-Shaheen.','It’s 80 km north of Ras Laffan.','One of the biggest sea fields!'],['بيتي في حقل الشاهين.','على بعد 80 كم شمال رأس لفان.','من أكبر الحقول البحرية!']],
+  say3:[['Workers come by helicopter.','They stay for weeks.','Engineers, chefs and pilots!'],['يصل العاملون بالمروحية.','ويبقون أسابيع.','مهندسون وطهاة وطيارون!']],
+  say5:[['33 platforms in the sea.','Steel legs like giant tables.','The sea is 60 m deep!'],['33 منصة في البحر.','أرجل فولاذية كطاولات عملاقة.','عمق البحر 60 مترًا!']],
+  say6:[['Made from tiny sea creatures.','Buried under mud and sand.','Heat and rocks made oil!'],['من كائنات بحرية صغيرة.','دُفنت تحت الطين والرمل.','الحرارة والصخور صنعت النفط!']],
+  say7:[['The oil layer here is thin.','Wells bend like a straw.','One well was 12.3 km long!'],['طبقة النفط هنا رقيقة.','الآبار تنحني مثل المصّاصة.','بئر بطول 12.3 كم!']],
+  say8:[['300,000 barrels every day.','That fills 19 big pools!','Half of all Qatar’s oil!'],['300 ألف برميل كل يوم.','تكفي لملء 19 مسبحًا!','نصف نفط قطر كله!']],
+  say9:[['Oil hides in your crayons.','It’s in your shoes too.','Even your toothbrush!'],['النفط في أقلامك.','وفي حذائك أيضًا.','حتى فرشاة أسنانك!']],
+  say10:[['Psst… a secret gas!','What do you think it is?','Hmm… guess its name!'],['بسّ… غاز سري!','ما رأيكم ما هو؟','همم… خمّنوا اسمه!']],
+  say11:[['How many litres, hmm?','What do you think?','Guess a number!'],['كم لترًا يا تُرى؟','ما رأيكم؟','خمّنوا رقمًا!']],
+  say12:[['Something huge sleeps below.','What could it be?','Hmm… guess, heroes!'],['شيء ضخم نائم بالأسفل.','ما يمكن أن يكون؟','همم… خمّنوا يا أبطال!']],
+  say13:[['Great job, Heroes!','You explored the sea with me.','Who wants to be an engineer?'],['أحسنتم يا أبطال!','استكشفتم البحر معي.','من يريد أن يصبح مهندسًا؟']]
 };
 
 const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
@@ -740,7 +865,7 @@ const tr=(k,n)=>{const v=T[k]; if(!v) return k; let s=v[lang==='ar'?1:0]; if(n!=
 
 /* sound effects */
 const SFX={
-  whoosh:{src:'whoose.mp3', vol:.4, max:3},
+  whoosh:{src:'whoose.mp3', vol:.2, max:3},
   sparkle:{src:'sparkle.mp3', vol:.55, max:4},
   win:{src:'winning_board.mp3', vol:.1, max:2}
 };
@@ -776,14 +901,18 @@ const depthEl=$('.depth-in'), mk=$('#mk'), dotsBox=$('.dots');
 slides.forEach((s,i)=>{const b=document.createElement('button'); b.type='button'; b.className='dot'; b.addEventListener('click',()=>go(i)); dotsBox.appendChild(b);});
 const dots=$$('.dot');
 let cur=-1;
+let titleDone=false, titleRun=false; /* Arabic slide 0: must finish the 3 quotes before leaving */
 function go(i){
-  i=Math.max(0,Math.min(last,i)); if(i===cur) return;
+  i=Math.max(0,Math.min(last,i));
+  if(i>cur && cur===0 && lang==='ar' && !titleDone){ if(!titleRun) startTitleTalk(); return; }
+  if(i===cur) return;
   if(cur>=0){ playSfx('whoosh'); slides[cur].classList.remove('on'); }
-  cur=i; const s=slides[i]; s.classList.add('on'); s.scrollTop=0;
+  cur=i; if(i!==0){ titleDone=false; titleRun=false; } const s=slides[i]; s.classList.add('on'); s.scrollTop=0;
   const d=parseFloat(s.dataset.depth||'0');
   depthEl.style.setProperty('--d',d); mk.style.top=(d*100)+'%';
   updateNav();
   const k=s.dataset.k; if(k&&hooks[k]) hooks[k]();
+  narrateSoon(i);
 }
 function updateNav(){
   if(cur<0) return;
@@ -858,7 +987,7 @@ function reveal(s,on){
   if(on===undefined) on=!s.classList.contains('revealed');
   s.classList.toggle('revealed',on);
   setRevBtn(s,on);
-  if(on){ playSfx('win'); confetti(110); }
+  if(on){ playSfx('sparkle'); confetti(110); }
   updateNav();
 }
 $$('.qslide').forEach(s=>{
@@ -885,9 +1014,156 @@ function resetAll(){
   $$('.tile').forEach(t=>t.setAttribute('aria-pressed','false'));
   $('#found').classList.remove('show');
   $('#oilL').classList.remove('glow');
-  if(cur===0){ updateNav(); } else { go(0); }
+  titleDone=false; titleRun=false;
+  stopNarration();
+  if(cur===0){ updateNav(); narrateSoon(0); } else { go(0); }
   slides[0].scrollTop=0;
 }
+
+/* Qatra narrator */
+const QATRA_INNER=
+  '<path d="M60 12C60 12 20 62 20 95A40 40 0 0 0 100 95C100 62 60 12 60 12Z" fill="#2B1E16" stroke="#0A0705" stroke-width="3"/>'+
+  '<ellipse cx="42" cy="74" rx="5" ry="11" fill="#fff" opacity=".35" transform="rotate(25 42 74)"/>'+
+  '<g class="q-eye"><circle cx="46" cy="92" r="10" fill="#fff"/><g class="q-pupils"><circle cx="48" cy="94" r="5" fill="#12324A"/><circle cx="50" cy="91" r="1.6" fill="#fff"/></g></g>'+
+  '<g class="q-eye"><circle cx="74" cy="92" r="10" fill="#fff"/><g class="q-pupils"><circle cx="76" cy="94" r="5" fill="#12324A"/><circle cx="78" cy="91" r="1.6" fill="#fff"/></g></g>'+
+  '<ellipse cx="36" cy="108" rx="6" ry="3.5" fill="#FF8FA3" opacity=".8"/><ellipse cx="84" cy="108" rx="6" ry="3.5" fill="#FF8FA3" opacity=".8"/>'+
+  '<path class="qm-shut" d="M50 110Q60 119 70 110" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>'+
+  '<g class="qm-open"><g class="qm-jaw"><g class="qm-shape"><ellipse cx="60" cy="112" rx="9" ry="7.5" fill="#5A1414"/><ellipse cx="60" cy="115" rx="5" ry="2.5" fill="#C0392B"/></g></g></g>'+
+  '<g stroke="#0A0705" stroke-width="3"><path d="M34 58Q34 28 60 28Q86 28 86 58Z" fill="#FF7A1A"/><rect x="26" y="54" width="68" height="9" rx="4.5" fill="#FF7A1A"/></g>'+
+  '<path d="M60 30V54" stroke="#C24E00" stroke-width="4"/>';
+const QATRA_SVG='<svg class="qsvg" viewBox="0 0 120 150" aria-hidden="true">'+QATRA_INNER+'</svg>';
+/* slide index -> { spot, bub, existing|anchor } ; slide 4 (safety) intentionally omitted */
+const NARR_CFG={
+  0:{spot:'title',existing:true,bub:'br'},
+  1:{spot:'cake',bub:'br'},
+  2:{spot:'map',anchor:'svg.map',fit:'map',bub:'br'},
+  3:{spot:'heli',anchor:'svg.art',bub:'br'},
+  5:{spot:'platform',anchor:'svg.scene',bub:'br'},
+  6:{spot:'sponge',bub:'sd'},
+  7:{spot:'well',anchor:'svg.drill',bub:'br'},
+  8:{spot:'mid',bub:'bc'},
+  9:{spot:'tiles',bub:'sd'},
+  10:{spot:'q',bub:'br'}, 11:{spot:'q',bub:'br'}, 12:{spot:'q',bub:'br'},
+  13:{spot:'finale',existing:true,bub:'bc'}
+};
+const NARR_HOLD=3200, NARR_EVERY=5000;
+/* Arabic voice-over clips (sayN-M.mp3 mapped to bubble line M of sayN); null = text only */
+const VO={
+  0:['say0-1','say0-2','say0-3'],
+  1:['say1-1','say1-2','say1-3'],
+  2:['say2-1','say2-2','say2-3'],
+  3:['say3-1','say3-2','say3-3'],
+  5:['say5-1','say5-2','say5-3'],
+  6:['say6-1','say6-2','say6-3'],
+  7:['say7-1','say7-2','say7-3'],
+  8:['say8-1','say8-2','say8-3'],
+  9:['say9-1','say9-2','say9-3'],
+  10:['hmm',null,null],
+  11:['what_is_answer',null,null],
+  12:['hmm',null,null],
+  13:['say13-1','say13-2','say13-3']
+};
+const voCache={}; let narrAudio=null, voBlocked=false, voResumed=false, voStartedOnce=false;
+function stopVo(){ if(narrAudio){ try{narrAudio.pause(); narrAudio.currentTime=0;}catch(e){} narrAudio=null; } }
+/* Plays `file`. onEnd runs only when the clip actually finishes; onFail runs when
+   audio can't play (autoplay blocked, missing file, etc.) so narration can fall back. */
+function playVo(file,onEnd,onFail){
+  if(!soundOn||!file) return false;
+  let a=voCache[file];
+  if(!a){ a=new Audio(file+'.mp3'); a.preload='auto'; voCache[file]=a; }
+  if(a._onEnd){ a.removeEventListener('ended',a._onEnd); a.removeEventListener('error',a._onEnd); a.removeEventListener('playing',a._onPlay); a._onEnd=null; }
+  stopVo();
+  narrAudio=a;
+  let started=false, settled=false;
+  const cleanup=()=>{ a.removeEventListener('ended',end); a.removeEventListener('error',fail); a.removeEventListener('playing',mark); a._onEnd=null; };
+  const end=()=>{ if(settled) return; settled=true; cleanup(); if(onEnd) onEnd(); };
+  const fail=()=>{ if(settled||started) return; settled=true; voBlocked=true; cleanup(); if(onFail) onFail(); };
+  const mark=()=>{ started=true; voStartedOnce=true; };
+  a._onEnd=end; a._onPlay=mark;
+  a.addEventListener('ended',end);
+  a.addEventListener('error',fail);
+  a.addEventListener('playing',mark);
+  try{ a.currentTime=0; }catch(e){}
+  const p=a.play();
+  if(p&&p.catch) p.catch(fail);
+  narrTimers.push(setTimeout(()=>{ if(!started) fail(); },6000));
+  return true;
+}
+const narrHosts={}, narrSvgs={}, narrBubbles={}, narrLines={}; let narrTimers=[];
+function buildNarration(){
+  slides.forEach((slide,i)=>{
+    const cfg=NARR_CFG[i]; if(!cfg) return;
+    const panel=slide.querySelector('.panel'); if(!panel) return;
+    const host=document.createElement('div'); host.className='qhost qhost--'+cfg.spot;
+    const bubble=document.createElement('div'); bubble.className='qbubble '+cfg.bub; bubble.setAttribute('aria-live','polite');
+    const line=document.createElement('p'); bubble.appendChild(line); host.appendChild(bubble);
+    let svg;
+    if(cfg.existing){
+      svg=slide.querySelector('.hero-art .qatra')||slide.querySelector('.qatra-big');
+      if(!svg) return;
+      const use=svg.querySelector('use'); if(use){const g=document.createElementNS('http://www.w3.org/2000/svg','g'); g.innerHTML=QATRA_INNER; use.replaceWith(g);}
+      let anchor;
+      if(svg.classList.contains('qatra-big')){
+        anchor=document.createElement('div'); anchor.className='qfig';
+        svg.parentNode.insertBefore(anchor,svg); anchor.appendChild(svg);
+      } else { anchor=svg.closest('.hero-art')||svg.parentElement; }
+      anchor.appendChild(host);
+    } else {
+      host.classList.add('qhost--new');
+      host.insertAdjacentHTML('beforeend',QATRA_SVG);
+      const target=cfg.anchor?slide.querySelector(cfg.anchor):null;
+      if(target){
+        const wrap=document.createElement('div');
+        wrap.className='qanchor'+(cfg.fit?' qanchor--'+cfg.fit:'');
+        target.parentNode.insertBefore(wrap,target); wrap.appendChild(target); wrap.appendChild(host);
+      } else panel.appendChild(host);
+      svg=host.querySelector('svg');
+    }
+    narrHosts[i]=host; narrSvgs[i]=svg; narrBubbles[i]=bubble; narrLines[i]=line;
+  });
+}
+function stopNarration(){
+  narrTimers.forEach(id=>clearTimeout(id)); narrTimers=[];
+  stopVo();
+  Object.keys(narrHosts).forEach(k=>{
+    narrHosts[k].classList.remove('speaking');
+    if(narrSvgs[k]) narrSvgs[k].classList.remove('speaking');
+    if(narrBubbles[k]) narrBubbles[k].classList.remove('on');
+  });
+}
+function narrate(i){
+  stopNarration();
+  const host=narrHosts[i], svg=narrSvgs[i], line=narrLines[i], bubble=narrBubbles[i];
+  const v=T['say'+i]; if(!host||!line||!bubble||!v) return;
+  const lines=v[lang==='ar'?1:0]||[]; if(!lines.length) return;
+  let k=0;
+  const titleAuto=(i===0 && lang==='ar'); /* gated title slide: half-time gaps, then auto-advance */
+  const GAP=titleAuto?1500:3000, RESTART=14000, AUTO_ADVANCE=2000;
+  const hideBubble=()=>{ host.classList.remove('speaking'); if(svg) svg.classList.remove('speaking'); bubble.classList.remove('on'); };
+  const step=()=>{
+    line.textContent=lines[k];
+    stopVo();
+    bubble.classList.remove('on'); void bubble.offsetWidth; bubble.classList.add('on');
+    host.classList.add('speaking'); if(svg) svg.classList.add('speaking');
+    const next=()=>{
+      k=(k+1)%lines.length;
+      if(titleAuto && k===0){ titleDone=true; narrTimers.push(setTimeout(()=>go(1),AUTO_ADVANCE)); return; }
+      if(i===0 && titleRun && k===0) titleDone=true;
+      narrTimers.push(setTimeout(step,k===0?RESTART:GAP));
+    };
+    const endLine=()=>{ hideBubble(); next(); };
+    const file=(lang==='ar'&&VO[i])?VO[i][k]:null;
+    if(!playVo(file,endLine,()=>narrTimers.push(setTimeout(endLine,NARR_HOLD)))) narrTimers.push(setTimeout(endLine,NARR_HOLD));
+  };
+  step();
+}
+function narrateSoon(i){
+  stopNarration();
+  if(i===0 && lang==='ar' && !titleRun) return; /* wait for Start/Next on the Arabic title slide */
+  if(narrHosts[i]) narrTimers.push(setTimeout(()=>narrate(i),430));
+}
+/* Arabic title slide: clicking Start/Next makes her talk the 3 quotes (gated until done) */
+function startTitleTalk(){ titleRun=true; titleDone=false; narrate(0); }
 
 /* language */
 function applyLang(){
@@ -897,6 +1173,8 @@ function applyLang(){
   $('#lang').setAttribute('lang',lang==='ar'?'en':'ar');
   document.title=tr('doc_title');
   updateGear(); updateNav(); updateSound();
+  titleDone=false; titleRun=false;
+  if(cur>=0) narrateSoon(cur);
 }
 let langBusy=false;
 function toggleLang(){
@@ -952,6 +1230,7 @@ let tx=0, ty=0; const stage=$('.stage');
 stage.addEventListener('touchstart',e=>{const t=e.changedTouches[0]; tx=t.clientX; ty=t.clientY;},{passive:true});
 stage.addEventListener('touchend',e=>{const t=e.changedTouches[0], dx=t.clientX-tx, dy=t.clientY-ty; if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){const fwd=lang==='ar'?dx>0:dx<0; if(fwd) advance(); else go(cur-1);}},{passive:true});
 
+buildNarration();
 applyLang();
 go(0);
 })();

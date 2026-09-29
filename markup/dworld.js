@@ -2,7 +2,7 @@
 document.getElementById("dworld").innerHTML = `
             <defs>
               <linearGradient id="dgSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3E8FC7"/><stop offset=".6" stop-color="#8AC4E2"/><stop offset="1" stop-color="#CBE6F2"/></linearGradient>
-              <linearGradient id="dgSea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#79CBE4"/><stop offset=".3" stop-color="#2A88AE"/><stop offset="1" stop-color="#0B3A55"/></linearGradient>
+              <linearGradient id="dgSea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6BBBD8"/><stop offset=".12" stop-color="#1E6F96"/><stop offset=".45" stop-color="#3A9EC0"/><stop offset="1" stop-color="#0B3A55"/></linearGradient>
               <linearGradient id="dgR1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEDCAF"/><stop offset="1" stop-color="#CDB583"/></linearGradient>
               <linearGradient id="dgR2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C4A87C"/><stop offset="1" stop-color="#B0925F"/></linearGradient>
               <linearGradient id="dgR3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A98C60"/><stop offset="1" stop-color="#94794F"/></linearGradient>
@@ -67,7 +67,9 @@ document.getElementById("dworld").innerHTML = `
 
             <g id="dsea">
               <rect x="-6000" y="170" width="12000" height="190" fill="url(#dgSea)"/>
-              <rect x="-6000" y="170" width="12000" height="30" fill="#FFFFFF" opacity=".16"/>
+              <rect x="-6000" y="170" width="12000" height="28" fill="#0A4A68" opacity=".28"/>
+              <rect x="-6000" y="210" width="12000" height="90" fill="#7FD3F0" opacity=".12"/>
+              <rect x="-6000" y="170" width="12000" height="14" fill="#FFFFFF" opacity=".18"/>
               <g id="dcaustics" opacity=".5"><rect x="-6000" y="176" width="12000" height="150" fill="url(#dgCausticP)"/></g>
               <g class="dray" fill="url(#dgRay)" opacity=".4">
                 <path d="M150 172 L216 172 L344 360 L216 360 Z"/>
@@ -149,70 +151,53 @@ document.getElementById("dworld").innerHTML = `
             </g>
 
             <g id="drig">
-              <path d="M214 126 L206 358 M426 126 L434 358" stroke="#5B6B78" stroke-width="7" stroke-linecap="round" fill="none"/>
-              <path d="M214 220 L426 220 M214 300 L426 300" stroke="#F4B000" stroke-width="4" fill="none"/>
-              <path d="M214 220 L426 300 M426 220 L214 300" stroke="#D89A16" stroke-width="2.6" fill="none"/>
-              <rect x="190" y="126" width="240" height="18" fill="url(#dgDeckShadow)" opacity=".5"/>
-              <rect x="190" y="112" width="240" height="14" rx="5" fill="url(#dgDeckG)" stroke="#12324A" stroke-width="2.5"/>
-              <rect x="193" y="115" width="234" height="4" rx="2" fill="#AFC3CF"/>
-              <path d="M192 106 L428 106" stroke="#DCE8EF" stroke-width="2" opacity=".8"/>
-              <ellipse id="drotary" cx="320" cy="116" rx="9" ry="2.6" fill="none" stroke="#FFD86B" stroke-width="2.4" stroke-dasharray="3 5"/>
-              <g stroke="#DCE8EF" stroke-width="1.6" opacity=".7">
-                <line x1="206" y1="106" x2="206" y2="114"/><line x1="242" y1="106" x2="242" y2="114"/>
-                <line x1="278" y1="106" x2="278" y2="114"/><line x1="356" y1="106" x2="356" y2="114"/>
-                <line x1="392" y1="106" x2="392" y2="114"/><line x1="424" y1="106" x2="424" y2="114"/>
-              </g>
+              <path d="M214 126 L206 358 M426 126 L434 358" stroke="#5B6B78" stroke-width="6" stroke-linecap="round" fill="none" opacity=".85"/>
+              <path d="M214 260 L426 260" stroke="#F4B000" stroke-width="3.2" fill="none" opacity=".75"/>
+              <rect x="190" y="126" width="240" height="14" fill="url(#dgDeckShadow)" opacity=".4"/>
+              <rect x="196" y="112" width="228" height="13" rx="5" fill="url(#dgDeckG)" stroke="#12324A" stroke-width="2.4"/>
+              <rect x="199" y="115" width="222" height="3.5" rx="2" fill="#AFC3CF" opacity=".85"/>
+              <ellipse id="drotary" cx="320" cy="116" rx="8" ry="2.4" fill="none" stroke="#FFD86B" stroke-width="2.2" stroke-dasharray="3 5"/>
               <path d="M304 112 L316 26 M336 112 L324 26" stroke="url(#dgDerrickG)" stroke-width="5" stroke-linecap="round" fill="none"/>
-              <path d="M308 92 L332 92 M310 72 L330 72 M312 54 L328 54 M314 38 L326 38" stroke="#C0432F" stroke-width="2.6"/>
-              <path d="M306 92 L330 72 M330 92 L308 72 M309 72 L327 54 M327 72 L311 54 M313 54 L325 38 M325 54 L315 38" stroke="#C0432F" stroke-width="2" opacity=".9"/>
+              <path d="M308 92 L332 92 M310 72 L330 72 M312 54 L328 54" stroke="#C0432F" stroke-width="2.4"/>
+              <path d="M306 92 L330 72 M330 92 L308 72 M309 72 L327 54 M327 72 L311 54" stroke="#C0432F" stroke-width="1.8" opacity=".85"/>
               <rect x="311" y="22" width="18" height="8" rx="2" fill="#B03B28"/>
               <rect id="dblockG" x="314" y="42" width="12" height="10" rx="2" fill="#F4B000" stroke="#12324A" stroke-width="1.6"/>
               <circle cx="320" cy="18" r="3.4" fill="#FF6B6B" class="dblink"/>
               <g>
-                <rect x="246" y="96" width="22" height="16" rx="4" fill="#5B6B78" stroke="#12324A" stroke-width="2"/>
-                <circle id="dflywheel" cx="257" cy="96" r="9" fill="#F4B000" stroke="#12324A" stroke-width="2.4"/>
-                <path d="M257 89 L257 103 M250 96 L264 96" stroke="#8A6208" stroke-width="2"/>
+                <rect x="248" y="98" width="18" height="14" rx="3" fill="#5B6B78" stroke="#12324A" stroke-width="1.8"/>
+                <circle id="dflywheel" cx="257" cy="98" r="7.5" fill="#F4B000" stroke="#12324A" stroke-width="2"/>
+                <path d="M257 92 L257 104 M251 98 L263 98" stroke="#8A6208" stroke-width="1.8"/>
               </g>
               <g>
-                <circle cx="220" cy="112" r="10" fill="#2F7D5A" stroke="#12324A" stroke-width="2"/>
-                <circle cx="220" cy="112" r="6.5" fill="none" stroke="#EAF6FB" stroke-width="1.6" opacity=".9"/>
-                <text x="220" y="116" text-anchor="middle" fill="#FFFFFF" style="font-family:var(--font);font-weight:800;font-size:9px">H</text>
+                <circle cx="222" cy="112" r="8" fill="#2F7D5A" stroke="#12324A" stroke-width="1.8"/>
+                <circle cx="222" cy="112" r="5" fill="none" stroke="#EAF6FB" stroke-width="1.4" opacity=".85"/>
+                <text x="222" y="115" text-anchor="middle" fill="#FFFFFF" style="font-family:var(--font);font-weight:800;font-size:8px">H</text>
               </g>
               <g>
-                <rect x="378" y="62" width="28" height="50" rx="5" fill="#E9EEF2" stroke="#12324A" stroke-width="2.2"/>
-                <rect x="378" y="62" width="28" height="8" rx="4" fill="#FF7A1A"/>
+                <rect x="382" y="68" width="22" height="42" rx="4" fill="#E9EEF2" stroke="#12324A" stroke-width="2"/>
+                <rect x="382" y="68" width="22" height="6" rx="3" fill="#FF7A1A"/>
                 <g clip-path="url(#dgOilTankClip)">
                   <rect id="doilFill" x="380" y="110" width="24" height="0" fill="url(#dgTankOil)"/>
                   <path id="doilWave" d="" fill="#C98A3C" opacity=".95"/>
                   <rect x="380" y="64" width="24" height="46" fill="url(#dgTankInner)"/>
-                  <g stroke="#FFFFFF" stroke-width="1.2" opacity=".5"><line x1="396" y1="70" x2="402" y2="70"/><line x1="396" y1="82" x2="402" y2="82"/><line x1="396" y1="94" x2="402" y2="94"/></g>
-                  <rect x="380" y="64" width="7" height="46" rx="3" fill="#FFFFFF" opacity=".3"/>
+                  <rect x="380" y="64" width="7" height="46" rx="3" fill="#FFFFFF" opacity=".28"/>
                 </g>
-                <ellipse id="doilGlow" cx="392" cy="88" rx="32" ry="34" fill="url(#dgGlow)" opacity="0"/>
+                <ellipse id="doilGlow" cx="393" cy="90" rx="26" ry="28" fill="url(#dgGlow)" opacity="0"/>
               </g>
               <g>
-                <rect x="410" y="70" width="28" height="42" rx="5" fill="#E9EEF2" stroke="#12324A" stroke-width="2.2"/>
-                <rect x="410" y="70" width="28" height="7" rx="3.5" fill="#1BA9B5"/>
+                <rect x="412" y="76" width="22" height="34" rx="4" fill="#E9EEF2" stroke="#12324A" stroke-width="2"/>
+                <rect x="412" y="76" width="22" height="5" rx="2.5" fill="#1BA9B5"/>
                 <g clip-path="url(#dgGasTankClip)">
                   <rect id="dgasFill" x="412" y="110" width="24" height="0" fill="url(#dgTankGas)"/>
                   <path id="dgasWave" d="" fill="#CFEFF9" opacity=".9"/>
                   <rect x="412" y="72" width="24" height="38" fill="url(#dgTankInner)"/>
-                  <g stroke="#FFFFFF" stroke-width="1.2" opacity=".45"><line x1="428" y1="80" x2="434" y2="80"/><line x1="428" y1="92" x2="434" y2="92"/></g>
-                  <rect x="412" y="72" width="6" height="38" rx="3" fill="#FFFFFF" opacity=".3"/>
+                  <rect x="412" y="72" width="6" height="38" rx="3" fill="#FFFFFF" opacity=".28"/>
                 </g>
-                <ellipse id="dgasGlow" cx="424" cy="92" rx="32" ry="32" fill="url(#dgGlow)" opacity="0"/>
+                <ellipse id="dgasGlow" cx="423" cy="94" rx="26" ry="26" fill="url(#dgGlow)" opacity="0"/>
               </g>
-              <g>
-                <rect x="422" y="96" width="14" height="16" rx="3" fill="#5B6B78" stroke="#12324A" stroke-width="1.8"/>
-                <path d="M430 96 L472 70" stroke="#F4B000" stroke-width="5" stroke-linecap="round"/>
-                <path d="M470 70 L470 84" stroke="#39454E" stroke-width="2.4"/>
-                <path d="M465 84 L475 84 L470 92 Z" fill="#39454E"/>
-              </g>
-              <path d="M320 124 L320 116 L392 116 L392 112" fill="none" stroke="#8A9AA3" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M320 121 L391 121" fill="none" stroke="#EAF1F5" stroke-width="1.6" opacity=".6"/>
-              <path d="M392 112 L424 112" fill="none" stroke="#8A9AA3" stroke-width="5" stroke-linecap="round"/>
-              <circle cx="356" cy="116" r="4" fill="none" stroke="#E8641A" stroke-width="2.4"/>
-              <circle cx="392" cy="108" r="4" fill="none" stroke="#E8641A" stroke-width="2.4"/>
+              <path d="M320 124 L320 116 L392 116 L392 112" fill="none" stroke="#8A9AA3" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
+              <path d="M392 112 L418 112" fill="none" stroke="#8A9AA3" stroke-width="4" stroke-linecap="round" opacity=".85"/>
+              <circle cx="356" cy="116" r="3.2" fill="none" stroke="#E8641A" stroke-width="2"/>
             </g>
 
             <g id="driser">
@@ -232,30 +217,30 @@ document.getElementById("dworld").innerHTML = `
               <line id="dstringT" x1="320" y1="52" x2="320" y2="140" stroke="#EAF1F5" stroke-width="2" opacity=".45" stroke-dasharray="3 26"/>
               <g id="dbit" transform="translate(320 140)">
                 <g id="dbitSpin">
-                  <rect x="-4.2" y="-10" width="8.4" height="12" rx="1.4" fill="#9AADB8" stroke="#12324A" stroke-width="1.2"/>
-                  <rect x="-6" y="0" width="12" height="3.4" rx="1" fill="#5C707D" stroke="#12324A" stroke-width="1"/>
-                  <path d="M-10 3.2 H10 L8 12 H-8 Z" fill="#D5DEE4" stroke="#12324A" stroke-width="1.3" stroke-linejoin="round"/>
-                  <path d="M-7 5.5 H7" stroke="#8FA3AE" stroke-width="1.2"/>
-                  <g fill="#6E8190" stroke="#12324A" stroke-width="1.15">
-                    <ellipse cx="-5.2" cy="14.2" rx="3.3" ry="4.4"/>
-                    <ellipse cx="0" cy="15.2" rx="3.4" ry="4.6"/>
-                    <ellipse cx="5.2" cy="14.2" rx="3.3" ry="4.4"/>
+                  <rect x="-5" y="-11" width="10" height="13" rx="1.5" fill="#B8C9D4" stroke="#12324A" stroke-width="1.3"/>
+                  <rect x="-7.5" y="0" width="15" height="3.8" rx="1.1" fill="#6E8492" stroke="#12324A" stroke-width="1.1"/>
+                  <path d="M-13 3.4 H13 L10.5 13 H-10.5 Z" fill="#E8F0F5" stroke="#12324A" stroke-width="1.4" stroke-linejoin="round"/>
+                  <path d="M-9 6 H9" stroke="#A8BCC8" stroke-width="1.3"/>
+                  <g fill="#8FA3AE" stroke="#12324A" stroke-width="1.2">
+                    <ellipse cx="-6.4" cy="15.4" rx="4.2" ry="5.4"/>
+                    <ellipse cx="0" cy="16.6" rx="4.4" ry="5.6"/>
+                    <ellipse cx="6.4" cy="15.4" rx="4.2" ry="5.4"/>
                   </g>
-                  <g fill="#F4F7F8" stroke="#12324A" stroke-width=".7" stroke-linejoin="round">
-                    <path d="M-7.4 16.2 L-5.6 21.4 L-3.8 16.2 Z"/>
-                    <path d="M-1.6 17.2 L0 22.6 L1.6 17.2 Z"/>
-                    <path d="M3.8 16.2 L5.6 21.4 L7.4 16.2 Z"/>
+                  <g fill="#FFFFFF" stroke="#12324A" stroke-width=".75" stroke-linejoin="round">
+                    <path d="M-9.2 17.6 L-6.8 24.2 L-4.4 17.6 Z"/>
+                    <path d="M-2 18.8 L0 25.6 L2 18.8 Z"/>
+                    <path d="M4.4 17.6 L6.8 24.2 L9.2 17.6 Z"/>
                   </g>
-                  <g fill="#E8641A" stroke="#12324A" stroke-width=".6">
-                    <circle cx="-5.2" cy="13.2" r="1.15"/>
-                    <circle cx="0" cy="14.2" r="1.15"/>
-                    <circle cx="5.2" cy="13.2" r="1.15"/>
-                    <circle cx="-5.2" cy="16.4" r=".9"/>
-                    <circle cx="0" cy="17.4" r=".9"/>
-                    <circle cx="5.2" cy="16.4" r=".9"/>
+                  <g fill="#FF9A3D" stroke="#12324A" stroke-width=".65">
+                    <circle cx="-6.4" cy="14.2" r="1.35"/>
+                    <circle cx="0" cy="15.4" r="1.35"/>
+                    <circle cx="6.4" cy="14.2" r="1.35"/>
+                    <circle cx="-6.4" cy="17.8" r="1.05"/>
+                    <circle cx="0" cy="19" r="1.05"/>
+                    <circle cx="6.4" cy="17.8" r="1.05"/>
                   </g>
                 </g>
-                <ellipse id="dbitGlow" cx="0" cy="20" rx="16" ry="8" fill="url(#dgGlow)" opacity="0"/>
+                <ellipse id="dbitGlow" cx="0" cy="22" rx="20" ry="10" fill="url(#dgGlow)" opacity="0"/>
               </g>
             </g>
 
@@ -683,9 +668,9 @@ document.getElementById("dworld").innerHTML = `
               <g id="dshipBob">
                 <path d="M0 0 L4 26 L162 26 C180 22 193 10 198 0 Z" fill="#F4F8FA" stroke="#12324A" stroke-width="2"/>
                 <g clip-path="url(#dgShipHullClip)">
-                  <rect x="0" y="2" width="200" height="14" fill="#2A7FB4"/>
-                  <rect x="0" y="16" width="200" height="4" fill="#FFFFFF" opacity=".85"/>
-                  <rect x="0" y="20" width="200" height="10" fill="#C0503F"/>
+                  <rect x="0" y="2" width="200" height="16" fill="#2A7FB4"/>
+                  <rect x="0" y="18" width="200" height="3" fill="#FFFFFF" opacity=".75"/>
+                  <rect x="0" y="21" width="200" height="9" fill="#C0503F"/>
                   <rect id="dcargo" x="8" y="24" width="184" height="0" fill="url(#dgTankOil)" opacity=".94"/>
                   <path id="dcargoWave" d="" fill="#C98A3C" opacity=".9"/>
                 </g>
@@ -727,15 +712,20 @@ document.getElementById("dworld").innerHTML = `
                     <circle cx="62" cy="-32" r="2.6" opacity="0"/>
                   </g>
                 </g>
-                <text id="dshipTxt" x="104" y="19" text-anchor="middle" fill="#FFFFFF" style="font-family:var(--font);font-weight:800;font-size:13px;letter-spacing:3px">NOC</text>
+                <text id="dshipTxt" x="104" y="14" text-anchor="middle" fill="#FFFFFF" style="font-family:var(--font);font-weight:800;font-size:12px;letter-spacing:2.5px;paint-order:stroke;stroke:#12324A;stroke-width:2.8px">NOC</text>
+                <!-- soft bow foam — only lit while moving; no hard triangles -->
                 <g id="dbow" opacity="0">
-                  <path d="M200 8 L220 15 L201 17 Z" fill="#FFFFFF" opacity=".55"/>
-                  <path d="M197 1 L215 -3 L199 -6 Z" fill="#FFFFFF" opacity=".35"/>
+                  <ellipse cx="204" cy="15" rx="7" ry="2.8" fill="#FFFFFF" opacity=".4"/>
+                  <ellipse cx="210" cy="17.5" rx="5" ry="2.2" fill="#EAF9FF" opacity=".32"/>
+                  <ellipse cx="201" cy="12" rx="4" ry="1.8" fill="#FFFFFF" opacity=".28"/>
                 </g>
               </g>
-              <g id="dwake" opacity="0">
-                <path d="M-4 10 L-96 24 L-96 2 L-4 17 Z" fill="#FFFFFF" opacity=".5"/>
-                <path d="M2 20 L-84 30" stroke="#FFFFFF" stroke-width="3" opacity=".4" stroke-linecap="round"/>
+              <!-- low foam trail behind the stern -->
+              <g id="dwake" opacity="0" transform="scale(1 1)">
+                <ellipse cx="-22" cy="22" rx="26" ry="4.5" fill="#FFFFFF" opacity=".42"/>
+                <ellipse cx="-48" cy="24" rx="22" ry="3.4" fill="#EAF9FF" opacity=".32"/>
+                <ellipse cx="-72" cy="25" rx="16" ry="2.6" fill="#FFFFFF" opacity=".22"/>
+                <path d="M-2 20 Q -36 18 -68 25" fill="none" stroke="#FFFFFF" stroke-width="2.2" opacity=".35" stroke-linecap="round"/>
               </g>
             </g>
 
@@ -773,9 +763,9 @@ document.getElementById("dworld").innerHTML = `
             </g>
 
             <g id="dglabels" aria-hidden="true">
-              <text class="dlbl" data-i="dg_lbl_sea" x="470" y="268" text-anchor="end">SEA</text>
-              <text class="dlbl" data-i="dg_lbl_seabed" x="470" y="352" text-anchor="end">SEABED</text>
-              <text class="dlbl" data-i="dg_lbl_rock" x="470" y="428" text-anchor="end">ROCK</text>
+              <text class="dlbl" data-i="dg_lbl_sea" x="598" y="248" text-anchor="end">SEA</text>
+              <text class="dlbl" data-i="dg_lbl_seabed" x="598" y="356" text-anchor="end">SEABED</text>
+              <text class="dlbl" data-i="dg_lbl_rock" x="598" y="430" text-anchor="end">ROCK</text>
             </g>
 
             <g id="dfx"></g>

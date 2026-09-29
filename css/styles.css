@@ -138,7 +138,7 @@ b{color:var(--hi);font-weight:800}
 .dbcard{background:var(--panel);border:3px solid var(--edge);border-radius:22px;box-shadow:calc(var(--sx)*6px) 6px 0 var(--drop);padding:12px 22px 16px;text-align:center;max-width:88%}
 .dbcard h3{margin:0;color:var(--hi);font-size:clamp(1.15rem,2.6vw,1.9rem)}
 .dbcard button{margin-top:10px}
-.dhud{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;margin-top:12px}
+.dhud{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;margin-top:4px}
 .dprompt{flex:none;display:flex;align-items:center;justify-content:center;gap:8px;box-sizing:border-box;width:min(34rem,100%);height:3em;overflow:hidden;font-weight:800;font-size:clamp(1rem,1.7vw,1.3rem);line-height:1.35;text-align:center}
 .dprompt .arrow{color:var(--orange);flex:none;animation:bounce 1.1s ease-in-out infinite}
 .dprompt .arrow:empty{display:none}
@@ -146,7 +146,7 @@ b{color:var(--hi);font-weight:800}
 .dprompt #dprompt{min-width:0;max-width:100%;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2}
 @keyframes bounceUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 /* vertical 3D joystick — pull the stick down to drill / lift */
-.djoy{flex:none;display:flex;flex-direction:column;align-items:center;gap:7px}
+.djoy{flex:none;display:flex;flex-direction:column;align-items:center;gap:0}
 .dslider{position:relative;width:88px;height:160px;border:3px solid var(--edge);border-radius:48px;background:linear-gradient(180deg,rgba(18,50,74,.24),rgba(18,50,74,0) 30%),linear-gradient(90deg,#8FA9B8,#EAF1F5 46%,#7C95A4);box-shadow:inset 0 5px 12px rgba(18,50,74,.34),inset 0 -3px 7px rgba(255,255,255,.6),calc(var(--sx)*4px) 4px 0 var(--drop);touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;z-index:1}
 .dslider::after{content:"";position:absolute;left:50%;top:12px;bottom:12px;width:26px;margin-left:-13px;border-radius:999px;background:linear-gradient(90deg,rgba(18,50,74,.32),rgba(255,255,255,.6) 45%,rgba(18,50,74,.26));box-shadow:inset 0 2px 6px rgba(18,50,74,.5);pointer-events:none}
 .dslider.locked{filter:grayscale(.55) opacity(.55);pointer-events:none}
@@ -156,12 +156,12 @@ b{color:var(--hi);font-weight:800}
 .dslider.working .dfill i{opacity:1;animation:dgBub 1.4s linear infinite}
 .dslider.working .dfill i:nth-child(2){animation-delay:.7s}
 @keyframes dgBub{0%{transform:translateY(0) scale(.7);opacity:.9}100%{transform:translateY(-42px) scale(1.1);opacity:0}}
-.dknob{position:absolute;left:50%;top:28px;width:54px;height:54px;margin-top:-27px;margin-left:-27px;border-radius:50%;border:3px solid var(--edge);background:radial-gradient(circle at 34% 26%,#FFE4BC,#FF9A3D 44%,var(--orange) 64%,#A83E07);box-shadow:0 .2em 0 var(--drop),inset 0 -.3em .5em rgba(0,0,0,.32),inset 0 .3em .45em rgba(255,255,255,.55);display:grid;place-items:center;color:#fff;pointer-events:none;z-index:3}
-.dknob svg{width:56%;height:56%}
+.dknob{position:absolute;left:50%;top:28px;width:64px;height:64px;margin-top:-32px;margin-left:-32px;border-radius:50%;border:3px solid var(--edge);background:radial-gradient(circle at 34% 26%,#FFE4BC,#FF9A3D 44%,var(--orange) 64%,#A83E07);box-shadow:0 .2em 0 var(--drop),inset 0 -.3em .5em rgba(0,0,0,.32),inset 0 .3em .45em rgba(255,255,255,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;color:#fff;pointer-events:none;z-index:3;padding:4px 2px 6px;box-sizing:border-box}
+.dknob svg{width:38%;height:38%;flex:none}
+.dknob .dfoot{display:block;max-width:58px;font-weight:800;font-size:clamp(.48rem,.9vw,.58rem);line-height:1.05;text-align:center;letter-spacing:.02em;text-transform:uppercase;color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.35);opacity:0;visibility:hidden;white-space:normal;overflow:hidden;max-height:2.2em}
+.dknob .dfoot.show{opacity:1;visibility:visible}
 .dslider.ready .dknob{animation:dgKnob 1.7s ease-out infinite}
 @keyframes dgKnob{0%,100%{transform:translateY(0);box-shadow:0 .2em 0 var(--drop),inset 0 -.3em .5em rgba(0,0,0,.32),0 0 0 0 rgba(232,100,26,.5)}50%{transform:translateY(13px);box-shadow:0 .2em 0 var(--drop),inset 0 -.3em .5em rgba(0,0,0,.32),0 0 0 20px rgba(232,100,26,0)}}
-.dfoot{flex:none;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;height:2.15em;min-width:9em;background:var(--sun);border:2px solid var(--edge);border-radius:999px;padding:0 14px;font-weight:800;font-size:clamp(.82rem,1.4vw,1.05rem);box-shadow:calc(var(--sx)*3px) 3px 0 var(--drop);opacity:0;visibility:hidden;white-space:nowrap}
-.dfoot.show{opacity:1;visibility:visible}
 #dworld .dcloud{animation:dgDrift 46s ease-in-out infinite alternate}
 @keyframes dgDrift{from{transform:translateX(-26px)}to{transform:translateX(34px)}}
 #dworld .dblink{animation:dgBlink 1.4s steps(1,end) infinite}
@@ -227,7 +227,6 @@ b{color:var(--hi);font-weight:800}
 #dworld #ddepthTag{transition:opacity .3s;pointer-events:none}
 #dworld #dradar{transform-box:fill-box;transform-origin:center}
 #dworld #dship.sailing #dradar{animation:dgSpin 2.2s linear infinite}
-#dworld #dship.sailing #dbow{opacity:1}
 #dworld .dsmoke circle{opacity:0}
 #dworld #dship.sailing .dsmoke circle{animation:dgPuff 2.6s ease-out infinite}
 #dworld #dship.sailing .dsmoke circle:nth-child(2){animation-delay:.9s}
@@ -237,8 +236,8 @@ b{color:var(--hi);font-weight:800}
 .dlbl{fill:#EAF6FB;opacity:.72;font-family:var(--font);font-weight:800;font-size:21px;letter-spacing:2px;paint-order:stroke;stroke:rgba(6,42,64,.6);stroke-width:5px;stroke-linejoin:round}
 :root[lang="ar"] .dlbl,:root[lang="ar"] #dgasLbl,:root[lang="ar"] #doilLbl text{letter-spacing:0!important}
 @media (max-width:620px){.djoy{transform:scale(.92);transform-origin:center top}}
-/* pre-drill hint: gently pulse the tappable sea life while the joystick is locked */
-#dworld #dlife.dl-hint .dlife .dbody{animation:dlHint 1.7s ease-in-out infinite}
+/* pre-drill hint: gently pulse a few marked sea animals while the joystick is locked */
+#dworld #dlife.dl-hint .dlife.dl-glow .dbody{animation:dlHint 1.7s ease-in-out infinite}
 @keyframes dlHint{0%,100%{filter:none}50%{filter:drop-shadow(0 0 7px #FFD86B)}}
 
 /* platform scene */

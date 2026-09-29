@@ -11,7 +11,7 @@ const dgEls={
   depthTag:$('#ddepthTag'),depthTagTxt:$('#ddepthTagTxt'),
   oilFill:$('#doilFill'),oilWave:$('#doilWave'),gasFill:$('#dgasFill'),gasWave:$('#dgasWave'),
   oilGlow:$('#doilGlow'),gasGlow:$('#dgasGlow'),
-  ship:$('#dship'),shipBob:$('#dshipBob'),wake:$('#dwake'),shipTxt:$('#dshipTxt'),
+  ship:$('#dship'),shipBob:$('#dshipBob'),wake:$('#dwake'),bow:$('#dbow'),shipTxt:$('#dshipTxt'),
   cargo:$('#dcargo'),cargoWave:$('#dcargoWave'),cargoLamps:$$('.dcargolamp'),
   hose:$('#dhose'),hoseFlow:$('#dhoseFlow'),hosePath:$('#dhosePath'),
   heli:$('#dheli'),heliBody:$('#dheliBody'),heliTxt:$('#dheliTxt'),heliRotor:$('#dheliRotor'),heliBlur:$('#dheliBlur'),
@@ -34,7 +34,8 @@ const DG_CAM={x:320,y:280,h:560},DG_CAMT={x:320,y:280,h:560};
 const DG_WAVE_SEC=21.624;
 const DG_APPROACH_START=0.7;
 const DG_APPROACH_END=DG_APPROACH_START+DG_WAVE_SEC; /* 22.324 */
-const DG_HOSE_END=DG_APPROACH_END+0.6; /* 22.924 — short pause then cargo fill */
+const DG_HOLD_SEC=2.2; /* hold tanker in frame after approach, before hose */
+const DG_HOSE_END=DG_APPROACH_END+DG_HOLD_SEC; /* 24.524 — hold beat then cargo fill */
 const DG_FILL_SEC=12;
 const DG_SAIL_SEC=DG_WAVE_SEC;
 function dgClamp(v,a,b){return v<a?a:(v>b?b:v);}
@@ -203,6 +204,13 @@ function dgShipTransform(){
   dgEls.shipTxt.setAttribute('transform',s<0?'translate('+cx+' 0) scale(-1 1) translate(-'+cx+' 0)':'');
   return 'translate('+DG.shipX.toFixed(1)+' '+(176+DG.sink).toFixed(1)+') translate('+cx+' 0) scale('+s+' 1) translate(-'+cx+' 0)';
 }
+/* World-space stern (propeller) — hull local stern≈0; after flip around 99, stern is at shipX+198. */
+function dgShipSternX(){return DG.shipFlip<0?DG.shipX+188:DG.shipX+4;}
+/* Foam drifts opposite travel so it trails behind the stern. */
+function dgShipWakeVx(){return DG.shipFlip<0?(18+Math.random()*22):(-20-Math.random()*24);}
+function dgSpawnSternFoam(y){
+  dgSpawn('foam',dgShipSternX()+(Math.random()*2-1)*8,y,{r:3+Math.random()*4,fill:'#FFFFFF',op:.5,vx:dgShipWakeVx(),vy:-3-Math.random()*2,grow:1.1,max:1.2+Math.random()});
+}
 function dgHeliStep(dt){
   const H=DG.heli;
   const flying=H.mode==='toShip'||H.mode==='follow'||H.mode==='home';
@@ -261,9 +269,15 @@ function dgBurst(x,y,type,n){
 function dgDrillFX(by){
   if(by<360){
     dgSpawn('bubble',320+(Math.random()*2-1)*8,by-6,{r:2+Math.random()*3,vy:-36-Math.random()*30,vx:(Math.random()*2-1)*14,max:1+Math.random(),op:.85});
+    /* short cuttings trail beside the bit while drilling through water */
+    dgSpawn('dust',320+(Math.random()*2-1)*10,by+4,{r:1.6+Math.random()*2.4,fill:'#C9B896',vy:8+Math.random()*18,vx:(Math.random()*2-1)*28,g:40,max:.55+Math.random()*.4,op:.75});
+    if(Math.random()<.55) dgSpawn('dust',320+(Math.random()>0.5?1:-1)*(8+Math.random()*6),by+2,{r:1.2+Math.random()*2,fill:'#A89068',vy:6+Math.random()*14,vx:(Math.random()*2-1)*18,g:50,max:.45+Math.random()*.35,op:.7});
     if(Math.abs(by-170)<14&&Math.random()<.5) dgSpawn('foam',320+(Math.random()*2-1)*14,170,{r:3+Math.random()*4,fill:'#FFFFFF',op:.45,vy:-10,vx:(Math.random()*2-1)*22,grow:1,max:1.1+Math.random()});
   } else {
     dgSpawn('dust',320+(Math.random()*2-1)*8,by-4,{r:2+Math.random()*3,fill:by>440?'#9C8B74':'#C9A46A',vy:-18-Math.random()*26,vx:(Math.random()*2-1)*50,g:60,max:.6+Math.random()*.5});
+    /* denser rock cuttings trail near the tricone */
+    dgSpawn('dust',320+(Math.random()*2-1)*12,by+6,{r:2+Math.random()*3.2,fill:by>440?'#8A7A62':'#B8955E',vy:10+Math.random()*22,vx:(Math.random()*2-1)*36,g:55,max:.7+Math.random()*.45,op:.85});
+    if(Math.random()<.6) dgSpawn('dust',320+(Math.random()>0.5?1:-1)*(10+Math.random()*8),by+3,{r:1.4+Math.random()*2.2,fill:'#D4B87A',vy:4+Math.random()*16,vx:(Math.random()*2-1)*22,g:45,max:.5+Math.random()*.4,op:.8});
     if(by>434&&Math.random()<.55) dgSpawn('spark',320+(Math.random()*2-1)*6,by,{r:1.6+Math.random()*1.6,vx:(Math.random()*2-1)*60,vy:-20-Math.random()*30,g:90,max:.4+Math.random()*.3});
   }
 }
@@ -334,6 +348,10 @@ function dgTapLife(g){
   dgTapLife.hide=setTimeout(function(){ b.classList.remove('show','below'); },3600);
   if(DG.gate&&DG.phase==='drill'&&DG.tapped&&!DG.tapped.has(key)){
     DG.tapped.add(key);DG.taps++;
+    if(DG.taps===1){
+      dgEls.life.classList.remove('dl-hint');
+      dgEls.life.querySelectorAll('.dlife.dl-glow').forEach(function(n){ n.classList.remove('dl-glow'); });
+    }
     if(DG.taps>=3) dgUnlockDrill();
     else dgPromptN('dg_p_tap_n',DG.taps,'👆');
   }
@@ -396,17 +414,17 @@ function dgLifePad(el,cx,cy,k){
 }
 const DLIFE_INFO=[
   {id:'dl_plankton',    side:-1, depth:0.06, sp:8,  turn:0.6,  r:16, face:false, vy:0.35, bob:4,   bobF:0.5},
-  {id:'dl_dolphin',     side:1,  depth:0.10, sp:26, turn:1.1,  r:26, face:true,  vy:0.4,  bob:2.5, bobF:1.1},
-  {id:'dl_whaleshark',  side:-1, depth:0.28, sp:11, turn:0.5,  r:40, face:true,  vy:0.35, bob:3,   bobF:0.5},
-  {id:'dl_seabream',    side:1,  depth:0.32, sp:16, turn:1.2,  r:16, face:true,  vy:0.4,  bob:2.5, bobF:1},
-  {id:'dl_hammerhead',  side:1,  depth:0.52, sp:22, turn:0.85, r:24, face:true,  vy:0.4,  bob:3,   bobF:0.7},
-  {id:'dl_turtle',      side:-1, depth:0.52, sp:13, turn:0.9,  r:22, face:true,  vy:0.45, bob:2.5, bobF:0.8},
-  {id:'dl_angelfish',   side:1,  depth:0.72, sp:10, turn:1.6,  r:20, face:true,  vy:0.45, bob:3,   bobF:1.1},
-  {id:'dl_hamour',      side:-1, depth:0.74, sp:16, turn:1,    r:20, face:true,  vy:0.45, bob:3,   bobF:0.9},
+  {id:'dl_dolphin',     side:1,  depth:0.22, sp:26, turn:1.1,  r:26, face:true,  vy:0.4,  bob:2.5, bobF:1.1},
+  {id:'dl_whaleshark',  side:-1, depth:0.38, sp:11, turn:0.5,  r:40, face:true,  vy:0.35, bob:3,   bobF:0.5},
+  {id:'dl_seabream',    side:1,  depth:0.42, sp:16, turn:1.2,  r:16, face:true,  vy:0.4,  bob:2.5, bobF:1},
+  {id:'dl_hammerhead',  side:1,  depth:0.55, sp:22, turn:0.85, r:24, face:true,  vy:0.4,  bob:3,   bobF:0.7},
+  {id:'dl_turtle',      side:-1, depth:0.58, sp:13, turn:0.9,  r:22, face:true,  vy:0.45, bob:2.5, bobF:0.8},
+  {id:'dl_angelfish',   side:1,  depth:0.74, sp:10, turn:1.6,  r:20, face:true,  vy:0.45, bob:3,   bobF:1.1},
+  {id:'dl_hamour',      side:-1, depth:0.78, sp:16, turn:1,    r:20, face:true,  vy:0.45, bob:3,   bobF:0.9},
   {id:'dl_butterfly',   side:-1, depth:0.90, sp:10, turn:1.5,  r:20, face:true,  vy:0.4,  bob:3,   bobF:1.3},
   {id:'dl_seasnake',    side:1,  depth:0.88, sp:18, turn:1.3,  r:16, face:true,  vy:0.3,  bob:2,   bobF:1.6},
-  {id:'dl_ray',         side:-1, depth:0.98, sp:15, turn:0.9,  r:22, face:true,  vy:0.22, bob:3,   bobF:0.6},
-  {id:'dl_brittlestar', side:1,  depth:0.98, sp:7,  turn:1.1,  r:14, face:false, vy:0.12, bob:1,   bobF:1.2}
+  {id:'dl_ray',         side:-1, depth:0.99, sp:15, turn:0.9,  r:22, face:true,  vy:0.18, bob:2.5, bobF:0.55},
+  {id:'dl_brittlestar', side:1,  depth:0.99, sp:7,  turn:1.1,  r:14, face:false, vy:0.1,  bob:1,   bobF:1.2}
 ];
 const DLIFE_PLANTS=[
   {id:'dl_algae',  side:-1, t:0.22},
@@ -574,6 +592,11 @@ function dgStartFlow(){
   dgChips(0,0);
   dgPromptN('dg_p_tap_n',0,'👆');
   dgFoot('');
+  dgEls.life.querySelectorAll('.dlife.dl-glow').forEach(function(n){ n.classList.remove('dl-glow'); });
+  ['dl_whaleshark','dl_dolphin','dl_butterfly'].forEach(function(id){
+    const el=dgEls.life.querySelector('[data-ia="'+id+'"]');
+    if(el) el.classList.add('dl-glow');
+  });
   dgEls.life.classList.add('dl-hint');
   dgGauge('dg_depth','0','m');
   dgEls.labels.classList.add('on');
@@ -585,6 +608,7 @@ function dgUnlockDrill(){
   dgPrompt('');
   dgFoot('dg_pull');
   dgEls.life.classList.remove('dl-hint');
+  dgEls.life.querySelectorAll('.dlife.dl-glow').forEach(function(n){ n.classList.remove('dl-glow'); });
   playSfx('sparkle');
 }
 function dgHardReset(){
@@ -594,6 +618,7 @@ function dgHardReset(){
   DG.ready=0;DG.readyShown=false;DG.sailWait=0;
   DG.kickT=0;DG.hitSeabed=false;DG.hitRock=false;DG.gate=false;DG.taps=0;DG.tapped=new Set();
   dgEls.life.classList.remove('dl-hint');
+  dgEls.life.querySelectorAll('.dlife.dl-glow').forEach(function(n){ n.classList.remove('dl-glow'); });
   dgEls.depthTag.setAttribute('opacity','0');
   DG.heli.mode='parked';DG.heli.x=220;DG.heli.y=106;DG.heli.rotor=0;DG.heli.sx=1;DG.heli.sxApplied=1;
   dgEls.heliBody.setAttribute('transform','');
@@ -603,6 +628,7 @@ function dgHardReset(){
   dgEls.resGlow.setAttribute('opacity','0');
   dgEls.gasLbl.setAttribute('opacity','0');dgEls.oilLbl.setAttribute('opacity','0');
   dgEls.ship.setAttribute('opacity','0');dgEls.wake.setAttribute('opacity','0');
+  if(dgEls.bow) dgEls.bow.setAttribute('opacity','0');
   dgEls.ship.setAttribute('transform',dgShipTransform());
   dgEls.hose.classList.remove('on');
   dgEls.ship.classList.remove('sailing');
@@ -660,7 +686,7 @@ function dgLoadStart(){
   dgEls.ship.classList.remove('sailing');
   dgEls.ship.setAttribute('opacity','1');
   dgEls.ship.setAttribute('transform',dgShipTransform());
-  dgEls.wake.setAttribute('opacity','1');
+  dgEls.wake.setAttribute('opacity','0');
   dgEls.hose.classList.remove('on');
   dgEls.refLabel.classList.remove('on');
   dgCargoFill(0);
@@ -699,7 +725,9 @@ function dgDone(){
 function dgUpdate(dt){
   DG.t+=dt;
   DG.drilling=false;DG.lifting=false;
-  const k=Math.min(1,dt*4.2);
+  let camRate=4.2;
+  if(DG.phase==='found'||(DG.hitSeabed&&DG.phase==='drill')) camRate=1.55;
+  const k=Math.min(1,dt*camRate);
   DG_CAM.x+=(DG_CAMT.x-DG_CAM.x)*k;
   DG_CAM.y+=(DG_CAMT.y-DG_CAM.y)*k;
   DG_CAM.h+=(DG_CAMT.h-DG_CAM.h)*k;
@@ -770,20 +798,21 @@ function dgUpdate(dt){
     if(DG.phaseT>=DG_APPROACH_START&&DG.phaseT<DG_APPROACH_END){
       const p=dgClamp((DG.phaseT-DG_APPROACH_START)/DG_WAVE_SEC,0,1);
       DG.shipX=dgLerp(820,436,dgEase(p));
-      if(Math.random()<0.3) dgSpawn('foam',DG.shipX+8,178,{r:3+Math.random()*4,fill:'#FFFFFF',op:.5,vx:-20-Math.random()*24,vy:-4,grow:1.1,max:1.2+Math.random()});
+      if(Math.random()<0.3) dgSpawnSternFoam(178);
     } else if(DG.phaseT>=DG_APPROACH_END&&DG.phaseT<DG_HOSE_END){
-      if(!dgEls.hose.classList.contains('on')){dgEls.hose.classList.add('on');dgPrompt('dg_p_fill');}
+      DG.shipX=436;
+      /* hold beat: tanker framed, hose still off */
     } else if(DG.phaseT>=DG_HOSE_END){
-      const k=dgClamp((DG.phaseT-DG_HOSE_END)/DG_FILL_SEC,0,1);
-      dgEls.hose.classList.add('on');
-      dgCargoFill(k);
-      dgTanks(1-k,(1-k)*0.92);
-      DG.sinkGoal=k*6;
-      dgGauge('dg_loading',String(Math.round(k*100)),'%');
+      const fillK=dgClamp((DG.phaseT-DG_HOSE_END)/DG_FILL_SEC,0,1);
+      if(!dgEls.hose.classList.contains('on')){dgEls.hose.classList.add('on');dgPrompt('dg_p_fill');}
+      dgCargoFill(fillK);
+      dgTanks(1-fillK,(1-fillK)*0.92);
+      DG.sinkGoal=fillK*6;
+      dgGauge('dg_loading',String(Math.round(fillK*100)),'%');
       if(Math.random()<0.28) dgSpawn('foam',DG.shipX+10+Math.random()*118,178,{r:3+Math.random()*4,fill:'#FFFFFF',op:.45,vx:-16-Math.random()*20,vy:-3,grow:1.1,max:1.2+Math.random()});
       if(Math.random()<0.22) dgSpawn('spark',509+(Math.random()*2-1)*8,166+(Math.random()*2-1)*4,{r:1.2+Math.random()*1.2,vx:(Math.random()*2-1)*10,vy:-10-Math.random()*10,max:.5+Math.random()*.4});
       if(DG.heli.mode!=='toShip'&&DG.heli.mode!=='follow') DG.heli.mode='toShip';
-      if(k>=1){
+      if(fillK>=1){
         if(!DG.readyShown){DG.readyShown=true;dgBanner('dg_b_ready','dg_sail',dgSail);}
         DG.sailWait+=dt;
         if(DG.sailWait>5.5) dgSail();
@@ -794,20 +823,35 @@ function dgUpdate(dt){
     DG.phaseT+=dt;
     const p=Math.min(1,DG.phaseT/DG_SAIL_SEC);
     DG.shipX=dgLerp(436,1340,dgEase(p));
-    if(Math.random()<0.3) dgSpawn('foam',DG.shipX-4,182,{r:3+Math.random()*4,fill:'#FFFFFF',op:.5,vx:-24-Math.random()*24,vy:-3,grow:1.2,max:1.2+Math.random()});
+    if(Math.random()<0.3) dgSpawnSternFoam(182);
     DG_CAMT.x=dgClamp(DG.shipX+70,430,1370);DG_CAMT.y=150;DG_CAMT.h=300;
     DG.sink+=(0-DG.sink)*Math.min(1,dt*2);
     if(p>=1) dgDone();
   }
   dgEls.ship.setAttribute('transform',dgShipTransform());
   dgEls.shipBob.setAttribute('transform','translate(0 '+(Math.sin(DG.t*2.4)*1.4).toFixed(1)+')');
+  /* #dwake sits at local negative x (behind stern≈0). Parent flip keeps it trailing.
+     Soft #dbow is at the tip only — propeller foam is world-space stern spawns above. */
+  const shipMoving=(DG.phase==='load'&&DG.phaseT>=DG_APPROACH_START&&DG.phaseT<DG_APPROACH_END)||DG.phase==='sail';
+  let wakeOp=0, wakeSc=0.55, bowOp=0;
+  if(DG.phase==='load'&&DG.phaseT>=DG_APPROACH_START&&DG.phaseT<DG_APPROACH_END){
+    const wp=dgClamp((DG.phaseT-DG_APPROACH_START)/DG_WAVE_SEC,0,1);
+    wakeOp=0.35+wp*0.65; wakeSc=0.55+wp*0.7; bowOp=0.2+wp*0.35;
+  } else if(DG.phase==='sail'){
+    wakeOp=1; wakeSc=1.25; bowOp=0.75;
+  } else if(DG.phase==='load'&&DG.phaseT>=DG_APPROACH_END){
+    wakeOp=0; wakeSc=0.4; bowOp=0;
+  }
+  dgEls.wake.setAttribute('opacity',wakeOp.toFixed(2));
+  /* Grow the trail behind the stern in local -x; parent scale(shipFlip) maps that to world trail. */
+  dgEls.wake.setAttribute('transform','scale('+wakeSc.toFixed(2)+' 1)');
+  if(dgEls.bow) dgEls.bow.setAttribute('opacity',bowOp.toFixed(2));
   dgHeliStep(dt);
   dgPartsStep(dt);
   dgLifeStep(dt);
   loopSet('drill',DG.phase==='drill'&&DG.drilling);
-  loopSet('suck',(DG.phase==='lift'&&DG.lifting)||(DG.phase==='load'&&DG.phaseT>=DG_APPROACH_END&&!DG.readyShown));
+  loopSet('suck',(DG.phase==='lift'&&DG.lifting)||(DG.phase==='load'&&DG.phaseT>=DG_HOSE_END&&!DG.readyShown));
   loopSet('heli',!!DG.heli.air);
-  const shipMoving=(DG.phase==='load'&&DG.phaseT>=DG_APPROACH_START&&DG.phaseT<DG_APPROACH_END)||DG.phase==='sail';
   loopSet('waves',shipMoving);
   if(!soundOn||(DG.phase!=='load'&&DG.phase!=='sail')) shipStop();
 }

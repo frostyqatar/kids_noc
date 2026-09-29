@@ -11,7 +11,9 @@
 <style>
 :root{
   --ink:#12324A;--ink2:#0B3A5B;--muted:#4A6B80;--edge:#12324A;--drop:#0A2438;
-  --sun:#FFC83D;--orange:#E8641A;--teal:#1BA9B5;--good:#1F9D55;--bad:#D93F44;
+  --sun:#FFC83D;--orange:#FF7A1A;--teal:#1BA9B5;--good:#1F9D55;--bad:#D93F44;
+  --deep:#0B3A5B;--maroon:#8A1538;--hi:#C24E00;
+  --oil-dark:#1A0F07;--oil-mid:#6A4116;--oil:#C98A3C;--oil-hi:#F0B85E;--gas:#BDE4E4;
   --font:"Baloo Bhaijaan 2","Segoe UI",Tahoma,system-ui,sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box}
@@ -25,7 +27,7 @@ svg{direction:ltr}
 .brand{display:flex;align-items:center;gap:.45em;font-weight:800;white-space:nowrap;font-size:clamp(11px,1.7vmin,19px)}
 .brand svg{height:1.7em;width:auto;flex:none}
 .steps{flex:1 1 auto;display:flex;justify-content:center;flex-wrap:wrap;gap:.35em;min-width:0}
-.step{display:inline-flex;align-items:center;gap:.35em;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.28);border-radius:999px;padding:.1em .6em .1em .18em;font-weight:800;font-size:.95em;opacity:.48;transition:opacity .3s,background .3s,border-color .3s,color .3s;white-space:nowrap}
+.step{display:inline-flex;align-items:center;gap:.35em;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.28);border-radius:999px;padding-block:.1em;padding-inline:.18em .6em;font-weight:800;font-size:.95em;opacity:.48;transition:opacity .3s,background .3s,border-color .3s,color .3s;white-space:nowrap}
 .step i{display:grid;place-items:center;width:1.55em;height:1.55em;border-radius:50%;background:rgba(255,255,255,.24);font-style:normal;font-size:.82em}
 .step.on{opacity:1;background:rgba(255,200,61,.2);border-color:rgba(255,200,61,.7);color:#FFF3CE}
 .step.done{opacity:1;background:rgba(31,157,85,.85);border-color:rgba(255,255,255,.4);color:#fff}
@@ -35,15 +37,15 @@ svg{direction:ltr}
 .stage{position:relative;min-height:0;overflow:hidden;background:#0B3A55}
 #world{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
 
-.gauge{position:absolute;top:clamp(8px,1.4vh,16px);right:clamp(8px,1.4vw,18px);z-index:12;background:rgba(6,42,64,.78);border:2px solid rgba(255,255,255,.35);border-radius:16px;padding:.35em .8em .5em;color:#EAF6FB;text-align:center;min-width:clamp(96px,11vw,132px);box-shadow:0 .3em 1em rgba(0,0,0,.25);opacity:0;transform:translateY(-8px);transition:opacity .35s,transform .35s;pointer-events:none}
+.gauge{position:absolute;top:clamp(8px,1.4vh,16px);inset-inline-end:clamp(8px,1.4vw,18px);z-index:12;background:rgba(6,42,64,.78);border:2px solid rgba(255,255,255,.35);border-radius:16px;padding:.35em .8em .5em;color:#EAF6FB;text-align:center;min-width:clamp(96px,11vw,132px);box-shadow:0 .3em 1em rgba(0,0,0,.25);opacity:0;transform:translateY(-8px);transition:opacity .35s,transform .35s;pointer-events:none}
 .gauge.show{opacity:1;transform:none}
-.gauge.good{border-color:rgba(123,227,160,.85)}
+.gauge.good{border-color:rgba(123,227,160,.85);box-shadow:0 .3em 1em rgba(0,0,0,.25),0 0 0 3px rgba(123,227,160,.28)}
 .gauge-cap{font-size:clamp(9px,1.35vmin,13px);font-weight:800;letter-spacing:.14em;opacity:.8}
 .gauge-val{display:flex;align-items:baseline;justify-content:center;gap:.18em;font-weight:800;line-height:1}
 .gauge-val b{font-size:clamp(22px,4vmin,40px)}
 .gauge-val span{font-size:clamp(11px,1.7vmin,17px);opacity:.8}
 .gauge-bar{margin-top:.35em;height:6px;border-radius:99px;background:rgba(255,255,255,.22);overflow:hidden}
-.gauge-bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#FFD86B,#E8641A);transition:width .18s linear}
+.gauge-bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#FFD86B,var(--orange));transition:width .18s linear}
 
 .banner{position:absolute;left:50%;top:clamp(10px,2vh,22px);transform:translate(-50%,-14px);opacity:0;transition:opacity .35s,transform .35s;pointer-events:none;z-index:20;max-width:min(92%,720px);background:#fff;border:4px solid var(--edge);border-radius:22px;box-shadow:0 .5em 0 var(--drop),0 1em 2em rgba(0,0,0,.25);padding:.7em 1.1em .9em;text-align:center}
 .banner.bottom{top:auto;bottom:clamp(10px,2vh,22px);transform:translate(-50%,14px)}
@@ -105,9 +107,18 @@ svg{direction:ltr}
 .console-head{display:flex;align-items:center;justify-content:space-between;gap:.4em;font-size:clamp(9px,1.28vmin,14px);font-weight:800;color:var(--ink2);letter-spacing:.06em}
 .lamp{width:clamp(9px,1.3vmin,13px);height:clamp(9px,1.3vmin,13px);border-radius:50%;background:#AEBCC5;box-shadow:inset 0 0 0 2px rgba(0,0,0,.14);flex:none}
 .console.working .lamp{background:#7BE3A0;box-shadow:0 0 10px rgba(123,227,160,.95)}
-.track{position:relative;flex:1 1 auto;min-height:84px;border-radius:16px;border:3px solid #9DB8C6;background:repeating-linear-gradient(#CBDEE8 0 2px,#BCD4E0 2px 22px);touch-action:none;overflow:visible}
-.trackfill{position:absolute;left:50%;bottom:6px;width:12px;margin-left:-6px;height:0;border-radius:99px;background:linear-gradient(#FFD86B,#E8641A)}
-.console[data-dir="up"] .trackfill{bottom:auto;top:6px;background:linear-gradient(#E8641A,#FFD86B)}
+.track{position:relative;flex:1 1 auto;min-height:84px;border-radius:16px;border:3px solid #9DB8C6;background:repeating-linear-gradient(#CBDEE8 0 2px,#BCD4E0 2px 22px);box-shadow:inset 0 0 10px rgba(18,50,74,.22);touch-action:none;overflow:visible}
+.trackfill{position:absolute;left:50%;bottom:6px;width:14px;margin-left:-7px;height:0;border-radius:99px;background:linear-gradient(#FFD86B,var(--orange));box-shadow:inset 0 0 0 2px rgba(255,255,255,.3),0 0 8px rgba(255,200,61,.55)}
+.trackfill::after{content:"";position:absolute;left:-4px;right:-4px;top:-3px;height:11px;border-radius:50%;background:radial-gradient(closest-side,#FFF6D8,rgba(255,216,107,0))}
+.trackfill i{position:absolute;left:50%;bottom:2px;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:rgba(255,255,255,.85);opacity:0}
+.console.working .trackfill i{opacity:1;animation:fillBubble 1.5s linear infinite}
+.console.working .trackfill i:nth-child(2){animation-delay:.5s}
+.console.working .trackfill i:nth-child(3){animation-delay:1s}
+@keyframes fillBubble{0%{transform:translateY(0) scale(.7);opacity:.9}100%{transform:translateY(-60px) scale(1.15);opacity:0}}
+@keyframes fillBubbleUp{0%{transform:translateY(0) scale(.7);opacity:.9}100%{transform:translateY(60px) scale(1.15);opacity:0}}
+.console[data-dir="up"] .trackfill{bottom:auto;top:6px;background:linear-gradient(var(--orange),#FFD86B)}
+.console[data-dir="up"] .trackfill::after{top:auto;bottom:-3px}
+.console[data-dir="up"] .trackfill i{bottom:auto;top:2px;animation-name:fillBubbleUp}
 .knob{position:absolute;left:50%;top:0;width:clamp(46px,7.6vmin,62px);height:clamp(46px,7.6vmin,62px);margin-left:calc(clamp(46px,7.6vmin,62px) / -2);border-radius:50%;border:3px solid var(--edge);background:radial-gradient(circle at 34% 28%,#FFC98B,#E8641A 62%,#A83E07);box-shadow:0 .2em 0 var(--drop),inset 0 -.3em .5em rgba(0,0,0,.25);display:grid;place-items:center;color:#fff;pointer-events:none;z-index:2;transition:box-shadow .15s}
 .knob svg{width:56%;height:56%;color:#fff}
 .console.working .knob{box-shadow:0 .2em 0 var(--drop),0 0 0 11px rgba(255,200,61,.32)}
@@ -157,14 +168,14 @@ svg{direction:ltr}
 #gRes{opacity:.42;transition:opacity .9s}
 #gRes.found{opacity:1}
 #gRes .resLbl{opacity:0;transform-box:fill-box;transform-origin:center}
-#gRes.found .resLbl{animation:popIn .6s cubic-bezier(.2,1.6,.4,1) both}
+#gRes.found .resLbl{animation:popIn .85s cubic-bezier(.2,1.6,.4,1) both}
 #gRes.found .resLbl2{animation-delay:.14s}
 #gRes #resGlow{opacity:0;transition:opacity .8s}
 #gRes.found #resGlow{opacity:.85;animation:glowPulse 2.4s ease-in-out infinite}
 @keyframes glowPulse{50%{opacity:.5}}
 @keyframes popIn{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:scale(1)}}
 #wellhead{opacity:0;transform-box:fill-box;transform-origin:50% 100%}
-#wellhead.in{animation:popIn .6s cubic-bezier(.2,1.7,.4,1) both}
+#wellhead.in{animation:popIn .85s cubic-bezier(.2,1.7,.4,1) both}
 .flowline{opacity:0;transition:opacity .5s;stroke-dasharray:16 24}
 .flowline.on{opacity:1;animation:flowUp .6s linear infinite}
 @keyframes flowUp{to{stroke-dashoffset:-40}}
@@ -194,10 +205,37 @@ svg{direction:ltr}
 #gShip.sailing .smoke circle:nth-child(2){animation-delay:.85s}
 #gShip.sailing .smoke circle:nth-child(3){animation-delay:1.7s}
 
+#gPort .steam circle{opacity:0;animation:puff 3.8s ease-out infinite}
+#gPort .steam circle:nth-child(2){animation-delay:1.25s}
+#gPort .steam circle:nth-child(3){animation-delay:2.5s}
+
+:root[lang="ar"] .kicker,:root[lang="ar"] .gauge-cap,:root[lang="ar"] .console-head,:root[lang="ar"] .console-foot,:root[lang="ar"] .lbl{letter-spacing:0}
+:root[dir="rtl"] .flow i{display:inline-block;transform:scaleX(-1)}
+:root[dir="rtl"] .gauge-bar i{background:linear-gradient(270deg,#FFD86B,#E8641A)}
+
+#gRiser{opacity:0;transition:opacity .9s}
+#gRiser.on{opacity:1}
+#caustics{animation:causticSlide 11s linear infinite}
+@keyframes causticSlide{from{transform:translateX(0)}to{transform:translateX(260px)}}
+.snow{animation:snowFloat 9s ease-in-out infinite alternate}
+@keyframes snowFloat{from{transform:translateY(-14px)}to{transform:translateY(22px)}}
+.twinkle{animation:twinkle 2.6s ease-in-out infinite}
+@keyframes twinkle{50%{opacity:.12}}
+.oilStreak{animation:oilFlow 1.1s linear infinite}
+@keyframes oilFlow{to{stroke-dashoffset:-86}}
+.cargoBub{animation:cargoBubUp 2.4s ease-in-out infinite}
+.cargoBub:nth-child(2n){animation-delay:.6s}
+.cargoBub:nth-child(3n){animation-delay:1.1s}
+@keyframes cargoBubUp{0%{transform:translateY(0)}50%{transform:translateY(-7px)}100%{transform:translateY(0)}}
+.vesselGlow{opacity:0;transition:opacity .4s}
+.vesselGlow.on{opacity:1}
+.focusChip{transition:opacity .25s}
+
 @media (prefers-reduced-motion:reduce){
   #world .cloud,#world .fishy,#world .ray,#world .ripple,#world .blink,#gShipBob,#radar,
   #world.drilling #block,#world.drilling #stringT,#world.drilling #bitSpin,#world.drilling #rotary,
-  .console.ready:not(.working) .knob,.console-foot::before{animation:none}
+  #gPort .steam circle,#gPort .flame,#caustics,.snow,.twinkle,.oilStreak,.cargoBub,
+  .console.ready:not(.working) .knob,.console.working .trackfill i,.console-foot::before{animation:none}
 }
 @media (max-aspect-ratio:5/4){
   .console{width:clamp(112px,20vw,190px)}
@@ -217,21 +255,22 @@ svg{direction:ltr}
   <header class="top">
     <div class="brand">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 6.5 12h2.2L9 21h6l.3-9h2.2L12 2Z" fill="#FFC83D" stroke="#12324A" stroke-width="1.2" stroke-linejoin="round"/><path d="M6 21h12" stroke="#EAF6FB" stroke-width="2.4" stroke-linecap="round"/></svg>
-      <span>Let's Drill Together</span>
+      <span data-i="brand">Let's Drill Together</span>
     </div>
-    <div class="steps" id="steps" aria-label="Progress">
-      <span class="step" data-i="0"><i>1</i>DRILL</span>
-      <span class="step" data-i="1"><i>2</i>FIND</span>
-      <span class="step" data-i="2"><i>3</i>LIFT</span>
-      <span class="step" data-i="3"><i>4</i>COLLECT</span>
-      <span class="step" data-i="4"><i>5</i>REFINERY</span>
+    <div class="steps" id="steps" data-ia="progress">
+      <span class="step"><i>1</i><span data-i="step0">DRILL</span></span>
+      <span class="step"><i>2</i><span data-i="step1">FIND</span></span>
+      <span class="step"><i>3</i><span data-i="step2">LIFT</span></span>
+      <span class="step"><i>4</i><span data-i="step3">COLLECT</span></span>
+      <span class="step"><i>5</i><span data-i="step4">REFINERY</span></span>
     </div>
-    <button class="pill" id="restart" type="button" aria-label="Restart the game" title="Restart">&#8635;</button>
+    <button class="pill" id="lang" type="button" lang="ar" data-ia="lang_aria">عربي</button>
+    <button class="pill" id="restart" type="button" data-ia="restart" title="Restart">&#8635;</button>
   </header>
 
   <div class="stage" id="stage">
     <svg id="world" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="worldTitle">
-      <title id="worldTitle">Offshore drilling platform over the ocean, with a drill going down through the seawater, the seabed and the rock layers into an oil and gas reservoir.</title>
+      <title id="worldTitle" data-i="world_title">Offshore drilling platform over the ocean, with a drill going down through the seawater, the seabed and the rock layers into an oil and gas reservoir.</title>
       <defs>
         <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="#3E8FC7"/><stop offset=".42" stop-color="#8AC4E2"/>
@@ -258,11 +297,18 @@ svg{direction:ltr}
         <radialGradient id="resGlowG"><stop offset="0" stop-color="#FFE49B" stop-opacity=".85"/><stop offset=".6" stop-color="#FFD86B" stop-opacity=".3"/><stop offset="1" stop-color="#FFD86B" stop-opacity="0"/></radialGradient>
         <linearGradient id="gasG" x1="0" y1="1258" x2="0" y2="1340" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#EAF7E6"/><stop offset="1" stop-color="#BDE4E4"/></linearGradient>
         <linearGradient id="oilG" x1="0" y1="1338" x2="0" y2="1462" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#8A5A22"/><stop offset=".5" stop-color="#6A4116"/><stop offset="1" stop-color="#3F240C"/></linearGradient>
+        <linearGradient id="resShadeG" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#062A40" stop-opacity=".5"/><stop offset=".2" stop-color="#062A40" stop-opacity="0"/>
+          <stop offset=".8" stop-color="#062A40" stop-opacity="0"/><stop offset="1" stop-color="#062A40" stop-opacity=".5"/>
+        </linearGradient>
+        <linearGradient id="deckShadowG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#062A40" stop-opacity=".5"/><stop offset="1" stop-color="#062A40" stop-opacity="0"/>
+        </linearGradient>
         <linearGradient id="slugG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0B85E"/><stop offset="1" stop-color="#8A5A22"/></linearGradient>
         <linearGradient id="deckG" x1="0" y1="330" x2="0" y2="372" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F4F9FC"/><stop offset="1" stop-color="#BCCDD8"/></linearGradient>
         <linearGradient id="tankG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#B9CBD6"/><stop offset=".35" stop-color="#F2F7FA"/><stop offset="1" stop-color="#A9BECB"/></linearGradient>
-        <linearGradient id="oilFillG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B27C34"/><stop offset="1" stop-color="#6A4116"/></linearGradient>
-        <linearGradient id="gasFillG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAF9F6"/><stop offset="1" stop-color="#A8DCE8"/></linearGradient>
+        <linearGradient id="oilFillG" gradientUnits="userSpaceOnUse" x1="0" y1="240" x2="0" y2="330"><stop offset="0" stop-color="#C98A3C"/><stop offset=".5" stop-color="#8A5A22"/><stop offset="1" stop-color="#5A3410"/></linearGradient>
+        <linearGradient id="gasFillG" gradientUnits="userSpaceOnUse" x1="0" y1="252" x2="0" y2="328"><stop offset="0" stop-color="#EAF9F6"/><stop offset="1" stop-color="#8FCEDD"/></linearGradient>
         <linearGradient id="pipeG" x1="0" y1="330" x2="0" y2="1420" gradientUnits="userSpaceOnUse">
           <stop offset="0" stop-color="#D7E2E9"/><stop offset=".16" stop-color="#AEC2CE"/><stop offset=".42" stop-color="#7C99AA"/><stop offset="1" stop-color="#4E6B7C"/>
         </linearGradient>
@@ -291,6 +337,64 @@ svg{direction:ltr}
         <clipPath id="clipOilTank"><rect x="1052" y="240" width="56" height="90" rx="7"/></clipPath>
         <clipPath id="clipGasTank"><rect x="1142" y="252" width="56" height="78" rx="7"/></clipPath>
         <clipPath id="clipHull"><path d="M 1300 400 L 1300 474 L 2500 474 C 2520 462 2538 434 2544 400 Z"/></clipPath>
+        <linearGradient id="oilStreamG" gradientUnits="userSpaceOnUse" x1="0" y1="340" x2="0" y2="980">
+          <stop offset="0" stop-color="#F0B85E"/><stop offset=".22" stop-color="#C98A3C"/><stop offset=".62" stop-color="#8A5A22"/><stop offset="1" stop-color="#4A2A0E"/>
+        </linearGradient>
+        <linearGradient id="riserWallG" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#6E8190"/><stop offset=".28" stop-color="#C6D3DB"/><stop offset=".55" stop-color="#EAF1F5"/><stop offset=".8" stop-color="#8FA3AE"/><stop offset="1" stop-color="#41525E"/>
+        </linearGradient>
+        <linearGradient id="boreG" gradientUnits="userSpaceOnUse" x1="0" y1="372" x2="0" y2="906">
+          <stop offset="0" stop-color="#16303F"/><stop offset="1" stop-color="#08141C"/>
+        </linearGradient>
+        <linearGradient id="cargoOilG" gradientUnits="userSpaceOnUse" x1="0" y1="406" x2="0" y2="470">
+          <stop offset="0" stop-color="#C98A3C"/><stop offset=".35" stop-color="#8A5A22"/><stop offset="1" stop-color="#2E1A08"/>
+        </linearGradient>
+        <linearGradient id="tankInnerG" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#062A40" stop-opacity=".38"/><stop offset=".22" stop-color="#062A40" stop-opacity="0"/>
+          <stop offset=".78" stop-color="#062A40" stop-opacity="0"/><stop offset="1" stop-color="#062A40" stop-opacity=".42"/>
+        </linearGradient>
+        <radialGradient id="slugBallG" cx=".36" cy=".28" r=".9">
+          <stop offset="0" stop-color="#FFE9A8"/><stop offset=".5" stop-color="#C98A3C"/><stop offset="1" stop-color="#6A4116"/>
+        </radialGradient>
+        <radialGradient id="gasBubbleG">
+          <stop offset="0" stop-color="#FFFFFF" stop-opacity=".95"/><stop offset=".55" stop-color="#EAF9F6" stop-opacity=".5"/><stop offset="1" stop-color="#BDE4E4" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="rayG" gradientUnits="userSpaceOnUse" x1="0" y1="418" x2="0" y2="984">
+          <stop offset="0" stop-color="#FFFFFF" stop-opacity=".55"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="waveFillA" gradientUnits="userSpaceOnUse" x1="0" y1="420" x2="0" y2="648">
+          <stop offset="0" stop-color="#FFFFFF" stop-opacity=".38"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="waveFillB" gradientUnits="userSpaceOnUse" x1="0" y1="420" x2="0" y2="684">
+          <stop offset="0" stop-color="#7FD3F0" stop-opacity=".5"/><stop offset="1" stop-color="#7FD3F0" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="derrickG" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#F0705A"/><stop offset=".5" stop-color="#E0553F"/><stop offset="1" stop-color="#A83424"/>
+        </linearGradient>
+        <linearGradient id="refFadeG" gradientUnits="userSpaceOnUse" x1="0" y1="418" x2="0" y2="580">
+          <stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#000000"/>
+        </linearGradient>
+        <mask id="refMask"><rect x="400" y="418" width="1000" height="162" fill="url(#refFadeG)"/></mask>
+        <radialGradient id="focusHoleG"><stop offset="0" stop-color="#000000"/><stop offset=".55" stop-color="#000000"/><stop offset="1" stop-color="#FFFFFF"/></radialGradient>
+        <mask id="focusMask" maskUnits="userSpaceOnUse">
+          <rect x="-2000" y="-1200" width="8000" height="4000" fill="#FFFFFF"/>
+          <circle id="focusHole" cx="900" cy="500" r="200" fill="url(#focusHoleG)"/>
+        </mask>
+        <radialGradient id="softGlowG">
+          <stop offset=".5" stop-color="#FFE9A8" stop-opacity="0"/><stop offset=".74" stop-color="#FFE9A8" stop-opacity=".55"/><stop offset="1" stop-color="#FFE9A8" stop-opacity="0"/>
+        </radialGradient>
+        <pattern id="pCaustics" width="260" height="140" patternUnits="userSpaceOnUse">
+          <g fill="none" stroke="#BEE7F5" stroke-width="2" stroke-linecap="round" opacity=".55">
+            <path d="M-40 36 q 40 -24 80 0 t 80 0 t 80 0 t 80 0"/>
+            <path d="M-10 82 q 40 -22 80 0 t 80 0 t 80 0 t 80 0"/>
+            <path d="M-70 128 q 40 -22 80 0 t 80 0 t 80 0 t 80 0"/>
+          </g>
+        </pattern>
+        <pattern id="pStrata" width="140" height="38" patternUnits="userSpaceOnUse">
+          <path d="M-10 11 q 35 -9 70 0 t 70 0" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" opacity=".1"/>
+          <path d="M-10 29 q 35 -9 70 0 t 70 0" fill="none" stroke="#3A2A1A" stroke-width="1.8" stroke-linecap="round" opacity=".1"/>
+        </pattern>
+        <clipPath id="clipOilCol"><rect id="oilColClip" x="891" y="372" width="18" height="0"/></clipPath>
       </defs>
 
       <g id="gSky">
@@ -303,6 +407,16 @@ svg{direction:ltr}
       <g id="gSea">
         <rect x="-1450" y="418" width="8800" height="570" fill="url(#seaG)"/>
         <rect x="-1450" y="418" width="8800" height="110" fill="url(#shimmerG)"/>
+        <g id="gReflect" opacity=".5" mask="url(#refMask)">
+          <g transform="translate(0 840) scale(1 -1)">
+            <path d="M868 186 L840 330 L960 330 L932 186 Z" fill="#0B3A55" opacity=".5"/>
+            <rect x="520" y="326" width="720" height="44" rx="10" fill="#12324A" opacity=".6"/>
+            <path d="M742 368 L742 432 L758 432 L758 368 Z" fill="#B4790C" opacity=".5"/>
+            <path d="M1042 368 L1042 432 L1058 432 L1058 368 Z" fill="#B4790C" opacity=".5"/>
+            <rect x="996" y="300" width="36" height="32" rx="6" fill="#5B6B78" opacity=".45"/>
+          </g>
+          <path d="M900 424 L900 468" stroke="#FFD86B" stroke-width="5" opacity=".3" stroke-linecap="round"/>
+        </g>
       </g>
 
       <g id="gFish"></g>
@@ -322,6 +436,7 @@ svg{direction:ltr}
           <rect x="600" y="1338" width="600" height="140" fill="url(#oilG)"/>
           <path d="M 600 1340 q 45 -9 90 0 t 90 0 t 90 0 t 90 0 t 90 0 t 90 0 t 90 0 L 1230 1362 L 600 1362 Z" fill="#C98A3C" opacity=".5"/>
           <path d="M 640 1392 q 30 -8 60 0 t 60 0 t 60 0 t 60 0 t 60 0 t 60 0 t 60 0" fill="none" stroke="#D9A155" stroke-width="6" opacity=".28"/>
+          <rect x="600" y="1258" width="600" height="204" fill="url(#resShadeG)" opacity=".55"/>
         </g>
         <path d="M 620 1332 C 620 1272 740 1258 900 1258 C 1060 1258 1180 1272 1180 1332 L 1180 1338" fill="none" stroke="#F0D9A8" stroke-width="5" opacity=".5"/>
         <g fill="#5A3D1C" opacity=".6">
@@ -331,17 +446,22 @@ svg{direction:ltr}
         </g>
         <g class="resLbl">
           <g fill="#FFFFFF" opacity=".95"><circle cx="748" cy="1282" r="8"/><circle cx="774" cy="1302" r="6"/><circle cx="726" cy="1306" r="5"/></g>
-          <text class="lbl" x="858" y="1318" text-anchor="end" style="font-size:46px">GAS</text>
+          <text class="lbl" data-i="lbl_gas" x="858" y="1318" text-anchor="end" style="font-size:46px">GAS</text>
         </g>
         <g class="resLbl resLbl2">
           <path d="M 736 1382 C 736 1382 712 1408 712 1424 a 24 24 0 0 0 48 0 C 760 1408 736 1382 736 1382 Z" fill="#F5C274"/>
-          <text class="lbl" x="858" y="1432" text-anchor="end" style="font-size:52px">OIL</text>
+          <text class="lbl" data-i="lbl_oil" x="858" y="1432" text-anchor="end" style="font-size:52px">OIL</text>
         </g>
       </g>
 
       <g id="gUnder"></g>
 
       <rect id="veil" x="-1450" y="418" width="8800" height="568" fill="url(#veilG)"/>
+
+      <g id="caustics" opacity=".55">
+        <rect x="-1710" y="420" width="9320" height="290" fill="url(#pCaustics)"/>
+      </g>
+      <g id="gSnow" opacity=".8"></g>
 
       <g id="gRays"></g>
 
@@ -385,6 +505,7 @@ svg{direction:ltr}
         <rect x="520" y="326" width="720" height="44" rx="10" fill="#5B6B78" stroke="#12324A" stroke-width="3"/>
         <rect x="525" y="331" width="710" height="11" rx="5" fill="#8DA0AD"/>
         <rect x="536" y="360" width="688" height="14" rx="7" fill="#44515B" opacity=".85"/>
+        <rect x="520" y="370" width="720" height="46" rx="6" fill="url(#deckShadowG)" opacity=".5"/>
         <g id="railings" stroke="#DCE8EF" stroke-width="3" fill="none" opacity=".9"></g>
         <g fill="#FFC83D"><rect x="524" y="317" width="11" height="10" rx="2"/><rect x="1225" y="317" width="11" height="10" rx="2"/></g>
         <path d="M 572 322 L 536 331" stroke="#5B6B78" stroke-width="9" stroke-linecap="round"/>
@@ -401,16 +522,40 @@ svg{direction:ltr}
         <rect x="794" y="296" width="36" height="34" rx="5" fill="#FF7A1A" stroke="#12324A" stroke-width="2.5"/>
         <path d="M 802 314 h 20" stroke="#FFE3C9" stroke-width="3.5" stroke-linecap="round"/>
         <g id="tanks">
-          <rect x="1051" y="238" width="58" height="92" rx="9" fill="#E9EEF2" stroke="#12324A" stroke-width="2.5"/>
-          <ellipse cx="1080" cy="238" rx="29" ry="7" fill="#CBD8DF" stroke="#12324A" stroke-width="2"/>
-          <rect x="1051" y="252" width="58" height="11" fill="#FF7A1A"/>
-          <g clip-path="url(#clipOilTank)"><rect id="oilFill" x="1052" y="330" width="56" height="0" fill="url(#oilFillG)"/></g>
-          <path d="M 1080 274 C 1080 274 1068 288 1068 297 a 12 12 0 0 0 24 0 C 1092 288 1080 274 1080 274 Z" fill="#E8641A" opacity=".9"/>
-          <rect x="1141" y="250" width="58" height="80" rx="9" fill="#E9EEF2" stroke="#12324A" stroke-width="2.5"/>
-          <ellipse cx="1170" cy="250" rx="29" ry="7" fill="#CBD8DF" stroke="#12324A" stroke-width="2"/>
-          <rect x="1141" y="262" width="58" height="11" fill="#1BA9B5"/>
-          <g clip-path="url(#clipGasTank)"><rect id="gasFill" x="1142" y="328" width="56" height="0" fill="url(#gasFillG)"/></g>
-          <g fill="#1BA9B5" opacity=".9"><circle cx="1160" cy="290" r="6.5"/><circle cx="1181" cy="280" r="4.5"/><circle cx="1172" cy="302" r="5"/></g>
+          <g class="tankOil">
+            <rect x="1051" y="238" width="58" height="92" rx="9" fill="#E9EEF2" stroke="#12324A" stroke-width="2.5"/>
+            <ellipse cx="1080" cy="238" rx="29" ry="7" fill="#CBD8DF" stroke="#12324A" stroke-width="2"/>
+            <rect x="1051" y="252" width="58" height="11" fill="#FF7A1A"/>
+            <g clip-path="url(#clipOilTank)">
+              <rect id="oilFill" x="1052" y="330" width="56" height="0" fill="url(#oilFillG)"/>
+              <path id="oilSurf" d="" fill="#C98A3C" opacity=".95"/>
+              <rect x="1052" y="240" width="56" height="90" fill="url(#tankInnerG)"/>
+              <g stroke="#FFFFFF" stroke-width="1.5" opacity=".5">
+                <line x1="1096" y1="260" x2="1104" y2="260"/><line x1="1096" y1="278" x2="1104" y2="278"/>
+                <line x1="1096" y1="296" x2="1104" y2="296"/><line x1="1096" y1="314" x2="1104" y2="314"/>
+              </g>
+              <rect x="1056" y="244" width="7" height="82" rx="3.5" fill="#FFFFFF" opacity=".3"/>
+            </g>
+            <path d="M 1080 274 C 1080 274 1068 288 1068 297 a 12 12 0 0 0 24 0 C 1092 288 1080 274 1080 274 Z" fill="#E8641A" opacity=".9"/>
+          </g>
+          <ellipse class="vesselGlow" id="oilGlow" cx="1080" cy="284" rx="62" ry="64" fill="url(#softGlowG)"/>
+          <g class="tankGas">
+            <rect x="1141" y="250" width="58" height="80" rx="9" fill="#E9EEF2" stroke="#12324A" stroke-width="2.5"/>
+            <ellipse cx="1170" cy="250" rx="29" ry="7" fill="#CBD8DF" stroke="#12324A" stroke-width="2"/>
+            <rect x="1141" y="262" width="58" height="11" fill="#1BA9B5"/>
+            <g clip-path="url(#clipGasTank)">
+              <rect id="gasFill" x="1142" y="328" width="56" height="0" fill="url(#gasFillG)"/>
+              <path id="gasSurf" d="" fill="#CFEFF9" opacity=".9"/>
+              <rect x="1142" y="252" width="56" height="76" fill="url(#tankInnerG)"/>
+              <g stroke="#FFFFFF" stroke-width="1.5" opacity=".45">
+                <line x1="1186" y1="274" x2="1194" y2="274"/><line x1="1186" y1="292" x2="1194" y2="292"/>
+                <line x1="1186" y1="310" x2="1194" y2="310"/>
+              </g>
+              <rect x="1146" y="256" width="7" height="70" rx="3.5" fill="#FFFFFF" opacity=".3"/>
+            </g>
+            <g fill="#1BA9B5" opacity=".9"><circle cx="1160" cy="290" r="6.5"/><circle cx="1181" cy="280" r="4.5"/><circle cx="1172" cy="302" r="5"/></g>
+          </g>
+          <ellipse class="vesselGlow" id="gasGlow" cx="1170" cy="290" rx="62" ry="58" fill="url(#softGlowG)"/>
         </g>
         <g id="manifold">
           <path d="M 930 336 L 1028 330 L 1028 228 L 1170 228" fill="none" stroke="#8A9AA3" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
@@ -453,8 +598,23 @@ svg{direction:ltr}
         <text id="depthTagTxt" x="50" y="8" text-anchor="middle" fill="#EAF6FB" style="font-family:var(--font);font-weight:800;font-size:24px">0 m</text>
       </g>
 
+      <g id="gRiser">
+        <line x1="900" y1="372" x2="900" y2="906" stroke="url(#boreG)" stroke-width="20" stroke-linecap="round"/>
+        <line x1="889" y1="372" x2="889" y2="906" stroke="url(#riserWallG)" stroke-width="7" stroke-linecap="round"/>
+        <line x1="911" y1="372" x2="911" y2="906" stroke="url(#riserWallG)" stroke-width="7" stroke-linecap="round"/>
+        <g id="riserRungs"></g>
+        <line x1="915" y1="378" x2="915" y2="900" stroke="#EAF1F5" stroke-width="2" opacity=".35"/>
+        <g clip-path="url(#clipOilCol)">
+          <rect id="oilColumn" x="891" y="906" width="18" height="0" fill="url(#oilStreamG)"/>
+          <line class="oilStreak" x1="896" y1="372" x2="896" y2="906" stroke="#FFE9A8" stroke-width="2" opacity=".18" stroke-dasharray="26 60"/>
+          <line class="oilStreak" x1="904" y1="372" x2="904" y2="906" stroke="#FFE9A8" stroke-width="1.5" opacity=".12" stroke-dasharray="18 70"/>
+        </g>
+        <path id="oilHead" d="" fill="#C98A3C" opacity="0"/>
+        <ellipse id="oilHeadGlow" cx="900" cy="0" rx="30" ry="16" fill="url(#softGlowG)" opacity="0"/>
+      </g>
+
       <g id="gFlow">
-        <line id="wellFlow" class="flowline" x1="900" y1="1330" x2="900" y2="340" stroke="#E9A13B" stroke-width="10" stroke-linecap="round"/>
+        <line id="wellFlow" class="flowline" x1="900" y1="1360" x2="900" y2="978" stroke="#8A5A22" stroke-width="13" stroke-linecap="round"/>
         <g id="slugs"></g>
         <g id="gasBubbles"></g>
         <path id="deckFlow" class="flowline" d="M 906 336 L 1028 330 L 1028 228 L 1080 228 L 1080 242" fill="none" stroke="#E9A13B" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
@@ -464,40 +624,167 @@ svg{direction:ltr}
       <g id="gSurface"></g>
 
       <g id="gPort">
-        <path d="M 5140 424 C 5240 404 5400 410 5560 424 C 5640 414 5760 410 5900 420 C 6020 410 6200 408 6360 420 C 6500 412 6660 410 6800 422 L 6800 436 L 5140 436 Z" fill="#9BC4B0" opacity=".9"/>
-        <g stroke="#12324A" stroke-width="2" fill="#C7DDE6" opacity=".95">
-          <rect x="5462" y="372" width="26" height="50" rx="6"/>
-          <rect x="5492" y="366" width="34" height="56" rx="7"/>
-          <rect x="5530" y="378" width="22" height="44" rx="6"/>
-          <rect x="5622" y="354" width="30" height="68" rx="8"/>
-          <rect x="5650" y="342" width="14" height="16" rx="4"/>
-          <rect x="5722" y="382" width="26" height="40" rx="6"/>
+        <path d="M 5360 421 C 5700 415 6100 409 6500 401 C 6900 394 7260 389 7600 384 L 7600 508 C 7260 506 6900 504 6500 502 C 6100 500 5700 498 5360 496 Z" fill="#9BC4B0" opacity=".95"/>
+        <path d="M 5360 421 C 5700 415 6100 409 6500 401 C 6900 394 7260 389 7600 384 L 7600 392 C 7260 397 6900 402 6500 409 C 6100 417 5700 423 5360 429 Z" fill="#BCDCCA" opacity=".9"/>
+        <path d="M 5360 496 C 5700 498 6100 500 6500 502 C 6900 504 7260 506 7600 508 L 7600 516 C 7260 514 6900 512 6500 510 C 6100 508 5700 506 5360 504 Z" fill="#5E8F7C" opacity=".75"/>
+        <path d="M 5360 421 C 5700 415 6100 409 6500 401 C 6900 394 7260 389 7600 384" fill="none" stroke="#C9DCE4" stroke-width="6" stroke-linecap="round" opacity=".95"/>
+        <g fill="#4E7A68" opacity=".3">
+          <ellipse cx="5882" cy="414" rx="58" ry="8"/>
+          <ellipse cx="5976" cy="413" rx="40" ry="6"/>
+          <ellipse cx="6170" cy="410" rx="46" ry="7"/>
+          <ellipse cx="6292" cy="409" rx="38" ry="6"/>
+          <ellipse cx="6426" cy="406" rx="44" ry="6"/>
+          <ellipse cx="6778" cy="403" rx="96" ry="9"/>
         </g>
-        <g stroke="#12324A" stroke-width="2" fill="#DCEAF0" opacity=".95">
-          <rect x="5982" y="392" width="72" height="30" rx="15"/>
-          <rect x="6084" y="396" width="62" height="26" rx="13"/>
+        <g id="rack" stroke-linecap="round">
+          <path d="M 5570 404 L 6600 396" fill="none" stroke="#8A9AA3" stroke-width="6"/>
+          <path d="M 5570 396 L 6600 388" fill="none" stroke="#E8641A" stroke-width="3" opacity=".9"/>
+          <path d="M 5570 411 L 6600 403" fill="none" stroke="#1BA9B5" stroke-width="3" opacity=".85"/>
+          <g fill="#8DA0AD" stroke="#12324A" stroke-width="1.6">
+            <rect x="5586" y="398" width="8" height="20" rx="2"/>
+            <rect x="5666" y="397" width="8" height="20" rx="2"/>
+            <rect x="5746" y="396" width="8" height="20" rx="2"/>
+            <rect x="5826" y="395" width="8" height="20" rx="2"/>
+            <rect x="5906" y="394" width="8" height="20" rx="2"/>
+            <rect x="5986" y="393" width="8" height="20" rx="2"/>
+            <rect x="6066" y="392" width="8" height="20" rx="2"/>
+            <rect x="6146" y="391" width="8" height="20" rx="2"/>
+            <rect x="6226" y="390" width="8" height="20" rx="2"/>
+            <rect x="6306" y="389" width="8" height="20" rx="2"/>
+            <rect x="6386" y="388" width="8" height="20" rx="2"/>
+            <rect x="6466" y="387" width="8" height="20" rx="2"/>
+            <rect x="6546" y="386" width="8" height="20" rx="2"/>
+          </g>
+          <circle cx="5636" cy="400" r="6" fill="none" stroke="#E8641A" stroke-width="3"/>
+          <circle cx="6276" cy="390" r="6" fill="none" stroke="#E8641A" stroke-width="3"/>
         </g>
-        <g stroke="#12324A" stroke-width="2" fill="#C7DDE6" opacity=".95">
-          <circle cx="5862" cy="404" r="19"/>
-          <circle cx="5906" cy="406" r="16"/>
+        <g id="dock">
+          <g fill="#5B6B78" stroke="#12324A" stroke-width="2">
+            <rect x="5462" y="408" width="12" height="10" rx="3"/>
+            <rect x="5530" y="407" width="12" height="10" rx="3"/>
+            <rect x="5598" y="406" width="12" height="10" rx="3"/>
+            <rect x="5666" y="405" width="12" height="10" rx="3"/>
+          </g>
+          <path d="M 5516 391 L 5466 385" stroke="#8A9AA3" stroke-width="7" stroke-linecap="round"/>
+          <circle cx="5490" cy="388" r="6" fill="none" stroke="#E8641A" stroke-width="3.4"/>
+          <rect x="5508" y="388" width="54" height="30" rx="5" fill="#DCEAF0" stroke="#12324A" stroke-width="2.4"/>
+          <rect x="5518" y="396" width="14" height="10" rx="2" fill="#5FB7D9"/>
+          <rect x="5538" y="396" width="14" height="10" rx="2" fill="#5FB7D9"/>
+          <rect x="5516" y="382" width="40" height="6" rx="3" fill="#B7CBD6" stroke="#12324A" stroke-width="1.6"/>
         </g>
-        <g fill="#B7D6DE" opacity=".95">
-          <rect x="5214" y="392" width="44" height="30" rx="4"/>
-          <rect x="5270" y="400" width="30" height="22" rx="4"/>
-          <rect x="6300" y="396" width="40" height="26" rx="4"/>
+        <g id="furnace" stroke="#12324A">
+          <path d="M 5576 416 L 5576 382 Q 5626 366 5676 382 L 5676 416 Z" fill="#C7DDE6" stroke-width="2.4"/>
+          <rect x="5592" y="388" width="15" height="20" rx="3" fill="#B7CBD6"/>
+          <rect x="5620" y="388" width="15" height="20" rx="3" fill="#DCEAF0"/>
+          <rect x="5644" y="388" width="15" height="20" rx="3" fill="#B7CBD6"/>
+          <rect x="5686" y="270" width="18" height="146" fill="#E9EEF2" stroke-width="2.4"/>
+          <rect x="5686" y="286" width="18" height="12" fill="#E8641A"/>
+          <rect x="5686" y="318" width="18" height="12" fill="#E8641A"/>
+          <rect x="5686" y="350" width="18" height="12" fill="#E8641A"/>
+          <ellipse cx="5695" cy="270" rx="9" ry="3.4" fill="#C2D4DD" stroke-width="2"/>
         </g>
-        <path d="M 5580 424 L 5584 318" stroke="#B0C6CE" stroke-width="7" stroke-linecap="round"/>
-        <path d="M 5584 320 l -9 17 h 18 z" fill="#FF7A1A"/>
-        <circle cx="5584" cy="330" r="15" fill="#FFD86B" opacity=".5"/>
-        <g stroke="#8FA9B4" stroke-width="3" opacity=".9" fill="none">
-          <path d="M 6186 424 L 6190 356 M 6224 424 L 6228 356"/>
-          <path d="M 6174 358 L 6244 358"/><path d="M 6174 384 L 6244 384"/>
+        <g class="steam" fill="#FFFFFF">
+          <circle cx="5695" cy="258" r="8"/>
+          <circle cx="5695" cy="258" r="6"/>
+          <circle cx="5695" cy="258" r="5"/>
         </g>
-        <path d="M 5200 436 L 6900 436" stroke="#C3DCE4" stroke-width="6" opacity=".8"/>
-        <rect x="5140" y="396" width="1760" height="44" fill="url(#hazeG)" opacity=".7"/>
+        <g id="drums" stroke="#12324A" stroke-width="2.4">
+          <rect x="5730" y="348" width="28" height="68" rx="13" fill="#E9EEF2"/>
+          <rect x="5730" y="366" width="28" height="8" fill="#1BA9B5" opacity=".85"/>
+          <rect x="5790" y="362" width="24" height="54" rx="12" fill="#DCEAF0"/>
+          <rect x="5790" y="378" width="24" height="7" fill="#E8641A" opacity=".85"/>
+        </g>
+        <g id="towers" stroke="#12324A">
+          <g stroke-width="2.6">
+            <path d="M 5846 413 L 5846 200 Q 5846 168 5882 168 Q 5918 168 5918 200 L 5918 413 Z" fill="#DCEAF0"/>
+            <rect x="5846" y="194" width="72" height="16" fill="#E8641A" opacity=".9"/>
+            <path d="M 5846 240 h 72 M 5846 288 h 72 M 5846 336 h 72 M 5846 384 h 72" stroke="#9FB6C0" stroke-width="2"/>
+            <rect x="5828" y="248" width="108" height="8" rx="4" fill="#8DA0AD"/>
+            <rect x="5828" y="306" width="108" height="8" rx="4" fill="#8DA0AD"/>
+            <rect x="5828" y="364" width="108" height="8" rx="4" fill="#8DA0AD"/>
+            <path d="M 5834 248 h 96 M 5834 306 h 96 M 5834 364 h 96" stroke="#DCE8EF" stroke-width="2.4" opacity=".95"/>
+            <circle class="blink" cx="5882" cy="160" r="4.5" fill="#FF6B6B" stroke="none"/>
+          </g>
+          <g stroke-width="2.4">
+            <path d="M 5950 412 L 5950 244 Q 5950 222 5976 222 Q 6002 222 6002 244 L 6002 412 Z" fill="#E9EEF2"/>
+            <rect x="5950" y="238" width="52" height="12" fill="#1BA9B5" opacity=".9"/>
+            <path d="M 5950 276 h 52 M 5950 314 h 52 M 5950 352 h 52 M 5950 388 h 52" stroke="#9FB6C0" stroke-width="2"/>
+            <rect x="5938" y="330" width="76" height="7" rx="3.5" fill="#8DA0AD"/>
+            <circle class="blink" cx="5976" cy="215" r="4" fill="#FF6B6B" stroke="none"/>
+          </g>
+          <g stroke-width="2.4">
+            <path d="M 6032 410 L 6032 290 Q 6032 272 6052 272 Q 6072 272 6072 290 L 6072 410 Z" fill="#DCEAF0"/>
+            <rect x="6032" y="286" width="40" height="10" fill="#E8641A" opacity=".85"/>
+            <path d="M 6032 320 h 40 M 6032 354 h 40 M 6032 388 h 40" stroke="#9FB6C0" stroke-width="2"/>
+          </g>
+          <path d="M 5918 300 L 5950 300" stroke="#8DA0AD" stroke-width="7"/>
+          <path d="M 6002 336 L 6032 336" stroke="#8DA0AD" stroke-width="7"/>
+        </g>
+        <g id="cool" stroke="#12324A">
+          <path d="M 6128 411 C 6128 372 6158 348 6158 306 C 6158 276 6148 260 6148 252 L 6188 252 C 6188 260 6178 276 6178 306 C 6178 348 6208 372 6208 411 Z" fill="#D5E2E8" stroke-width="2.4"/>
+          <ellipse cx="6168" cy="252" rx="20" ry="5.5" fill="#B8CBD4" stroke-width="2"/>
+          <path d="M 6148 252 a 20 5.5 0 0 0 40 0" fill="none" stroke="#8DA0AD" stroke-width="1.6" opacity=".8"/>
+          <g class="steam" fill="#FFFFFF">
+            <circle cx="6168" cy="240" r="7"/>
+            <circle cx="6168" cy="240" r="5"/>
+            <circle cx="6168" cy="240" r="4"/>
+          </g>
+          <path d="M 6258 410 C 6258 378 6282 360 6282 330 C 6282 308 6274 294 6274 288 L 6306 288 C 6306 294 6298 308 6298 330 C 6298 360 6322 378 6322 410 Z" fill="#E2ECF1" stroke-width="2.2"/>
+          <ellipse cx="6290" cy="288" rx="16" ry="4.6" fill="#C2D4DD" stroke-width="2"/>
+        </g>
+        <g id="flare" stroke="#39454E" fill="none">
+          <path d="M 6396 405 L 6412 170 M 6456 405 L 6440 170" stroke-width="4.4"/>
+          <path d="M 6400 378 L 6452 346 M 6398 338 L 6454 300 M 6402 292 L 6450 254 M 6404 240 L 6448 204" stroke-width="2.6" opacity=".8"/>
+          <path d="M 6426 176 L 6426 150" stroke="#5B6B78" stroke-width="6"/>
+          <ellipse cx="6426" cy="150" rx="5" ry="2.4" fill="#8DA0AD" stroke="none"/>
+        </g>
+        <circle class="blink" cx="6426" cy="188" r="4" fill="#FF6B6B" stroke="none"/>
+        <g id="tankFarm" stroke="#12324A">
+          <g stroke-width="2.2">
+            <rect x="6646" y="340" width="76" height="56" rx="7" fill="#DCEAF0"/>
+            <ellipse cx="6684" cy="340" rx="38" ry="9" fill="#C2D4DD"/>
+            <rect x="6646" y="354" width="76" height="9" fill="#1BA9B5" opacity=".85"/>
+            <rect x="6746" y="346" width="70" height="50" rx="7" fill="#E9EEF2"/>
+            <ellipse cx="6781" cy="346" rx="35" ry="8" fill="#C2D4DD"/>
+            <rect x="6746" y="360" width="70" height="8" fill="#E8641A" opacity=".8"/>
+            <rect x="6840" y="342" width="74" height="54" rx="7" fill="#DCEAF0"/>
+            <ellipse cx="6877" cy="342" rx="37" ry="9" fill="#C2D4DD"/>
+            <rect x="6840" y="356" width="74" height="9" fill="#1BA9B5" opacity=".85"/>
+          </g>
+          <g stroke-width="2.6">
+            <rect x="6600" y="326" width="104" height="78" rx="9" fill="#E9EEF2"/>
+            <ellipse cx="6652" cy="326" rx="52" ry="11" fill="#CBD8DF"/>
+            <rect x="6600" y="344" width="104" height="12" fill="#1BA9B5" opacity=".9"/>
+            <circle cx="6626" cy="318" r="4" fill="#FFD86B" stroke="none"/>
+            <rect x="6726" y="334" width="112" height="70" rx="9" fill="#DCEAF0"/>
+            <ellipse cx="6782" cy="334" rx="56" ry="12" fill="#C2D4DD"/>
+            <rect x="6726" y="352" width="112" height="12" fill="#E8641A" opacity=".85"/>
+            <circle class="blink" cx="6782" cy="324" r="4" fill="#FF6B6B" stroke="none"/>
+            <rect x="6856" y="330" width="108" height="74" rx="9" fill="#E9EEF2"/>
+            <ellipse cx="6910" cy="330" rx="54" ry="11" fill="#CBD8DF"/>
+            <rect x="6856" y="348" width="108" height="12" fill="#1BA9B5" opacity=".9"/>
+          </g>
+          <g stroke-width="4" fill="none" stroke="#9FB6C0">
+            <path d="M 6640 404 h 96"/>
+            <path d="M 6770 404 h 120"/>
+            <path d="M 6904 404 h 100"/>
+          </g>
+        </g>
+        <g id="spheres" stroke="#12324A" stroke-width="2.4">
+          <path d="M 7008 398 L 7022 366 M 7074 398 L 7060 366" fill="none" stroke-width="4"/>
+          <circle cx="7041" cy="344" r="33" fill="#E9EEF2"/>
+          <ellipse cx="7041" cy="344" rx="33" ry="9" fill="none" opacity=".55"/>
+          <path d="M 7008 344 a 33 33 0 0 0 66 0" fill="none" opacity=".55"/>
+          <circle cx="7028" cy="332" r="8" fill="#FFFFFF" opacity=".75" stroke="none"/>
+          <path d="M 7088 398 L 7098 372 M 7136 398 L 7126 372" fill="none" stroke-width="4"/>
+          <circle cx="7112" cy="354" r="26" fill="#DCEAF0"/>
+          <ellipse cx="7112" cy="354" rx="26" ry="7" fill="none" opacity=".55"/>
+          <circle cx="7102" cy="344" r="6" fill="#FFFFFF" opacity=".7" stroke="none"/>
+        </g>
+        <rect x="5360" y="392" width="2240" height="58" fill="url(#hazeG)" opacity=".55"/>
         <g id="refLabel">
-          <path class="hitline" d="M 5546 292 L 5520 346" fill="none"/>
-          <text class="lbl" x="5552" y="286">REFINERY</text>
+          <path class="hitline" d="M 5806 214 L 5844 198" fill="none"/>
+          <text class="lbl" data-i="lbl_refinery" x="5800" y="208" text-anchor="end">REFINERY</text>
         </g>
       </g>
 
@@ -515,6 +802,11 @@ svg{direction:ltr}
             <path d="M 1852 400 a 28 22 0 0 1 56 0 Z" fill="#C7D6DF" stroke="#93A7B3" stroke-width="2"/>
             <path d="M 2032 400 a 28 22 0 0 1 56 0 Z" fill="#C7D6DF" stroke="#93A7B3" stroke-width="2"/>
             <path d="M 2212 400 a 28 22 0 0 1 56 0 Z" fill="#C7D6DF" stroke="#93A7B3" stroke-width="2"/>
+          </g>
+          <g id="hatchLamps" fill="#FFD86B" stroke="#B4790C" stroke-width="1.5">
+            <circle class="hatchLamp" cx="1880" cy="372" r="5" opacity="0"/>
+            <circle class="hatchLamp" cx="2060" cy="372" r="5" opacity="0"/>
+            <circle class="hatchLamp" cx="2240" cy="372" r="5" opacity="0"/>
           </g>
           <g id="shipManifold">
             <rect x="1694" y="330" width="12" height="70" fill="#A9BAC4" stroke="#7B8E9A" stroke-width="2"/>
@@ -536,6 +828,16 @@ svg{direction:ltr}
           <rect id="radar" x="1334" y="222" width="32" height="5" rx="2.5" fill="#E8641A"/>
           <circle class="blink" cx="1350" cy="212" r="4" fill="#FF6B6B"/>
           <g class="smoke"><circle cx="1428" cy="234" r="9" fill="#FFFFFF" opacity="0"/><circle cx="1428" cy="234" r="7" fill="#FFFFFF" opacity="0"/><circle cx="1428" cy="234" r="6" fill="#FFFFFF" opacity="0"/></g>
+          <g clip-path="url(#clipHull)">
+            <rect id="cargoOil" x="1298" y="468" width="1246" height="0" fill="url(#cargoOilG)" opacity=".94"/>
+            <path id="cargoSurf" d="" fill="#C98A3C" opacity=".92"/>
+            <g id="cargoBubbles" opacity="0" fill="#F0B85E">
+              <circle class="cargoBub" cx="1420" cy="452" r="3"/><circle class="cargoBub" cx="1620" cy="444" r="2.5"/>
+              <circle class="cargoBub" cx="1840" cy="456" r="3.4"/><circle class="cargoBub" cx="2060" cy="446" r="2.8"/>
+              <circle class="cargoBub" cx="2280" cy="454" r="3.2"/><circle class="cargoBub" cx="2400" cy="442" r="2.4"/>
+              <circle class="cargoBub" cx="1520" cy="438" r="2.2"/><circle class="cargoBub" cx="1960" cy="452" r="2.6"/>
+            </g>
+          </g>
           <text x="2260" y="426" text-anchor="middle" fill="#FFFFFF" style="font-family:var(--font);font-weight:800;font-size:36px;letter-spacing:9px;opacity:.95">NOC</text>
           <g id="wake">
             <path d="M 1306 404 L 880 452 L 880 392 L 1306 420 Z" fill="url(#wakeG)"/>
@@ -573,7 +875,7 @@ svg{direction:ltr}
           <rect x="-4" y="-42" width="7" height="14" rx="2" fill="#39454E"/>
           <circle cx="86" cy="-20" r="8" fill="none" stroke="#39454E" stroke-width="2.5"/>
           <circle class="blink" cx="80" cy="-7" r="3.4" fill="#FF6B6B"/>
-          <text x="-4" y="-8" text-anchor="middle" fill="#0B3A55" style="font-family:var(--font);font-weight:800;font-size:15px;letter-spacing:1px">NOC</text>
+          <text id="heliTxt" x="-4" y="-8" text-anchor="middle" fill="#0B3A55" style="font-family:var(--font);font-weight:800;font-size:15px;letter-spacing:1px">NOC</text>
           <ellipse id="heliBlur" cx="0" cy="-42" rx="60" ry="4" fill="#39454E" opacity=".1"/>
           <g id="heliRotor">
             <rect x="-62" y="-44.5" width="124" height="4.6" rx="2.3" fill="#39454E"/>
@@ -581,6 +883,13 @@ svg{direction:ltr}
             <rect x="-60" y="-44.5" width="120" height="4.6" rx="2.3" fill="#5A6673" opacity=".75" transform="rotate(-8 0 -42)"/>
           </g>
         </g>
+      </g>
+
+      <rect id="focusDim" x="-2000" y="-1200" width="8000" height="4000" fill="#062A40" opacity="0" mask="url(#focusMask)"/>
+      <g id="focusChip" class="focusChip" opacity="0">
+        <rect x="-96" y="-42" width="192" height="42" rx="21" fill="#FFFFFF" stroke="#12324A" stroke-width="3"/>
+        <path d="M -11 0 L 11 0 L 0 13 Z" fill="#FFFFFF" stroke="#12324A" stroke-width="2.5" stroke-linejoin="round"/>
+        <text id="chipTxt" x="0" y="-14" text-anchor="middle" fill="#0B3A55" style="font-family:var(--font);font-weight:800;font-size:22px" data-i="chip_fill">FILLING</text>
       </g>
 
       <g id="gFx"></g>
@@ -599,12 +908,12 @@ svg{direction:ltr}
           <text class="ticknum" data-m="400" x="488" y="1178">400</text>
           <text class="ticknum" data-m="500" x="488" y="1368">500</text>
         </g>
-        <text class="lbl" x="540" y="488">OCEAN</text>
-        <text class="lbl" x="540" y="1046">SEABED</text>
-        <text class="lbl" x="540" y="1212">ROCK</text>
+        <text class="lbl" data-i="lbl_ocean" x="540" y="488">OCEAN</text>
+        <text class="lbl" data-i="lbl_seabed" x="540" y="1046">SEABED</text>
+        <text class="lbl" data-i="lbl_rock" x="540" y="1212">ROCK</text>
         <g>
           <path class="hitline" d="M 410 300 L 560 344" fill="none"/>
-          <text class="lbl" x="404" y="292" text-anchor="end">OFFSHORE PLATFORM</text>
+          <text class="lbl" data-i="lbl_platform" x="404" y="292" text-anchor="end">OFFSHORE PLATFORM</text>
         </g>
       </g>
     </svg>
@@ -632,19 +941,19 @@ svg{direction:ltr}
           <span><svg viewBox="0 0 24 24"><path d="M12 3 C12 3 5 11 5 15 a7 7 0 0 0 14 0 C19 11 12 3 12 3 Z" fill="#E8641A" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 15.4 a3.2 3.2 0 0 0 3 3.2" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg></span>
           <span><svg viewBox="0 0 24 24"><path d="M3 14h18l-2.4 5H5.4L3 14Z" fill="#2A7FB4" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 14V9h7v5" fill="#fff" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/><path d="M2 21h20" stroke="#12324A" stroke-width="1.6" stroke-linecap="round"/></svg></span>
         </div>
-        <span class="kicker">OFFSHORE &middot; BENEATH THE SEABED</span>
-        <h1>Let's Drill Together!</h1>
-        <p>Help us drill beneath the ocean and find oil and gas!</p>
-        <button class="btn big" id="startBtn" type="button">START</button>
+        <span class="kicker" data-i="intro_kicker">OFFSHORE &middot; BENEATH THE SEABED</span>
+        <h1 data-i="intro_h">Let's Drill Together!</h1>
+        <p data-i="intro_p">Help us drill beneath the ocean and find oil and gas!</p>
+        <button class="btn big" id="startBtn" type="button" data-i="start">START</button>
       </div>
     </div>
 
     <div class="overlay" id="overlayFinal">
       <div class="card">
-        <h2>&#127881; YOU DID IT!</h2>
-        <div class="flow"><span>DRILL</span><i>&#8594;</i><span>FIND</span><i>&#8594;</i><span>BRING IT UP</span><i>&#8594;</i><span>COLLECT</span><i>&#8594;</i><span>REFINERY</span></div>
-        <p>You helped drill beneath the ocean, collect oil and gas, and get them ready for their journey!</p>
-        <button class="btn big" id="againBtn" type="button">PLAY AGAIN</button>
+        <h2 data-i="final_h">&#127881; YOU DID IT!</h2>
+        <div class="flow"><span data-i="step0">DRILL</span><i>&#8594;</i><span data-i="step1">FIND</span><i>&#8594;</i><span data-i="flow_lift">BRING IT UP</span><i>&#8594;</i><span data-i="step3">COLLECT</span><i>&#8594;</i><span data-i="step4">REFINERY</span></div>
+        <p data-i="final_p">You helped drill beneath the ocean, collect oil and gas, and get them ready for their journey!</p>
+        <button class="btn big" id="againBtn" type="button" data-i="again">PLAY AGAIN</button>
       </div>
     </div>
   </div>
@@ -657,7 +966,7 @@ svg{direction:ltr}
     <div class="console locked" id="console" data-dir="down">
       <div class="console-head"><span id="consoleTitle">DRILL CONTROL</span><i class="lamp" id="lamp"></i></div>
       <div class="track" id="track" role="slider" tabindex="0" aria-label="Drill handle" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-        <div class="trackfill" id="trackfill"></div>
+        <div class="trackfill" id="trackfill"><i></i><i></i><i></i></div>
         <div class="knob" id="knob">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
         </div>
@@ -684,22 +993,101 @@ function el(tag,attrs,parent){
 function clamp(v,a,b){return v<a?a:(v>b?b:v);}
 function lerp(a,b,t){return a+(b-a)*t;}
 function easeInOut(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
+function easeInOutSine(t){return -(Math.cos(Math.PI*t)-1)/2;}
 function easeOut(t){return 1-Math.pow(1-t,3);}
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
 var rnd=mulberry32(20260930);
 var RM=false;
 try{RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(errRM){}
 
+var LANG_KEY='noc-kids-lang';
+var lang='en';
+try{var langSaved=localStorage.getItem(LANG_KEY); if(langSaved==='ar'||langSaved==='en'){lang=langSaved;}}catch(errL){}
+var TXT={
+  doc_title:["Let's Drill Together! - Offshore Prototype",'لنحفر معًا! - تجربة المنصة البحرية'],
+  brand:["Let's Drill Together",'لنحفر معًا'],
+  langBtn:['عربي','English'],
+  lang_aria:['Switch to Arabic','التبديل إلى الإنجليزية'],
+  restart:['Restart the game','إعادة اللعبة من البداية'],
+  progress:['Progress','مراحل اللعبة'],
+  step0:['DRILL','احفر'],
+  step1:['FIND','اكتشف'],
+  step2:['LIFT','ارفع'],
+  step3:['COLLECT','اجمع'],
+  step4:['REFINERY','المصفاة'],
+  flow_lift:['BRING IT UP','أخرِجه'],
+  intro_kicker:['OFFSHORE · BENEATH THE SEABED','في عرض البحر · تحت قاع البحر'],
+  intro_h:["Let's Drill Together!",'لنحفر معًا!'],
+  intro_p:['Help us drill beneath the ocean and find oil and gas!','ساعدونا في الحفر تحت قاع البحر لنكتشف النفط والغاز!'],
+  start:['START','ابدأوا'],
+  final_h:['🎉 YOU DID IT!','🎉 أحسنتم!'],
+  final_p:['You helped drill beneath the ocean, collect oil and gas, and get them ready for their journey!','ساعدتم في الحفر تحت قاع البحر، وجمع النفط والغاز، وتجهيزهما للرحلة!'],
+  again:['PLAY AGAIN','العبوا من جديد'],
+  world_title:['Offshore drilling platform over the ocean, with a drill going down through the seawater, the seabed and the rock layers into an oil and gas reservoir.','منصة حفر بحرية فوق المحيط، مع مثقاب ينزل عبر مياه البحر وقاع البحر وطبقات الصخور حتى خزّان النفط والغاز.'],
+  lbl_ocean:['OCEAN','المحيط'],
+  lbl_seabed:['SEABED','قاع البحر'],
+  lbl_rock:['ROCK','الصخور'],
+  lbl_platform:['OFFSHORE PLATFORM','المنصة البحرية'],
+  lbl_gas:['GAS','الغاز'],
+  lbl_oil:['OIL','النفط'],
+  lbl_refinery:['REFINERY','المصفاة'],
+  u_m:['m','م'],
+  gauge_depth:['DEPTH','العمق'],
+  gauge_rising:['OIL RISING','صعود النفط'],
+  gauge_loading:['LOADING','التحميل'],
+  ctrl_drill:['DRILL CONTROL','ذراع الحفر'],
+  ctrl_pump:['PUMP CONTROL','مضخة الرفع'],
+  pull_down:['PULL DOWN','اسحب للأسفل'],
+  pull_up:['PULL UP','اسحب للأعلى'],
+  aria_drill_handle:['Drill handle','مقبض الحفر'],
+  aria_pump_handle:['Pump handle','مقبض المضخة'],
+  chip_fill:['FILLING','قيد التعبئة'],
+  chip_lift:['RISING','صاعد'],
+  p_start:['Tap START to begin!','اضغطوا على «ابدأوا» للبدء!'],
+  s_start:['Help us drill beneath the ocean and find oil and gas!','ساعدونا في الحفر تحت قاع البحر لنكتشف النفط والغاز!'],
+  p_pull_down:['Pull the handle down to drill!','اسحبوا المقبض إلى الأسفل للحفر!'],
+  s_pull_down:['Drag the handle all the way down.','اسحبوا المقبض إلى آخره نحو الأسفل.'],
+  p_drilling:['Drilling deeper...','نحفر أعمق...'],
+  s_drilling:['Keep pulling the handle down.','واصلوا سحب المقبض نحو الأسفل.'],
+  s_pull_all:['Pull it all the way down.','اسحبوه إلى آخره نحو الأسفل.'],
+  p_found:['We found oil and gas!','وجدنا النفط والغاز!'],
+  s_found:['Deep beneath the seabed.','في أعماق قاع البحر.'],
+  b_found_h:['WE FOUND OIL & GAS!','وجدنا النفط والغاز!'],
+  b_found_p:['Oil and gas can be found deep beneath the seabed.','يوجد النفط والغاز في أعماق قاع البحر.'],
+  b_found_cta:['BRING IT UP  ▲','لنرفعه إلى الأعلى  ▲'],
+  p_lift:['Now bring the oil and gas up!','الآن لنرفع النفط والغاز إلى الأعلى!'],
+  s_lift:['Drag the pump handle up.','اسحبوا مقبض المضخة نحو الأعلى.'],
+  p_rising:['The oil and gas are coming up!','النفط والغاز يصعدان!'],
+  s_rising:['Keep pulling the pump handle up.','واصلوا سحب المقبض نحو الأعلى.'],
+  p_lift_more:['Keep pulling the pump handle up!','واصلوا سحب مقبض المضخة إلى الأعلى!'],
+  s_lift_more:['The oil and gas are still in the well.','النفط والغاز ما زالا في البئر.'],
+  b_collected:['The oil and gas are collected on the platform.','جُمع النفط والغاز على المنصة.'],
+  s_filling:['Filling the storage tanks...','نملأ خزانات التخزين...'],
+  p_filling_ship:['Filling the tanker...','نملأ الناقلة...'],
+  s_filling_ship:['The oil and gas travel from the platform to the ship.','ينتقل النفط والغاز من المنصة إلى السفينة.'],
+  b_ready_h:['Ready to travel!','جاهزون للإبحار!'],
+  b_ready_p:['The tanker is full of oil and gas.','الناقلة ممتلئة بالنفط والغاز.'],
+  b_ready_cta:['SET SAIL','لنُبحر'],
+  p_ready:['Ready to travel!','جاهزون للإبحار!'],
+  s_ready:['The tanker is loaded and ready.','الناقلة جاهزة ومحمّلة.'],
+  p_sail:['Sailing to the refinery!','نبحر إلى المصفاة!'],
+  s_sail:['The oil and gas are on their way.','النفط والغاز في طريقهما.'],
+  cap_sail:['The oil and gas are on their way to the refinery.','النفط والغاز في طريقهما إلى المصفاة.'],
+  p_done:['You did it!','أحسنتم!'],
+  s_done:['You helped drill beneath the ocean and collect oil and gas.','ساعدتم في الحفر تحت قاع البحر وجمع النفط والغاز.']
+};
+function tr(k){var v=TXT[k];return v?(lang==='ar'?v[1]:v[0]):k;}
+
 var world=$('#world'), stage=$('#stage');
 var els={
-  steps:$('#steps'),restart:$('#restart'),gauge:$('#gauge'),gaugeCap:$('#gaugeCap'),gaugeNum:$('#gaugeNum'),
+  steps:$('#steps'),restart:$('#restart'),langBtn:$('#lang'),gauge:$('#gauge'),gaugeCap:$('#gaugeCap'),gaugeNum:$('#gaugeNum'),
   gaugeUnit:$('#gaugeUnit'),gaugeBar:$('#gaugeBar'),banner:$('#banner'),bannerTitle:$('#bannerTitle'),
   bannerSub:$('#bannerSub'),bannerCta:$('#bannerCta'),caption:$('#caption'),flash:$('#flash'),fx:$('#fx'),
   overlayIntro:$('#overlayIntro'),overlayFinal:$('#overlayFinal'),startBtn:$('#startBtn'),againBtn:$('#againBtn'),
   promptBox:$('#promptBox'),promptText:$('#promptText'),promptSub:$('#promptSub'),promptArrow:$('#promptArrow'),
   consoleEl:$('#console'),consoleTitle:$('#consoleTitle'),consoleFoot:$('#consoleFoot'),track:$('#track'),
   trackfill:$('#trackfill'),knob:$('#knob'),
-  gHeli:$('#gHeli'),heliRotor:$('#heliRotor'),heliBlur:$('#heliBlur'),
+  gHeli:$('#gHeli'),heliBody:$('#heliBody'),heliTxt:$('#heliTxt'),heliRotor:$('#heliRotor'),heliBlur:$('#heliBlur'),
   gFish:$('#gFish'),gGround:$('#gGround'),gRes:$('#gRes'),gUnder:$('#gUnder'),gRays:$('#gRays'),
   gWell:$('#gWell'),gString:$('#gString'),gPlatform:$('#gPlatform'),gFlow:$('#gFlow'),gSurface:$('#gSurface'),
   gShip:$('#gShip'),gMoor:$('#gMoor'),gHose:$('#gHose'),gFx:$('#gFx'),labels:$('#labels'),
@@ -707,11 +1095,16 @@ var els={
   stringH:$('#stringH'),gBit:$('#gBit'),resGlow:$('#resGlow'),oilFill:$('#oilFill'),gasFill:$('#gasFill'),
   wellFlow:$('#wellFlow'),deckFlow:$('#deckFlow'),slugs:$('#slugs'),gasBubbles:$('#gasBubbles'),
   arrival:$('#arrival'),hosePath:$('#hosePath'),hoseFlow:$('#hoseFlow'),wake:$('#wake'),
-  flywheel:$('#flywheel'),radar:$('#radar'),depthTag:$('#depthTag'),depthTagTxt:$('#depthTagTxt'),pipeRing:null
+  flywheel:$('#flywheel'),radar:$('#radar'),depthTag:$('#depthTag'),depthTagTxt:$('#depthTagTxt'),pipeRing:null,
+  oilSurf:$('#oilSurf'),gasSurf:$('#gasSurf'),oilGlow:$('#oilGlow'),gasGlow:$('#gasGlow'),
+  gRiser:$('#gRiser'),riserRungs:$('#riserRungs'),oilColumn:$('#oilColumn'),oilHead:$('#oilHead'),
+  oilHeadGlow:$('#oilHeadGlow'),oilColClip:$('#oilColClip'),
+  cargoOil:$('#cargoOil'),cargoSurf:$('#cargoSurf'),cargoBubbles:$('#cargoBubbles'),hatchLamps:$$('.hatchLamp'),
+  focusDim:$('#focusDim'),focusHole:$('#focusHole'),focusChip:$('#focusChip'),chipTxt:$('#chipTxt')
 };
 
 var SURFACE=420, SEABED=980, BIT_START=332, BIT_MAX=1360, DISCOVER_Y=1354;
-var WELL_X=900, FLOW_TOP=340, FLOW_BOT=1330;
+var WELL_X=900, FLOW_TOP=340, FLOW_BOT=1330, RISER_TOP=372, RISER_BOT=906;
 var PH={INTRO:'intro',DRILL:'drill',FOUND:'found',LIFT:'lift',COLLECT:'collect',LOAD:'load',SAIL:'sail',DONE:'done'};
 var phase=PH.INTRO;
 
@@ -721,8 +1114,11 @@ var load={p:0,state:'arrive',done:false};
 var sail={t:0,done:false};
 var flags={surface:false,seabed:false,rock:false,res:false};
 var shipX=0, shipSink=0, sinkGoal=0, spawnAcc=0, foamAcc=0, prevLiftP=0, glowAcc=0;
+var tank={oil:0,gas:0,to:0,tg:0};
+var focus={x:900,y:500,r:200,o:0,to:0,chip:'chip_fill',pct:null,lastTxt:''};
+var loadFoamAcc=0, waterAcc=0, arrivalAcc=0;
 var T=0, timers=[];
-var heli={x:612,y:300,rotor:0,blur:.1,mode:'parked'};
+var heli={x:612,y:300,rotor:0,blur:.1,mode:'parked',flip:0,alpha:1,turnDone:0};
 var kickT=0;
 
 var cam={x:900,y:470,h:1300,minW:0,maxH:0,name:'welcome',fit:null};
@@ -778,7 +1174,7 @@ function camTo(x,y,h,ms,opt){
   var fx0=cam.x,fy0=cam.y,fh0=cam.h,t0=performance.now();
   var dur=Math.max(60,RM?ms*0.35:ms);
   function step(now){
-    var p=clamp((now-t0)/dur,0,1), e=easeInOut(p);
+    var p=clamp((now-t0)/dur,0,1), e=easeInOutSine(p);
     cam.x=lerp(fx0,x,e); cam.y=lerp(fy0,y,e); cam.h=lerp(fh0,h,e);
     if(p<1){camRAF=requestAnimationFrame(step);}else{camRAF=0;if(opt.done){opt.done();}}
   }
@@ -801,8 +1197,8 @@ function bandPath(yt,yb,amp,seed){
   return d;
 }
 var BANDS=[
-  {y:980,amp:8,seed:20,g:'sandG',p:'pDots',pa:.55},
-  {y:1058,amp:12,seed:140,g:'r1G',p:'pDots',pa:.32},
+  {y:980,amp:8,seed:20,g:'sandG',p:'pStrata',pa:.5},
+  {y:1058,amp:12,seed:140,g:'r1G',p:'pStrata',pa:.35},
   {y:1185,amp:16,seed:320,g:'r2G',p:'pPebs',pa:.4},
   {y:1310,amp:14,seed:540,g:'r3G',p:'pHatch',pa:.5},
   {y:1450,amp:18,seed:760,g:'r4G',p:'pHatch',pa:.45},
@@ -871,6 +1267,21 @@ function buildUnder(){
     el('ellipse',{cx:px[i],cy:980,rx:32,ry:8,fill:'#F4B000',opacity:'.9'},els.gUnder);
   }
 }
+function buildRiser(){
+  for(var y=384;y<=900;y+=86){
+    el('rect',{x:882,y:y,width:14,height:7,rx:2,fill:'#8DA0AD',stroke:'#12324A','stroke-width':1.4},els.riserRungs);
+    el('rect',{x:904,y:y,width:14,height:7,rx:2,fill:'#8DA0AD',stroke:'#12324A','stroke-width':1.4},els.riserRungs);
+    el('line',{x1:891,y1:(y+3.5),x2:909,y2:(y+3.5),stroke:'#5B6B78','stroke-width':1.5,opacity:'.5'},els.riserRungs);
+  }
+}
+function buildSnow(){
+  for(var i=0;i<26;i++){
+    var c=el('circle',{cx:(300+Math.random()*2700).toFixed(0),cy:(470+Math.random()*520).toFixed(0),r:(1+Math.random()*1.8).toFixed(1),fill:'#CFEFF9',opacity:(0.08+Math.random()*0.16).toFixed(2)},$('#gSnow'));
+    c.setAttribute('class','snow');
+    c.style.animationDuration=(7+(i%5)*1.6)+'s';
+    c.style.animationDelay=(-(i%7)*1.3)+'s';
+  }
+}
 function buildDerrick(){
   var front=$('#derrickFront');
   function build(node,cx,baseY,halfBase,topY,halfTop,segs,col,col2,sw,op){
@@ -889,7 +1300,7 @@ function buildDerrick(){
     el('line',{x1:cx-halfTop,y1:topY,x2:cx+halfTop,y2:topY,stroke:col,'stroke-width':sw*1.6},node);
     el('line',{x1:cx-halfBase,y1:baseY,x2:cx+halfBase,y2:baseY,stroke:col2,'stroke-width':sw*1.4},node);
   }
-  build(front,900,330,84,122,20,10,'#E0553F','#C0432F',4.2,1);
+  build(front,900,330,84,122,20,10,'url(#derrickG)','#A83424',4.2,1);
 }
 function buildRailings(){
   var g=$('#railings'), i;
@@ -902,7 +1313,7 @@ function buildRays(){
   for(var i=0;i<xs.length;i++){
     var x=xs[i], w=90+((i%3)*40), sh=110+((i%4)*40);
     var d='M '+x+' 418 L '+(x+w)+' 418 L '+(x+sh+w*1.9)+' 984 L '+(x+sh+w*0.5)+' 984 Z';
-    var p=el('path',{d:d,fill:'#FFFFFF',opacity:(0.05+(i%3)*0.018).toFixed(3)},els.gRays);
+    var p=el('path',{d:d,fill:'url(#rayG)',opacity:(0.3+(i%3)*0.12).toFixed(3)},els.gRays);
     p.setAttribute('class','ray');
     p.style.animationDuration=(11+(i%5)*2.4)+'s';
     p.style.animationDelay=(-(i%7)*1.7)+'s';
@@ -918,6 +1329,7 @@ function buildFish(){
     el('path',{d:'M4 0 C20 -13 38 -12 47 0 C38 12 20 13 4 0 Z',fill:'#0B3A55',opacity:'.45'},m);
     el('path',{d:'M7 0 L-13 -12 L-10 0 L-13 12 Z',fill:'#0B3A55',opacity:'.45'},m);
     el('path',{d:'M22 -8 C28 -18 40 -18 44 -10 C36 -11 28 -10 22 -8 Z',fill:'#0B3A55',opacity:'.35'},m);
+    el('path',{d:'M8 3 C20 9 36 8 45 1 C36 7 20 8 8 3 Z',fill:'#BEE7F5',opacity:'.28'},m);
     el('circle',{cx:36,cy:-2,r:2.6,fill:'#EAF6FB',opacity:'.85'},m);
   }
   fish(360,742,1.6,27,-4);
@@ -948,15 +1360,31 @@ function buildClouds(){
 }
 var waves=[];
 function buildWaves(){
+  var fills=[
+    {y:420,amp:7,wl1:210,wl2:74,sp:1.0,fill:'url(#waveFillA)',op:.5,z:648},
+    {y:427,amp:9,wl1:250,wl2:90,sp:-0.6,fill:'url(#waveFillB)',op:.42,z:684}
+  ];
   var defs=[
     {y:420,amp:7,wl1:210,wl2:74,sp:1.0,stroke:'#0A3F5E',sw:5.5,op:.5},
     {y:425,amp:5,wl1:150,wl2:61,sp:-1.4,stroke:'#FFFFFF',sw:3.4,op:.55},
     {y:412,amp:4,wl1:260,wl2:96,sp:0.7,stroke:'#BEE7F5',sw:2.6,op:.4}
   ];
-  for(var i=0;i<defs.length;i++){
-    var d=defs[i];
-    var p=el('path',{fill:'none',stroke:d.stroke,'stroke-width':d.sw,'stroke-linecap':'round',opacity:d.op,d:''},els.gSurface);
+  var i,d,p;
+  for(i=0;i<fills.length;i++){
+    d=fills[i];
+    p=el('path',{fill:d.fill,opacity:d.op,d:''},els.gSurface);
     d.el=p; waves.push(d);
+  }
+  for(i=0;i<defs.length;i++){
+    d=defs[i];
+    p=el('path',{fill:'none',stroke:d.stroke,'stroke-width':d.sw,'stroke-linecap':'round',opacity:d.op,d:''},els.gSurface);
+    d.el=p; waves.push(d);
+  }
+  for(var k=0;k<14;k++){
+    var sx=520+((k*173)%2100), sy=414+(k%4)*4;
+    var spk=el('path',{d:'M '+sx+' '+(sy-5)+' L '+sx+' '+(sy+5)+' M '+(sx-5)+' '+sy+' L '+(sx+5)+' '+sy,stroke:'#EAF9FF','stroke-width':2,'stroke-linecap':'round',fill:'none',opacity:'.5'},els.gSurface);
+    spk.setAttribute('class','twinkle');
+    spk.style.animationDelay=(-(k%7)*0.5)+'s';
   }
   var rings=[[760,420],[1040,420]];
   for(var j=0;j<rings.length;j++){
@@ -978,7 +1406,9 @@ function wavePath(d,ph){
 }
 function updateWaves(){
   for(var i=0;i<waves.length;i++){
-    waves[i].el.setAttribute('d',wavePath(waves[i],T*0.9));
+    var w=waves[i], d=wavePath(w,T*0.9);
+    if(w.z){d+=' L 7250 '+w.z+' L -1450 '+w.z+' Z';}
+    w.el.setAttribute('d',d);
   }
 }
 
@@ -1085,16 +1515,22 @@ function setBit(y){
     var showTag=(y>440)&&(phase===PH.DRILL||phase===PH.LIFT);
     els.depthTag.style.opacity=showTag?'1':'0';
     els.depthTag.setAttribute('transform','translate(958 '+(yy-4).toFixed(1)+')');
-    els.depthTagTxt.textContent=Math.max(0,Math.round(depthAt(yy)/5)*5)+' m';
+    els.depthTagTxt.textContent=Math.max(0,Math.round(depthAt(yy)/5)*5)+' '+tr('u_m');
   }
 }
 
+var gaugeState=null;
+function renderGauge(){
+  var g=gaugeState; if(!g){return;}
+  els.gaugeCap.textContent=tr(g.cap);
+  els.gaugeNum.textContent=g.val;
+  els.gaugeUnit.textContent=g.unit==='m'?tr('u_m'):g.unit;
+  els.gaugeBar.style.width=(clamp(g.frac,0,1)*100).toFixed(0)+'%';
+  els.gauge.classList.toggle('good',!!g.good);
+}
 function gaugeShow(cap,val,unit,frac,good){
-  els.gaugeCap.textContent=cap;
-  els.gaugeNum.textContent=val;
-  els.gaugeUnit.textContent=unit;
-  els.gaugeBar.style.width=(clamp(frac,0,1)*100).toFixed(0)+'%';
-  els.gauge.classList.toggle('good',!!good);
+  gaugeState={cap:cap,val:val,unit:unit,frac:frac,good:good};
+  renderGauge();
   els.gauge.classList.add('show');
 }
 function gaugeHide(){els.gauge.classList.remove('show');}
@@ -1104,33 +1540,45 @@ function markTicks(m){
     t[i].classList.toggle('hit',parseFloat(t[i].getAttribute('data-m'))<=m+1);
   }
 }
-function setPrompt(main,sub,arrow){
-  els.promptText.textContent=main;
-  els.promptSub.textContent=sub||'';
-  if(arrow){
-    els.promptArrow.textContent=arrow;
-    els.promptArrow.className='arrow'+(arrow==='\u25B2'?' up':'');
+var curPrompt={main:'',sub:'',arrow:''};
+function renderPrompt(){
+  els.promptText.textContent=curPrompt.main?tr(curPrompt.main):'';
+  els.promptSub.textContent=curPrompt.sub?tr(curPrompt.sub):'';
+  if(curPrompt.arrow){
+    els.promptArrow.textContent=curPrompt.arrow;
+    els.promptArrow.className='arrow'+(curPrompt.arrow==='\u25B2'?' up':'');
     els.promptArrow.style.display='';
   } else {
     els.promptArrow.textContent='';
     els.promptArrow.style.display='none';
   }
 }
-var bannerAction=null;
-function showBanner(o){
+function setPrompt(main,sub,arrow){
+  curPrompt={main:main||'',sub:sub||'',arrow:arrow||''};
+  renderPrompt();
+}
+var curBanner=null, bannerAction=null;
+function renderBanner(){
+  var o=curBanner; if(!o){return;}
   els.banner.classList.toggle('bottom',o.pos==='bottom');
-  els.bannerTitle.textContent=o.title||'';
-  els.bannerSub.textContent=o.sub||'';
+  els.bannerTitle.textContent=tr(o.title);
+  els.bannerSub.textContent=o.sub?tr(o.sub):'';
   els.bannerSub.style.display=o.sub?'':'none';
   if(o.cta){
     els.bannerCta.hidden=false;
-    els.bannerCta.textContent=o.cta;
+    els.bannerCta.textContent=tr(o.cta);
     bannerAction=o.onCta||null;
   } else {els.bannerCta.hidden=true;bannerAction=null;}
+}
+function showBanner(o){
+  curBanner=o;
+  renderBanner();
   els.banner.classList.add('show');
 }
 function hideBanner(){els.banner.classList.remove('show');}
-function showCaption(text){els.caption.textContent=text;els.caption.classList.add('show');}
+var curCaption='';
+function renderCaption(){els.caption.textContent=curCaption?tr(curCaption):'';}
+function showCaption(text){curCaption=text;renderCaption();els.caption.classList.add('show');}
 function hideCaption(){els.caption.classList.remove('show');}
 function flash(){
   if(RM){return;}
@@ -1163,39 +1611,117 @@ function markSteps(doneCount,activeIdx){
     if(badge){badge.textContent=done?'\u2713':String(i+1);}
   }
 }
+var consoleState=null;
+function renderConsole(){
+  var st=consoleState; if(!st){return;}
+  els.consoleTitle.textContent=tr(st.title);
+  els.track.setAttribute('aria-label',st.dir==='up'?tr('aria_pump_handle'):tr('aria_drill_handle'));
+  applyKnob();
+}
 function setConsole(dir,enabled,title,foot){
+  consoleState={dir:dir,title:title,foot:foot};
   ctrl.dir=dir;
   ctrl.v=0;
   els.consoleEl.setAttribute('data-dir',dir);
-  els.consoleTitle.textContent=title;
-  els.consoleFoot.textContent=foot;
   els.consoleEl.classList.toggle('locked',!enabled);
   els.consoleEl.classList.toggle('ready',!!enabled);
   els.consoleEl.classList.remove('nudge','working');
   els.consoleEl.setAttribute('aria-disabled',enabled?'false':'true');
-  els.track.setAttribute('aria-label',dir==='up'?'Pump handle':'Drill handle');
   var icon=dir==='up'?'M12 4 L12 20 M6 10 L12 3 L18 10':'M4 6h16M4 12h16M4 18h16';
   els.knob.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+icon+'" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   ctrl.enabled=!!enabled;
   els.track.setAttribute('tabindex',enabled?'0':'-1');
+  renderConsole();
   applyKnob();
 }
-function setTanks(oil,gas){
-  var o=clamp(oil,0,1), g=clamp(gas,0,1);
-  els.oilFill.setAttribute('y',(328-o*88).toFixed(1));
+function setTanks(oil,gas){ tank.to=clamp(oil,0,1); tank.tg=clamp(gas,0,1); }
+function surfD(x,w,y,amp,humps){
+  var d='M '+x+' '+y.toFixed(1), seg=w/humps, i;
+  for(i=0;i<humps;i++){d+=' q '+(seg/2).toFixed(1)+' '+(-amp).toFixed(1)+' '+seg.toFixed(1)+' 0';}
+  return d+' L '+(x+w).toFixed(1)+' '+(y+9).toFixed(1)+' L '+x+' '+(y+9).toFixed(1)+' Z';
+}
+function updateTanks(dt){
+  var k=Math.min(1,dt*7);
+  tank.oil+=(tank.to-tank.oil)*k; tank.gas+=(tank.tg-tank.gas)*k;
+  if(Math.abs(tank.to-tank.oil)<0.003){tank.oil=tank.to;}
+  if(Math.abs(tank.tg-tank.gas)<0.003){tank.gas=tank.tg;}
+  var o=tank.oil,g=tank.gas,oy=328-o*88,gy=328-g*76;
+  els.oilFill.setAttribute('y',oy.toFixed(1));
   els.oilFill.setAttribute('height',(o*88).toFixed(1));
-  els.gasFill.setAttribute('y',(328-g*76).toFixed(1));
+  els.oilSurf.setAttribute('d',o>0.01?surfD(1052,56,oy,2.4,4):'');
+  els.oilGlow.classList.toggle('on',o>0.02&&o<0.995);
+  els.gasFill.setAttribute('y',gy.toFixed(1));
   els.gasFill.setAttribute('height',(g*76).toFixed(1));
+  els.gasSurf.setAttribute('d',g>0.01?surfD(1142,56,gy,2.2,4):'');
+  els.gasGlow.classList.toggle('on',g>0.02&&g<0.995);
+}
+function cargoFill(v){
+  v=clamp(v,0,1);
+  var top=468-v*58;
+  els.cargoOil.setAttribute('y',top.toFixed(1));
+  els.cargoOil.setAttribute('height',(468-top).toFixed(1));
+  els.cargoSurf.setAttribute('d',v>0.01?surfD(1298,1246,top,3,10):'');
+  els.cargoBubbles.setAttribute('opacity',v>0.02?'0.6':'0');
+  for(var i=0;i<els.hatchLamps.length;i++){
+    els.hatchLamps[i].setAttribute('opacity',clamp(v*3.3-i*0.9,0,1).toFixed(2));
+  }
+}
+function focusOn(x,y,r,o,chip,pct){
+  focus.x=x;focus.y=y;focus.r=r;focus.to=o;
+  if(chip!==undefined){focus.chip=chip;}
+  if(pct!==undefined){focus.pct=pct;}
+}
+function focusOff(){focus.to=0;}
+function updateFocus(dt){
+  focus.o+=(focus.to-focus.o)*Math.min(1,dt*4);
+  if(focus.o<0.004&&focus.to===0){
+    if(els.focusDim.getAttribute('opacity')!=='0'){
+      els.focusDim.setAttribute('opacity','0');
+      els.focusChip.setAttribute('opacity','0');
+    }
+    return;
+  }
+  var aspect=stageW/stageH, halfW=cam.h*aspect/2, halfH=cam.h/2;
+  var cx=clamp(focus.x,cam.x-halfW+112,cam.x+halfW-112);
+  var cy=clamp(focus.y-focus.r-18,cam.y-halfH+72,cam.y+halfH-24);
+  els.focusDim.setAttribute('opacity',focus.o.toFixed(3));
+  els.focusHole.setAttribute('cx',focus.x.toFixed(0));
+  els.focusHole.setAttribute('cy',focus.y.toFixed(0));
+  els.focusHole.setAttribute('r',focus.r.toFixed(0));
+  els.focusChip.setAttribute('opacity',(focus.o>0.05?1:focus.o/0.05).toFixed(2));
+  els.focusChip.setAttribute('transform','translate('+cx.toFixed(0)+' '+cy.toFixed(0)+')');
+  var txt=tr(focus.chip||'chip_fill')+(focus.pct!=null?' '+Math.round(focus.pct*100)+'%':'');
+  if(txt!==focus.lastTxt){focus.lastTxt=txt;els.chipTxt.textContent=txt;}
 }
 function slugsInit(){
   var i;
-  for(i=0;i<3;i++){el('rect',{x:-13,y:-24,width:26,height:48,rx:13,fill:'url(#slugG)',opacity:'0'},els.slugs);}
-  for(i=0;i<8;i++){el('circle',{r:3+(i%3),fill:'#EAF9F6',opacity:'0'},els.gasBubbles);}
+  for(i=0;i<3;i++){el('rect',{x:-8,y:-22,width:16,height:44,rx:8,fill:'url(#slugG)',stroke:'#5A3410','stroke-width':1.5,opacity:'0'},els.slugs);}
+  for(i=0;i<10;i++){el('circle',{r:2.5+(i%4),fill:'url(#gasBubbleG)',opacity:'0'},els.gasBubbles);}
 }
-function updateFlow(){
-  var p=lift.p, i, s, t, y, b, tb, yb, xb;
+function headD(y,w,amp){
+  var x0=900-w/2,x1=900+w/2;
+  return 'M '+x0+' '+y+' q '+(w*.18).toFixed(1)+' '+(-amp*1.5).toFixed(1)+' '+(w*.5).toFixed(1)+' 0 q '+(w*.32).toFixed(1)+' '+(amp*1.6).toFixed(1)+' '+(w*.5).toFixed(1)+' 0 L '+x1+' '+(y+12)+' L '+x0+' '+(y+12)+' Z';
+}
+function updateFlow(dt){
+  var p=lift.p, i, s, t, y, b, tb, yb, xb, hy, colTop, h, nearSurf;
   els.wellFlow.classList.toggle('on',p>0.02);
   els.deckFlow.classList.toggle('on',p>0.62&&p<0.999);
+  hy=lerp(FLOW_BOT,FLOW_TOP,p);
+  colTop=clamp(hy,RISER_TOP,RISER_BOT);
+  h=Math.max(0,RISER_BOT-colTop);
+  els.oilColumn.setAttribute('y',colTop.toFixed(1));
+  els.oilColumn.setAttribute('height',h.toFixed(1));
+  els.oilColClip.setAttribute('y',colTop.toFixed(1));
+  els.oilColClip.setAttribute('height',h.toFixed(1));
+  if(h>8){
+    els.oilHead.setAttribute('d',headD(colTop,18,2.6));
+    els.oilHead.setAttribute('opacity','1');
+    els.oilHeadGlow.setAttribute('transform','translate(900 '+colTop.toFixed(1)+')');
+    els.oilHeadGlow.setAttribute('opacity','0.8');
+  } else {
+    els.oilHead.setAttribute('opacity','0');
+    els.oilHeadGlow.setAttribute('opacity','0');
+  }
   for(i=0;i<els.slugs.children.length;i++){
     s=els.slugs.children[i];
     t=(p*1.06)-i*0.2;
@@ -1210,12 +1736,26 @@ function updateFlow(){
     tb=lift.p*1.32-(i*0.085);
     if(tb>0&&tb<=1){
       yb=lerp(FLOW_BOT-10,FLOW_TOP+6,tb);
-      xb=WELL_X+Math.sin(i*2.1)*7;
+      xb=WELL_X+Math.sin(i*2.1)*7+Math.sin(T*2.4+i*1.7)*2.6;
       b.setAttribute('transform','translate('+xb.toFixed(1)+' '+yb.toFixed(1)+')');
+      b.setAttribute('r',(2.2+(i%4)+tb*2.2).toFixed(1));
       b.setAttribute('opacity',clamp(Math.min(tb*5,(1-tb)*6),0,1).toFixed(2));
     } else {b.setAttribute('opacity','0');}
   }
   els.arrival.setAttribute('opacity',p>0.9?((p-0.9)*4).toFixed(2):'0');
+  if(p>0.02&&p<0.999&&dt){
+    waterAcc+=dt;
+    nearSurf=Math.abs(hy-SURFACE)<70;
+    if(waterAcc>(nearSurf?0.09:0.45)){
+      waterAcc=0;
+      spawn('foam',900+(Math.random()*2-1)*24,SURFACE+(Math.random()*2-1)*4,{r:4+Math.random()*6,fill:'#FFFFFF',op:.5,vy:-14,vx:(Math.random()*2-1)*30,grow:1.1,max:1.2+Math.random()*0.6});
+      if(nearSurf&&Math.random()<0.5){burst(900,SURFACE-2,'bubble',2,{sp:60});}
+    }
+  }
+  if(p>0.8){
+    arrivalAcc+=dt||0.016;
+    if(arrivalAcc>0.15){arrivalAcc=0;burst(900,344,'glint',1,{sp:30});}
+  }
 }
 
 var ctrl={enabled:false,dir:'down',v:0,active:false,travel:60,knobH:52};
@@ -1225,11 +1765,20 @@ function layoutKnob(){
   ctrl.travel=Math.max(14,r.height-ctrl.knobH-12);
   applyKnob();
 }
+function drillProg(){return clamp((drill.bitY-BIT_START)/(BIT_MAX-BIT_START),0,1);}
+var footTxt='';
+function updateFoot(prog){
+  var base=consoleState?tr(consoleState.foot):'';
+  var t=base+((consoleState&&consoleState.enabled&&prog>0.01)?' \u00B7 '+Math.round(prog*100)+'%':'');
+  if(t!==footTxt){footTxt=t;els.consoleFoot.textContent=t;}
+}
 function applyKnob(){
   var y=(ctrl.dir==='up'?(1-ctrl.v):ctrl.v)*ctrl.travel+6;
   els.knob.style.transform='translateY('+y.toFixed(1)+'px)';
-  els.trackfill.style.height=(ctrl.v*ctrl.travel).toFixed(1)+'px';
+  var prog=ctrl.dir==='down'?drillProg():lift.p;
+  els.trackfill.style.height=(clamp(prog,0,1)*ctrl.travel).toFixed(1)+'px';
   els.track.setAttribute('aria-valuenow',String(Math.round(ctrl.v*100)));
+  updateFoot(prog);
 }
 function knobFromClientY(clientY){
   var r=els.track.getBoundingClientRect();
@@ -1284,11 +1833,42 @@ els.track.addEventListener('keydown',function(e){
 });
 els.bannerCta.addEventListener('click',function(){if(bannerAction){bannerAction();}});
 els.restart.addEventListener('click',function(){restart();});
+els.langBtn.addEventListener('click',function(){toggleLang();});
 els.startBtn.addEventListener('click',function(){
   els.overlayIntro.classList.remove('show');
   setPhase(PH.DRILL);
 });
 els.againBtn.addEventListener('click',function(){restart();});
+
+function applyLang(){
+  var r=document.documentElement;
+  r.lang=lang;
+  r.dir=(lang==='ar')?'rtl':'ltr';
+  var list=$$('[data-i]'),i,e,v;
+  for(i=0;i<list.length;i++){
+    e=list[i];
+    v=tr(e.getAttribute('data-i'));
+    if(e instanceof SVGElement){e.textContent=v;} else {e.innerHTML=v;}
+  }
+  list=$$('[data-ia]');
+  for(i=0;i<list.length;i++){
+    e=list[i];
+    e.setAttribute('aria-label',tr(e.getAttribute('data-ia')));
+  }
+  els.langBtn.textContent=tr('langBtn');
+  els.langBtn.setAttribute('lang',lang==='ar'?'en':'ar');
+  els.restart.setAttribute('title',tr('restart'));
+  document.title=tr('doc_title');
+  renderPrompt(); renderBanner(); renderConsole(); renderGauge(); renderCaption();
+}
+function toggleLang(){
+  lang=(lang==='ar')?'en':'ar';
+  try{localStorage.setItem(LANG_KEY,lang);}catch(errLS){}
+  applyLang();
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='l'||e.key==='L'){toggleLang();}
+});
 
 var promptKey='';
 function setPromptIf(main,sub,arrow){
@@ -1310,57 +1890,67 @@ function setPhase(p){
     camSnapFit(180,1720,60,1100,{name:'welcome'});
     var it=fitTarget(180,1720,60,1100);
     introBase.y=it.y; introBase.h=it.h;
-    setPrompt('Tap START to begin!','Help us drill beneath the ocean and find oil and gas!');
-    setConsole('down',false,'DRILL CONTROL','PULL DOWN');
+    setPrompt('p_start','s_start');
+    setConsole('down',false,'ctrl_drill','pull_down');
     gaugeHide(); markTicks(0); markSteps(0,-1); setTanks(0,0);
+    els.gRiser.classList.remove('on');
+    focusOff();
   }
   else if(p===PH.DRILL){
     camToFit(520,1340,104,1610,1700,{name:'cutaway'});
-    setPrompt('Pull the handle down to drill!','Drag the handle all the way down.','\u25BC');
-    setConsole('down',true,'DRILL CONTROL','PULL DOWN');
-    gaugeShow('DEPTH',0,'m',0,false); markTicks(0); markSteps(0,0);
+    setPrompt('p_pull_down','s_pull_down','\u25BC');
+    setConsole('down',true,'ctrl_drill','pull_down');
+    focusOff();
+    gaugeShow('gauge_depth',0,'m',0,false); markTicks(0); markSteps(0,0);
     after(5200,function(){if(phase===PH.DRILL&&!ctrl.active&&ctrl.v===0){els.consoleEl.classList.add('nudge');}});
     after(12000,function(){if(phase===PH.DRILL&&!ctrl.active&&drill.target<1){els.promptBox.classList.add('pulse');}});
   }
   else if(p===PH.FOUND){
-    setConsole('down',false,'DRILL CONTROL','PULL DOWN');
-    camToFit(600,1200,1180,1540,1500,{name:'reservoir'});
-    gaugeShow('DEPTH',Math.round(depthAt(DISCOVER_Y)/5)*5,'m',1,true);
+    setConsole('down',false,'ctrl_drill','pull_down');
+    camToFit(600,1200,1180,1540,2800,{name:'reservoir'});
+    focusOff();
+    gaugeShow('gauge_depth',Math.round(depthAt(DISCOVER_Y)/5)*5,'m',1,true);
     markTicks(500); markSteps(1,1);
-    setPrompt('We found oil and gas!','Deep beneath the seabed.');
-    showBanner({title:'WE FOUND OIL & GAS!',sub:'Oil and gas can be found deep beneath the seabed.',cta:'BRING IT UP  \u25B2',
+    setPrompt('p_found','s_found');
+    showBanner({title:'b_found_h',sub:'b_found_p',cta:'b_found_cta',
       onCta:function(){goLift();}});
     after(11000,function(){if(phase===PH.FOUND){goLift();}});
   }
   else if(p===PH.LIFT){
-    camToFit(520,1340,104,1610,1600,{name:'cutaway'});
-    setPrompt('Now bring the oil and gas up!','Drag the pump handle up.','\u25B2');
-    setConsole('up',true,'PUMP CONTROL','PULL UP');
+    camToFit(520,1340,104,1610,2200,{name:'cutaway'});
+    setPrompt('p_lift','s_lift','\u25B2');
+    setConsole('up',true,'ctrl_pump','pull_up');
     ctrl.v=0; lift.v=0; applyKnob();
-    gaugeShow('OIL RISING',0,'%',0,false); markSteps(2,2);
+    els.gRiser.classList.add('on');
+    if(els.pipeRing){els.pipeRing.classList.remove('off');}
+    focusOn(900,700,280,0.12,'chip_lift',0);
+    gaugeShow('gauge_rising',0,'%',0,false); markSteps(2,2);
     after(5200,function(){if(phase===PH.LIFT&&!ctrl.active&&lift.target===0){els.consoleEl.classList.add('nudge');}});
   }
   else if(p===PH.COLLECT){
-    setConsole('up',false,'PUMP CONTROL','PULL UP');
-    camToFit(540,1260,150,560,1500,{name:'top'});
+    setConsole('up',false,'ctrl_pump','pull_up');
+    camToFit(540,1260,150,560,2600,{name:'top'});
+    focusOn(1080,286,150,0.3,'chip_fill',0);
     gaugeHide(); markSteps(3,3);
     after(4400,function(){if(phase===PH.COLLECT){goLoad();}});
   }
   else if(p===PH.LOAD){
-    camToFit(470,2630,120,600,1800,{name:'wide'});
-    setPrompt('Filling the tanker...','The oil and gas travel from the platform to the ship.');
-    setConsole('up',false,'PUMP CONTROL','PULL UP');
+    camToFit(470,2630,120,600,2300,{name:'wide'});
+    setPrompt('p_filling_ship','s_filling_ship');
+    setConsole('up',false,'ctrl_pump','pull_up');
     els.gShip.classList.add('on');
     els.wake.classList.add('on');
     shipX=1500; shipSink=0; sinkGoal=0;
     load.p=0; load.state='arrive'; load.done=false;
-    gaugeShow('LOADING',0,'%',0,false);
+    cargoFill(0);
+    focusOn(1922+shipX,436,330,0.3,'chip_fill',null);
+    gaugeShow('gauge_loading',0,'%',0,false);
     markSteps(4,4);
     heliToShip();
   }
   else if(p===PH.SAIL){
-    setPrompt('Sailing to the refinery!','The oil and gas are on their way.');
-    setConsole('up',false,'PUMP CONTROL','PULL UP');
+    setPrompt('p_sail','s_sail');
+    setConsole('up',false,'ctrl_pump','pull_up');
     els.gMoor.classList.remove('on');
     els.gHose.classList.remove('on');
     els.hoseFlow.classList.remove('on');
@@ -1368,15 +1958,17 @@ function setPhase(p){
     els.gShip.classList.add('sailing');
     els.wake.classList.add('on');
     sinkGoal=0;
+    focusOff();
     gaugeHide(); hideBanner(); hideCaption();
-    showCaption('The oil and gas are on their way to the refinery.');
+    showCaption('cap_sail');
     after(9000,function(){hideCaption();});
     markSteps(5,-1);
   }
   else if(p===PH.DONE){
-    setConsole('up',false,'PUMP CONTROL','PULL UP');
-    setPrompt('You did it!','You helped drill beneath the ocean and collect oil and gas.');
+    setConsole('up',false,'ctrl_pump','pull_up');
+    setPrompt('p_done','s_done');
     markSteps(5,-1);
+    focusOff();
     heliHome();
     els.overlayFinal.classList.add('show');
     confetti(90);
@@ -1401,12 +1993,13 @@ function onLiftDone(){
   burst(900,360,'bubble',10);
   confetti(40);
   setPhase(PH.COLLECT);
-  showBanner({pos:'bottom',title:'The oil and gas are collected on the platform.'});
-  setPrompt('The oil and gas are collected on the platform.','Filling the storage tanks...');
+  showBanner({pos:'bottom',title:'b_collected'});
+  setPrompt('b_collected','s_filling');
   var t0=performance.now(), dur=RM?700:2200;
   (function fill(now){
     var p=clamp((now-t0)/dur,0,1), e=easeOut(p);
     setTanks(e,e*0.92);
+    focusOn(1080,286,150,0.3,'chip_fill',e);
     if(p>=1){
       burst(1080,236,'spark',10,{sp:70});
       burst(1170,248,'spark',10,{sp:70});
@@ -1416,9 +2009,9 @@ function onLiftDone(){
   })(t0);
 }
 function onLoadDone(){
-  showBanner({pos:'bottom',title:'Ready to travel!',sub:'The tanker is full of oil and gas.',cta:'SET SAIL',
+  showBanner({pos:'bottom',title:'b_ready_h',sub:'b_ready_p',cta:'b_ready_cta',
     onCta:function(){goSail();}});
-  setPrompt('Ready to travel!','The tanker is loaded and ready.');
+  setPrompt('p_ready','s_ready');
   after(9000,function(){if(phase===PH.LOAD){goSail();}});
 }
 function goLift(){
@@ -1452,14 +2045,14 @@ function updateDrill(dt){
       burstBit();
       if(drill.bitY<SEABED&&Math.random()<0.3){spawn('foam',900,420,{r:4+Math.random()*5,fill:'#FFFFFF',op:.4,vy:-16,vx:(Math.random()*2-1)*30,grow:1.2,max:1.2});}
     }
-    setPromptIf('Drilling deeper...','Keep pulling the handle down.','\u25BC');
+    setPromptIf('p_drilling','s_drilling','\u25BC');
   } else {
     if(world.classList.contains('drilling')){world.classList.remove('drilling');}
-    if(drill.target<1){setPromptIf('Pull the handle down to drill!','Pull it all the way down.','\u25BC');}
+    if(drill.target<1){setPromptIf('p_pull_down','s_pull_all','\u25BC');}
   }
   setBit(drill.bitY);
   var m=Math.max(0,Math.round(depthAt(drill.bitY)/5)*5);
-  gaugeShow('DEPTH',m,'m',(drill.bitY-BIT_START)/(BIT_MAX-BIT_START),drill.bitY>=DISCOVER_Y-40);
+  gaugeShow('gauge_depth',m,'m',(drill.bitY-BIT_START)/(BIT_MAX-BIT_START),drill.bitY>=DISCOVER_Y-40);
   markTicks(m);
   if(!flags.surface&&drill.bitY>SURFACE+4){flags.surface=true;burst(900,SURFACE,'bubble',12);burst(900,SURFACE-4,'foam',8);}
   if(!flags.seabed&&drill.bitY>SEABED+4){
@@ -1472,6 +2065,7 @@ function updateDrill(dt){
   }
   if(!flags.rock&&drill.bitY>1058){flags.rock=true;burst(900,1062,'dust',14,{sp:110});kick(260);}
   if(!flags.res&&drill.bitY>=DISCOVER_Y){flags.res=true;onDiscover();}
+  applyKnob();
 }
 function updateLift(dt){
   if(phase!==PH.LIFT){return;}
@@ -1480,15 +2074,17 @@ function updateLift(dt){
     if(prevLiftP===0){burst(900,FLOW_BOT-20,'bubble',10);}
     lift.p=Math.min(lift.target,lift.p+0.32*dt);
     els.consoleEl.classList.add('working');
-    if(lift.p>0.3){setPromptIf('The oil and gas are coming up!','Keep pulling the pump handle up.','\u25B2');}
+    if(lift.p>0.3){setPromptIf('p_rising','s_rising','\u25B2');}
   } else if(lift.p>0){
-    if(lift.target<1){setPromptIf('Keep pulling the pump handle up!','The oil and gas are still in the well.','\u25B2');}
+    if(lift.target<1){setPromptIf('p_lift_more','s_lift_more','\u25B2');}
   }
   prevLiftP=lift.p;
   if(lift.p>0&&lift.p<1){if(!els.flywheel.classList.contains('spinWheel')){els.flywheel.classList.add('spinWheel');}}
   else {els.flywheel.classList.remove('spinWheel');}
-  updateFlow();
-  gaugeShow('OIL RISING',Math.round(lift.p*100),'%',lift.p,lift.p>0.95);
+  updateFlow(dt);
+  focusOn(900,clamp(lerp(FLOW_BOT,FLOW_TOP,lift.p),430,940),280,0.12,'chip_lift',lift.p);
+  gaugeShow('gauge_rising',Math.round(lift.p*100),'%',lift.p,lift.p>0.95);
+  applyKnob();
   if(lift.p>=1&&!lift.done){lift.done=true;onLiftDone();}
 }
 var hoseSlugs=null;
@@ -1499,24 +2095,30 @@ function updateLoad(dt){
     shipX=lerp(1500,0,easeOut(load.p));
     glowAcc+=dt;
     if(glowAcc>0.16){glowAcc=0;spawn('foam',1290+shipX,424+Math.random()*16,{r:4+Math.random()*6,fill:'#FFFFFF',op:.55,vx:-60-Math.random()*40,vy:-4,grow:1.2,max:1.4+Math.random()});}
-    gaugeShow('LOADING',0,'%',0,false);
+    focusOn(1922+shipX,436,330,0.3,'chip_fill',null);
+    cargoFill(0);
+    gaugeShow('gauge_loading',0,'%',0,false);
     if(load.p>=1){
       load.state='fill'; load.p=0;
       els.gHose.classList.add('on');
       els.gMoor.classList.add('on');
       els.hoseFlow.classList.add('on');
-      setPrompt('Filling the tanker...','The oil and gas travel from the platform to the ship.');
+      setPrompt('p_filling_ship','s_filling_ship');
     }
   } else {
     load.p=Math.min(1,load.p+dt/7);
     glowAcc+=dt;
     if(glowAcc>0.24){glowAcc=0;burst(1698,352,'glint',1,{sp:26});}
+    focusOn(1922+shipX,436,330,0.3,'chip_fill',load.p);
+    cargoFill(load.p);
+    loadFoamAcc+=dt;
+    if(loadFoamAcc>0.22){loadFoamAcc=0;spawn('foam',1520+Math.random()*820,424+Math.random()*8,{r:4+Math.random()*6,fill:'#FFFFFF',op:.45,vy:-10,vx:(Math.random()*2-1)*40,grow:1.2,max:1.3+Math.random()*0.6});}
     setTanks(1-load.p,1-load.p);
     sinkGoal=load.p*10;
     if(!hoseSlugs){
       hoseSlugs=[];
       for(var i=0;i<3;i++){
-        var s=el('circle',{r:9,fill:'#E9A13B',stroke:'#B4790C','stroke-width':2,opacity:'0'},els.gHose);
+        var s=el('circle',{r:9,fill:'url(#slugBallG)',stroke:'#6A4116','stroke-width':1.5,opacity:'0'},els.gHose);
         hoseSlugs.push(s);
       }
     }
@@ -1530,7 +2132,7 @@ function updateLoad(dt){
         hoseSlugs[j].setAttribute('opacity',clamp(Math.min(t*5,(1-t)*6),0,1).toFixed(2));
       } else {hoseSlugs[j].setAttribute('opacity','0');}
     }
-    gaugeShow('LOADING',Math.round(load.p*100),'%',load.p,load.p>0.95);
+    gaugeShow('gauge_loading',Math.round(load.p*100),'%',load.p,load.p>0.95);
     if(load.p>=1&&!load.done){
       load.done=true;
       els.hoseFlow.classList.remove('on');
@@ -1566,11 +2168,11 @@ function updateIntroDrift(){
   cam.h=introBase.h-42*(0.5-0.5*Math.cos(T*0.22));
   cam.y=introBase.y+Math.sin(T*0.19)*7;
 }
-function heliToShip(){heli.mode='toShip';}
+function heliToShip(){heli.mode='toShip';heli.turnDone=0;}
 function heliHome(){if(heli.mode!=='parked'){heli.mode='backHome';}}
 function heliMove(tx,ty,rate,dt){
   var dx=tx-heli.x, dy=ty-heli.y, d=Math.sqrt(dx*dx+dy*dy)||1;
-  var step=Math.min(d,Math.max(rate,d*rate*0.85)*dt);
+  var step=Math.min(d,Math.min(rate,d*2.2)*dt);
   heli.x+=dx/d*step; heli.y+=dy/d*step;
   return {d:d,dx:dx};
 }
@@ -1580,11 +2182,18 @@ function updateHeli(dt){
     heli.x=612;
     heli.y=300+Math.sin(T*1.5)*1.5;
   } else if(heli.mode==='toShip'){
-    tx=1922+shipX+40; ty=168;
-    res=heliMove(tx,ty,250,dt);
-    tilt=clamp(res.dx*0.035,-12,12);
     airborne=true;
-    if(res.d<30){heli.mode='followShip';}
+    if(!heli.turnDone){
+      heli.x-=180*dt;
+      heli.y+=(250-heli.y)*Math.min(1,dt*2.6);
+      tilt=5;
+      if(heli.x<=480){heli.turnDone=1;}
+    } else {
+      tx=1922+shipX+40; ty=168;
+      res=heliMove(tx,ty,250,dt);
+      tilt=clamp(res.dx*0.035,-12,12);
+      if(res.d<30){heli.mode='followShip';}
+    }
   } else if(heli.mode==='followShip'){
     tx=1922+shipX+40; ty=168+Math.sin(T*1.6)*3;
     heli.x+=(tx-heli.x)*Math.min(1,dt*1.5);
@@ -1592,7 +2201,7 @@ function updateHeli(dt){
     tilt=clamp((tx-heli.x)*0.03,-10,10);
     airborne=true;
   } else if(heli.mode==='backHome'){
-    res=heliMove(612,300,270,dt);
+    res=heliMove(612,300,750,dt);
     tilt=clamp(res.dx*0.035,-12,12);
     airborne=true;
     if(res.d<22){
@@ -1600,10 +2209,21 @@ function updateHeli(dt){
       burst(612,306,'dust',8,{sp:60});
     }
   }
+  var faceShip=(heli.mode==='followShip'||(heli.mode==='toShip'&&heli.turnDone))?1:0;
+  if(faceShip!==heli.flip){
+    heli.flip=faceShip;
+    els.heliBody.setAttribute('transform',faceShip?'scale(-1 1)':'');
+    els.heliTxt.setAttribute('transform',faceShip?'scale(-1 1)':'');
+  }
+  if(faceShip){tilt=-tilt;}
+  var alphaTarget=1;
+  if(phase===PH.SAIL&&heli.mode==='followShip'){alphaTarget=clamp((1-sail.t)/0.32,0,1);}
+  heli.alpha+=(alphaTarget-heli.alpha)*Math.min(1,dt*3.2);
   heli.rotor+=(airborne?0.62:0.22)*dt;
   var blurTarget=airborne?0.3:0.1;
   heli.blur+=(blurTarget-heli.blur)*Math.min(1,dt*3);
   els.gHeli.setAttribute('transform','translate('+heli.x.toFixed(1)+' '+heli.y.toFixed(1)+') rotate('+tilt.toFixed(2)+') scale(0.92)');
+  els.gHeli.setAttribute('opacity',clamp(heli.alpha,0,1).toFixed(3));
   els.heliRotor.setAttribute('transform','rotate('+(Math.sin(heli.rotor*26)*3.6).toFixed(2)+' 0 -42)');
   els.heliBlur.setAttribute('opacity',heli.blur.toFixed(3));
 }
@@ -1619,8 +2239,10 @@ function loop(now){
   updateHeli(dt);
   updateIntroDrift();
   updateParticles(dt);
+  updateTanks(dt);
   setShip();
   camView();
+  updateFocus(dt);
   requestAnimationFrame(loop);
 }
 var last=performance.now();
@@ -1634,8 +2256,11 @@ function restart(){
   flags={surface:false,seabed:false,rock:false,res:false};
   shipX=0; shipSink=0; sinkGoal=0; spawnAcc=0; foamAcc=0; prevLiftP=0; glowAcc=0; kickT=0;
   hoseSlugs=null;
-  heli.mode='parked'; heli.x=612; heli.y=300; heli.rotor=0; heli.blur=0.1;
+  heli.mode='parked'; heli.x=612; heli.y=300; heli.rotor=0; heli.blur=0.1; heli.flip=0; heli.alpha=1; heli.turnDone=0;
   els.gHeli.setAttribute('transform','translate(612 300) scale(0.92)');
+  els.gHeli.setAttribute('opacity','1');
+  els.heliBody.setAttribute('transform','');
+  els.heliTxt.setAttribute('transform','');
   ctrl.v=0; ctrl.active=false;
   els.gRes.classList.remove('found');
   els.gShip.classList.remove('on','sailing');
@@ -1654,6 +2279,13 @@ function restart(){
   for(var j=parts.length-1;j>=0;j--){recycle(j);}
   hideCaption(); hideBanner();
   world.classList.remove('drilling');
+  tank={oil:0,gas:0,to:0,tg:0};
+  focus.o=0; focus.to=0; focus.pct=null; focus.lastTxt='';
+  waterAcc=0; arrivalAcc=0; loadFoamAcc=0;
+  els.oilGlow.classList.remove('on'); els.gasGlow.classList.remove('on');
+  els.gRiser.classList.remove('on');
+  els.focusDim.setAttribute('opacity','0'); els.focusChip.setAttribute('opacity','0');
+  cargoFill(0);
   setBit(BIT_START);
   setTanks(0,0);
   setPrompt('','');
@@ -1664,13 +2296,16 @@ function restart(){
 function init(){
   buildGround();
   buildUnder();
+  buildRiser();
   buildDerrick();
   buildRailings();
   buildRays();
   buildFish();
   buildClouds();
   buildWaves();
+  buildSnow();
   slugsInit();
+  applyLang();
   setBit(BIT_START);
   setTanks(0,0);
   setPhase(PH.INTRO);

@@ -7,12 +7,12 @@ document.getElementById("dworld").innerHTML = `
               <linearGradient id="dgR2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C4A87C"/><stop offset="1" stop-color="#B0925F"/></linearGradient>
               <linearGradient id="dgR3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A98C60"/><stop offset="1" stop-color="#94794F"/></linearGradient>
               <linearGradient id="dgR4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#87704F"/><stop offset="1" stop-color="#5C4A39"/></linearGradient>
-              <linearGradient id="dgGas" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAF7E6"/><stop offset="1" stop-color="#BDE4E4"/></linearGradient>
+              <linearGradient id="dgGas" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF6D2"/><stop offset="1" stop-color="#E4C56A"/></linearGradient>
               <linearGradient id="dgOil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A5A22"/><stop offset=".5" stop-color="#6A4116"/><stop offset="1" stop-color="#3F240C"/></linearGradient>
               <linearGradient id="dgWall" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6E8190"/><stop offset=".35" stop-color="#EAF1F5"/><stop offset="1" stop-color="#41525E"/></linearGradient>
               <linearGradient id="dgOilCol" gradientUnits="userSpaceOnUse" x1="0" y1="132" x2="0" y2="380"><stop offset="0" stop-color="#F0B85E"/><stop offset=".35" stop-color="#C98A3C"/><stop offset="1" stop-color="#4A2A0E"/></linearGradient>
               <linearGradient id="dgTankOil" gradientUnits="userSpaceOnUse" x1="0" y1="62" x2="0" y2="112"><stop offset="0" stop-color="#C98A3C"/><stop offset="1" stop-color="#5A3410"/></linearGradient>
-              <linearGradient id="dgTankGas" gradientUnits="userSpaceOnUse" x1="0" y1="70" x2="0" y2="112"><stop offset="0" stop-color="#EAF9F6"/><stop offset="1" stop-color="#8FCEDD"/></linearGradient>
+              <linearGradient id="dgTankGas" gradientUnits="userSpaceOnUse" x1="0" y1="70" x2="0" y2="112"><stop offset="0" stop-color="#FFF6D2"/><stop offset="1" stop-color="#E2C56A"/></linearGradient>
               <radialGradient id="dgGlow"><stop offset="0" stop-color="#FFE49B" stop-opacity=".9"/><stop offset="1" stop-color="#FFD86B" stop-opacity="0"/></radialGradient>
               <clipPath id="dgResClip"><path d="M190 545 L190 470 C190 446 245 438 320 438 C395 438 450 446 450 470 L450 545 Z"/></clipPath>
               <clipPath id="dgOilTankClip"><rect x="380" y="64" width="24" height="46" rx="4"/></clipPath>
@@ -29,7 +29,7 @@ document.getElementById("dworld").innerHTML = `
               <linearGradient id="dgDerrickG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F0705A"/><stop offset=".5" stop-color="#E0553F"/><stop offset="1" stop-color="#A83424"/></linearGradient>
               <linearGradient id="dgRefFade" gradientUnits="userSpaceOnUse" x1="0" y1="170" x2="0" y2="300"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#000000"/></linearGradient>
               <mask id="dgRefMask"><rect x="120" y="170" width="400" height="130" fill="url(#dgRefFade)"/></mask>
-              <radialGradient id="dgBubble"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".95"/><stop offset=".55" stop-color="#EAF9F6" stop-opacity=".5"/><stop offset="1" stop-color="#BDE4E4" stop-opacity="0"/></radialGradient>
+              <radialGradient id="dgBubble"><stop offset="0" stop-color="#FFF8DC" stop-opacity=".95"/><stop offset=".55" stop-color="#F0D78A" stop-opacity=".7"/><stop offset="1" stop-color="#E2C56A" stop-opacity="0"/></radialGradient>
               <linearGradient id="dgSlug" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0B85E"/><stop offset="1" stop-color="#8A5A22"/></linearGradient>
               <radialGradient id="dgSunHalo"><stop offset="0" stop-color="#FFF6D2" stop-opacity=".85"/><stop offset=".6" stop-color="#FFF1BE" stop-opacity=".25"/><stop offset="1" stop-color="#FFF1BE" stop-opacity="0"/></radialGradient>
               <linearGradient id="dgDeepFog" gradientUnits="userSpaceOnUse" x1="0" y1="400" x2="0" y2="560"><stop offset="0" stop-color="#062A40" stop-opacity="0"/><stop offset="1" stop-color="#062A40" stop-opacity=".45"/></linearGradient>
@@ -127,14 +127,14 @@ document.getElementById("dworld").innerHTML = `
               <path d="M190 545 L190 470 C190 446 245 438 320 438 C395 438 450 446 450 470 L450 545 Z" fill="#120C07"/>
               <g clip-path="url(#dgResClip)">
                 <rect x="180" y="438" width="280" height="34" fill="url(#dgGas)"/>
-                <g fill="#FFFFFF" opacity=".75">
+                <g fill="#F6E7A8" opacity=".8">
                   <circle cx="252" cy="456" r="5"/><circle cx="300" cy="470" r="4"/><circle cx="372" cy="460" r="5.5"/><circle cx="410" cy="474" r="3.6"/>
                 </g>
                 <rect x="180" y="472" width="280" height="80" fill="url(#dgOil)"/>
                 <path d="M180 474 q 30 -6 60 0 t 60 0 t 60 0 t 60 0 L 480 490 L 180 490 Z" fill="#C98A3C" opacity=".55"/>
               </g>
               <path d="M190 468 C190 446 245 438 320 438 C395 438 450 446 450 468" fill="none" stroke="#F0D9A8" stroke-width="3.4" opacity=".45"/>
-              <text id="dgasLbl" data-i="dg_lbl_gas" opacity="0" x="268" y="466" text-anchor="end" fill="#EAF7E6" style="font-family:var(--font);font-weight:800;font-size:17px;letter-spacing:1px;stroke:rgba(6,42,64,.5);stroke-width:4;paint-order:stroke">GAS</text>
+              <text id="dgasLbl" data-i="dg_lbl_gas" opacity="0" x="268" y="466" text-anchor="end" fill="#FFF6D2" style="font-family:var(--font);font-weight:800;font-size:17px;letter-spacing:1px;stroke:rgba(6,42,64,.5);stroke-width:4;paint-order:stroke">GAS</text>
               <g id="doilLbl" opacity="0">
                 <path d="M244 500 C244 500 236 510 236 515 a 8 8 0 0 0 16 0 C252 510 244 500 244 500 Z" fill="#F5C274"/>
                 <text data-i="dg_lbl_oil" x="268" y="524" text-anchor="end" fill="#FFE1A8" style="font-family:var(--font);font-weight:800;font-size:18px;letter-spacing:1px;stroke:rgba(6,42,64,.5);stroke-width:4;paint-order:stroke">OIL</text>
@@ -186,14 +186,20 @@ document.getElementById("dworld").innerHTML = `
               </g>
               <g>
                 <rect x="412" y="76" width="22" height="34" rx="4" fill="#E9EEF2" stroke="#12324A" stroke-width="2"/>
-                <rect x="412" y="76" width="22" height="5" rx="2.5" fill="#1BA9B5"/>
+                <rect x="412" y="76" width="22" height="5" rx="2.5" fill="#E2C56A"/>
                 <g clip-path="url(#dgGasTankClip)">
                   <rect id="dgasFill" x="412" y="110" width="24" height="0" fill="url(#dgTankGas)"/>
-                  <path id="dgasWave" d="" fill="#CFEFF9" opacity=".9"/>
+                  <path id="dgasWave" d="" fill="#F3E3A4" opacity=".9"/>
                   <rect x="412" y="72" width="24" height="38" fill="url(#dgTankInner)"/>
                   <rect x="412" y="72" width="6" height="38" rx="3" fill="#FFFFFF" opacity=".28"/>
                 </g>
                 <ellipse id="dgasGlow" cx="423" cy="94" rx="26" ry="26" fill="url(#dgGlow)" opacity="0"/>
+                <g id="dtankKey" opacity="0" aria-hidden="true">
+                  <circle cx="446" cy="86" r="3.4" fill="#C98A3C" stroke="#12324A" stroke-width="1"/>
+                  <text data-i="dg_lbl_oil" x="453" y="90" fill="#FFF4D8" stroke="#12324A" stroke-width="3" paint-order="stroke" style="font-family:var(--font);font-weight:800;font-size:11px">OIL</text>
+                  <circle cx="446" cy="102" r="3.4" fill="#F0D78A" stroke="#12324A" stroke-width="1"/>
+                  <text data-i="dg_lbl_gas" x="453" y="106" fill="#FFF6D2" stroke="#12324A" stroke-width="3" paint-order="stroke" style="font-family:var(--font);font-weight:800;font-size:11px">GAS</text>
+                </g>
               </g>
               <path d="M320 124 L320 116 L392 116 L392 112" fill="none" stroke="#8A9AA3" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
               <path d="M392 112 L418 112" fill="none" stroke="#8A9AA3" stroke-width="4" stroke-linecap="round" opacity=".85"/>

@@ -234,7 +234,7 @@ b{color:var(--hi);font-weight:800}
 #dglabels{opacity:0;transition:opacity .55s}
 #dglabels.on{opacity:1}
 .dlbl{fill:#EAF6FB;opacity:.72;font-family:var(--font);font-weight:800;font-size:21px;letter-spacing:2px;paint-order:stroke;stroke:rgba(6,42,64,.6);stroke-width:5px;stroke-linejoin:round}
-:root[lang="ar"] .dlbl,:root[lang="ar"] #dgasLbl,:root[lang="ar"] #doilLbl text{letter-spacing:0!important}
+:root[lang="ar"] .dlbl,:root[lang="ar"] #dgasLbl,:root[lang="ar"] #doilLbl text,:root[lang="ar"] #dtankKey text{letter-spacing:0!important}
 @media (max-width:620px){.djoy{transform:scale(.92);transform-origin:center top}}
 /* pre-drill hint: gently pulse a few marked sea animals while the joystick is locked */
 #dworld #dlife.dl-hint .dlife.dl-glow .dbody{animation:dlHint 1.7s ease-in-out infinite}

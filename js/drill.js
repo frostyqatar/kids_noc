@@ -1,6 +1,6 @@
 /* Offshore drill mini-game. Loaded after narrator.js. */
 /* ─── Let's drill mini-game (slide 6) ───────────────────────────── */
-const DG_SLIDE=5;
+const DG_SLIDE=8;
 const dgEls={
   wrap:$('#dwrap'),world:$('#dworld'),slider:$('#dslider'),knob:$('#dknob'),fill:$('#dfill'),
   foot:$('#dfoot'),prompt:$('#dprompt'),arrow:$('#darrow'),gauge:$('#dgauge'),cap:$('#dgcap'),
@@ -451,10 +451,10 @@ function dgLifeInit(){
     Array.prototype.forEach.call(holder.querySelectorAll('[style]'),function(n){ n.removeAttribute('style'); });
     const k=dgLifeScale(cfg.id,b), cx=b.x+b.width/2, cy=b.y+b.height/2;
     cfg.k=k;
-    cfg.r=Math.max(3,Math.min(b.width,b.height)*k*0.42);
+    cfg.r=Math.max(14,Math.max(b.width,b.height)*k*0.36);
     dgLifePad(el,cx,cy,k);
     cfg.box=[0,DL_SEA_TOP,0,DL_SEA_BOT];
-    dgLife.push({cfg:cfg,holder:holder,cx:cx,cy:cy,halfW:(b.width/2)*k,
+    dgLife.push({cfg:cfg,holder:holder,cx:cx,cy:cy,halfW:(b.width/2)*k,halfH:(b.height/2)*k,
       homeX:0,homeY:0,x:0,y:0,tx:0,ty:0,
       ang:(Math.random()*2-1)*0.4,vx:0,vy:0,sx:cfg.side,wait:0,seed:Math.random()*9});
   });
@@ -483,11 +483,29 @@ function dgLifeLane(side,halfW,water){
   if(hi<lo){ if(side<0) lo=hi; else hi=lo; }
   return [lo,hi];
 }
-function dgLifeAssign(c,water){
-  const lane=dgLifeLane(c.cfg.side,c.halfW||c.cfg.r,water);
-  c.cfg.box=[lane[0],water.top,lane[1],water.bot];
-  c.homeX=(lane[0]+lane[1])/2;
-  c.homeY=water.top+(water.bot-water.top)*c.cfg.depth;
+/* two rows, three across, so big bodies each get a cell instead of one shared column */
+function dgLifeSpread(water){
+  [-1,1].forEach(function(side){
+    const list=dgLife.filter(function(c){return c.cfg.side===side;});
+    list.sort(function(a,b){return a.cfg.depth-b.cfg.depth;});
+    const lane=dgLifeLane(side,12,water);
+    const cols=3, rows=Math.ceil(list.length/cols)||1;
+    const yTop=water.top+4, yBot=water.bot-22;
+    const spanX=Math.max(36,lane[1]-lane[0]), spanY=Math.max(36,yBot-yTop);
+    list.forEach(function(c,i){
+      const col=i%cols, row=Math.floor(i/cols);
+      const gx=8, gy=8;
+      let x0=lane[0]+col*(spanX/cols)+gx, x1=lane[0]+(col+1)*(spanX/cols)-gx;
+      let y0=yTop+row*(spanY/rows)+gy, y1=yTop+(row+1)*(spanY/rows)-gy;
+      if(side<0) x1=Math.min(x1,DL_SHAFT_L-12);
+      else x0=Math.max(x0,DL_SHAFT_R+12);
+      if(x1<x0+16){ if(side<0) x0=x1-16; else x1=x0+16; }
+      if(y1<y0+16) y1=y0+16;
+      c.cfg.box=[x0,y0,x1,y1];
+      c.homeX=(x0+x1)/2;
+      c.homeY=(y0+y1)/2;
+    });
+  });
 }
 function dgPlacePlants(water){
   dgSta.forEach(function(p){
@@ -501,11 +519,11 @@ function dgPlacePlants(water){
 function dgLifeRezone(){
   if(!dgLifeBuilt) return;
   const water=dgLifeZones();
+  dgLifeSpread(water);
   dgLife.forEach(function(c){
-    dgLifeAssign(c,water);
     const b=c.cfg.box;
-    c.x=dgClamp(c.x,b[0],b[2]);
-    c.y=dgClamp(c.y,b[1],b[3]);
+    c.x=dgClamp(c.x||c.homeX,b[0],b[2]);
+    c.y=dgClamp(c.y||c.homeY,b[1],b[3]);
   });
   dgPlacePlants(water);
 }
@@ -519,7 +537,7 @@ function dgLifeSeparate(){
   for(let i=0;i<dgLife.length;i++){
     const a=dgLife[i];
     for(let j=i+1;j<dgLife.length;j++){
-      const b2=dgLife[j], min=a.cfg.r+b2.cfg.r+6;
+      const b2=dgLife[j], min=a.cfg.r+b2.cfg.r+10;
       let dx=b2.x-a.x, dy=b2.y-a.y, d=Math.hypot(dx,dy);
       if(d>=min) continue;
       if(d<0.001){ dx=(b2.cfg.side-a.cfg.side)||1; dy=(b2.cfg.depth-a.cfg.depth)||0.2; d=Math.hypot(dx,dy); }
@@ -548,7 +566,7 @@ function dgLifeReset(){
     c.ang=(c.cfg.side>0?0:Math.PI)+(Math.random()*2-1)*0.3;
     c.vx=Math.cos(c.ang)*c.cfg.sp; c.vy=0; c.wait=1+Math.random()*2; c.sx=c.cfg.side;
   });
-  for(let n=0;n<8;n++) dgLifeSeparate();
+  for(let n=0;n<12;n++) dgLifeSeparate();
   dgLife.forEach(function(c){ dgLifeXform(c.holder,c.cx,c.cy,c.x,c.y,0,c.sx,c.cfg.k); });
 }
 function dgLifeAway(c,x,y,rad,out){
@@ -571,7 +589,7 @@ function dgLifeStep(dt){
     const avoid={x:0,y:(c.homeY-c.y)/70};
     if(c.cfg.side<0) avoid.x-=Math.max(0,c.x-(DL_SHAFT_L-c.cfg.r-24))/40;
     else avoid.x+=Math.max(0,(DL_SHAFT_R+c.cfg.r+24)-c.x)/40;
-    dgLife.forEach(function(o){ if(o===c) return; dgLifeAway(c,o.x,o.y,c.cfg.r+o.cfg.r+10,avoid); });
+    dgLife.forEach(function(o){ if(o===c) return; dgLifeAway(c,o.x,o.y,c.cfg.r+o.cfg.r+8,avoid); });
     dgSta.forEach(function(s){ dgLifeAway(c,s.x,s.y,c.cfg.r+s.r+8,avoid); });
     const want=Math.atan2(dy/dd+avoid.y*2.4,dx/dd+avoid.x*2.4);
     c.ang+=dgClamp(dgWrap(want-c.ang),-c.cfg.turn*dt,c.cfg.turn*dt);

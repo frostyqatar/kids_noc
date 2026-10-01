@@ -25,6 +25,16 @@ const NARR_CFG={
   11:{spot:'q',bub:'br'}, 12:{spot:'q',bub:'br'}, 13:{spot:'q',bub:'br'},
   14:{spot:'finale',existing:true,bub:'bc'}
 };
+/* slide index -> say-table key. Slides 4 (safety) and 8 (drilling game) have no narration.
+   The T[...] copy keys and the voice-over file names both use this key, so they cannot drift apart. */
+const SAY_KEY={0:'say0',1:'say1',2:'say2',3:'say3',5:'say6',6:'say7',7:'say8',9:'say9',10:'say10',11:'say11',12:'say12',13:'say13',14:'say14'};
+/* Arabic quizzes play one clip for the question, the other lines are text-only */
+const VO_AR_ONE={11:'hmm',12:'what_is_answer',13:'hmm'};
+function voFile(i,k){
+  const key=SAY_KEY[i]; if(!key) return null;
+  if(lang==='ar'&&VO_AR_ONE[i]) return k===0?VO_AR_ONE[i]:null;
+  return (lang==='ar'?'':'en/')+key+'-'+(k+1);
+}
 /* slide -> [data-i target per spoken line]; Qatra slides beside the sentence she is saying.
    Only used on slides where she sits over the artwork column, so she never covers text. */
 const SAY_ANCHORS={
@@ -41,37 +51,6 @@ const SAY_ANCHORS={
   13:['[data-i="p3_q"]','[data-i="p3_q"]','[data-i="p3_q"]']
 };
 const NARR_HOLD=4800, NARR_EVERY=5000, NARR_DELAY=3500; /* NARR_DELAY: skim time before she starts on a new slide */
-/* voice-over clips (sayN-M.mp3 -> bubble line M of sayN); Arabic in root, English in en/; null = text only */
-const VO_AR={
-  0:['say0-1','say0-2','say0-3'],
-  1:['say1-1','say1-2','say1-3'],
-  2:['say2-1','say2-2','say2-3'],
-  3:['say3-1','say3-2','say3-3'],
-  5:['say6-1','say6-2','say6-3'],
-  6:['say7-1','say7-2','say7-3'],
-  7:['say8-1','say8-2','say8-3'],
-  9:['say9-1','say9-2','say9-3'],
-  10:['say10-1','say10-2','say10-3'],
-  11:['hmm',null,null],
-  12:['what_is_answer',null,null],
-  13:['hmm',null,null],
-  14:['say14-1','say14-2','say14-3']
-};
-const VO_EN={
-  0:['en/say0-1','en/say0-2','en/say0-3'],
-  1:['en/say1-1','en/say1-2','en/say1-3'],
-  2:['en/say2-1','en/say2-2','en/say2-3'],
-  3:['en/say3-1','en/say3-2','en/say3-3'],
-  5:['en/say6-1','en/say6-2','en/say6-3'],
-  6:['en/say7-1','en/say7-2','en/say7-3'],
-  7:['en/say8-1','en/say8-2','en/say8-3'],
-  9:['en/say9-1','en/say9-2','en/say9-3'],
-  10:['en/say10-1','en/say10-2','en/say10-3'],
-  11:['en/say11-1','en/say11-2','en/say11-3'],
-  12:['en/say12-1','en/say12-2','en/say12-3'],
-  13:['en/say13-1','en/say13-2','en/say13-3'],
-  14:['en/say14-1','en/say14-2','en/say14-3']
-};
 const voCache={}; let narrAudio=null, voBlocked=false, voResumed=false, voStartedOnce=false;
 function stopVo(){ if(narrAudio){ try{narrAudio.pause(); narrAudio.currentTime=0;}catch(e){} narrAudio=null; } }
 /* Plays `file`. onEnd runs only when the clip actually finishes; onFail runs when
@@ -234,7 +213,7 @@ function placeQatra(i,k,animate){
 function narrate(i){
   stopNarration();
   const host=narrHosts[i], svg=narrSvgs[i], line=narrLines[i], bubble=narrBubbles[i];
-  const v=T['say'+i]; if(!host||!line||!bubble||!v) return;
+  const v=T[SAY_KEY[i]]; if(!host||!line||!bubble||!v) return;
   const lines=v[lang==='ar'?1:0]||[]; if(!lines.length) return;
   let k=0;
   const titleAuto=(i===0); /* gated title slide: half-time gaps, then auto-advance */
@@ -255,8 +234,7 @@ function narrate(i){
       narrTimers.push(setTimeout(step,k===0?RESTART:GAP));
     };
     const endLine=()=>{ stopMouth(); next(); };
-    const map=lang==='ar'?VO_AR:VO_EN;
-    const file=map[i]?map[i][k]:null;
+    const file=voFile(i,k);
     if(!playVo(file,endLine,()=>narrTimers.push(setTimeout(endLine,NARR_HOLD)))) narrTimers.push(setTimeout(endLine,NARR_HOLD));
   };
   step();

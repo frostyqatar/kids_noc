@@ -195,6 +195,7 @@ b{color:var(--hi);font-weight:800}
 #dworld .dlife{cursor:pointer;pointer-events:visiblePainted}
 #dworld .dlife:focus-visible{outline:none}
 #dworld .dlife:focus-visible .dbody{filter:drop-shadow(0 0 7px #FFD86B)}
+@media (hover:hover){#dworld .dlife:hover .dbody{filter:drop-shadow(0 0 6px rgba(255,222,120,.9))}}
 #dworld .dl-anim{transform-box:fill-box}
 #dworld .dbody{transform-box:fill-box;transform-origin:center}
 #dworld .dlife.tap .dbody{animation:dlPop .62s cubic-bezier(.3,1.6,.5,1)}

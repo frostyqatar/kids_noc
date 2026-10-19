@@ -41,6 +41,27 @@ document.getElementById("dworld").innerHTML = `
                   <path d="M-60 106 q 34 -18 68 0 t 68 0 t 68 0"/>
                 </g>
               </pattern>
+              <!-- sea-life palettes (shared by the animals below) -->
+              <linearGradient id="dgAnWS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#94BCCB"/><stop offset=".55" stop-color="#567D90"/><stop offset="1" stop-color="#31505F"/></linearGradient>
+              <linearGradient id="dgAnWSFin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7FA8B9"/><stop offset="1" stop-color="#3A5A6C"/></linearGradient>
+              <linearGradient id="dgAnBelly" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#CFE0E7"/></linearGradient>
+              <linearGradient id="dgAnHam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8DBCD2"/><stop offset=".55" stop-color="#5B8AA3"/><stop offset="1" stop-color="#365A70"/></linearGradient>
+              <linearGradient id="dgAnDol" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A9E6F7"/><stop offset=".5" stop-color="#63B9DC"/><stop offset="1" stop-color="#2E7DA3"/></linearGradient>
+              <linearGradient id="dgAnTurtle" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8AD6A9"/><stop offset=".55" stop-color="#4FAE86"/><stop offset="1" stop-color="#246B4C"/></linearGradient>
+              <linearGradient id="dgAnSkin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8AD6A9"/><stop offset="1" stop-color="#3E9B72"/></linearGradient>
+              <linearGradient id="dgAnGrouper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E0A972"/><stop offset=".55" stop-color="#B47A51"/><stop offset="1" stop-color="#7C4E2E"/></linearGradient>
+              <linearGradient id="dgAnAngel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6B86E8"/><stop offset=".55" stop-color="#3948AC"/><stop offset="1" stop-color="#1E2A68"/></linearGradient>
+              <linearGradient id="dgAnButterfly" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE58A"/><stop offset=".55" stop-color="#FFC234"/><stop offset="1" stop-color="#E89A12"/></linearGradient>
+              <linearGradient id="dgAnSilver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".5" stop-color="#E3EEF3"/><stop offset="1" stop-color="#A8C7D5"/></linearGradient>
+              <linearGradient id="dgAnRay" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D7E2E8"/><stop offset=".55" stop-color="#98A6B1"/><stop offset="1" stop-color="#6C7985"/></linearGradient>
+              <linearGradient id="dgAnSnake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBEDBE"/><stop offset=".5" stop-color="#E2C478"/><stop offset="1" stop-color="#AF8939"/></linearGradient>
+              <linearGradient id="dgAnCoral" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFBFA0"/><stop offset=".55" stop-color="#EF9376"/><stop offset="1" stop-color="#C4664B"/></linearGradient>
+              <linearGradient id="dgAnSponge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD8BA"/><stop offset=".55" stop-color="#F0B48B"/><stop offset="1" stop-color="#C47A52"/></linearGradient>
+              <linearGradient id="dgAnAlgae" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8FE0B1"/><stop offset=".55" stop-color="#3F9C6C"/><stop offset="1" stop-color="#226747"/></linearGradient>
+              <linearGradient id="dgAnOyster" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".5" stop-color="#E7D6BE"/><stop offset="1" stop-color="#B7A185"/></linearGradient>
+              <linearGradient id="dgAnSand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8CCA0"/><stop offset="1" stop-color="#C49A66"/></linearGradient>
+              <radialGradient id="dgAnPlankton"><stop offset="0" stop-color="#D4FFE1" stop-opacity=".65"/><stop offset=".65" stop-color="#B9F2C6" stop-opacity=".22"/><stop offset="1" stop-color="#B9F2C6" stop-opacity="0"/></radialGradient>
+              <radialGradient id="dgAnPearl"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#EAF7FB"/><stop offset="1" stop-color="#B9D6E2"/></radialGradient>
             </defs>
 
             <g id="dsky">
@@ -256,14 +277,23 @@ document.getElementById("dworld").innerHTML = `
                   <g class="dlife" data-ia="dl_plankton" tabindex="0" role="button">
                     <g class="dbody">
                       <ellipse cx="52" cy="16" rx="62" ry="26" fill="transparent"/>
-                      <g fill="#8FE7B0" opacity=".9">
-                        <circle cx="0" cy="10" r="2"/><circle cx="14" cy="2" r="1.6"/><circle cx="26" cy="14" r="2.2"/><circle cx="40" cy="4" r="1.7"/>
-                        <circle cx="54" cy="12" r="2"/><circle cx="68" cy="2" r="1.5"/><circle cx="82" cy="14" r="2.1"/><circle cx="96" cy="6" r="1.6"/>
-                        <circle cx="20" cy="26" r="1.8"/><circle cx="48" cy="28" r="1.9"/><circle cx="76" cy="26" r="1.7"/><circle cx="104" cy="20" r="1.8"/>
-                        <circle cx="34" cy="-4" r="1.4"/><circle cx="62" cy="-4" r="1.5"/><circle cx="90" cy="0" r="1.3"/>
+                      <ellipse cx="52" cy="12" rx="60" ry="26" fill="url(#dgAnPlankton)"/>
+                      <g stroke="#C8F7D5" stroke-width="1" opacity=".85">
+                        <g fill="#8FE7B0" fill-opacity=".38"><circle cx="14" cy="9" r="4.4"/><circle cx="33" cy="20" r="3.2"/><circle cx="70" cy="7" r="3.8"/><circle cx="96" cy="17" r="4.2"/></g>
+                        <g fill="#8FE7B0" fill-opacity=".5"><circle cx="47" cy="5" r="2.8"/><circle cx="61" cy="24" r="2.4"/><circle cx="87" cy="2" r="2.2"/></g>
+                        <circle cx="24" cy="26" r="2.6" fill="none"/>
+                        <circle cx="102" cy="7" r="2.2" fill="none"/>
                       </g>
-                      <g fill="none" stroke="#B9F2C6" stroke-width="1.2" opacity=".8">
-                        <circle cx="26" cy="14" r="4"/><circle cx="54" cy="12" r="3.6"/><circle cx="82" cy="14" r="4"/>
+                      <g fill="#5FD08B" opacity=".9">
+                        <circle cx="14" cy="9" r="1.5"/><circle cx="33" cy="20" r="1.2"/><circle cx="70" cy="7" r="1.3"/><circle cx="96" cy="17" r="1.5"/>
+                        <circle cx="47" cy="5" r="1"/><circle cx="61" cy="24" r=".9"/>
+                      </g>
+                      <g fill="#F2FFF6" opacity=".95">
+                        <circle cx="12.8" cy="7.6" r=".8"/><circle cx="68.8" cy="5.8" r=".7"/><circle cx="94.8" cy="15.6" r=".8"/>
+                      </g>
+                      <g stroke="#B9F2C6" stroke-width=".8" stroke-linecap="round" opacity=".7">
+                        <path d="M10 12 L7 15 M18 12 L21 15 M66 11 L63 14 M74 11 L77 14"/>
+                        <path d="M30 23 L27 26 M104 11 L107 14"/>
                       </g>
                     </g>
                   </g>
@@ -273,11 +303,13 @@ document.getElementById("dworld").innerHTML = `
                 <g class="dlife" data-ia="dl_algae" tabindex="0" role="button">
                   <g class="dbody">
                     <g class="dl-sway dl-anim" style="--dur:6.4s">
-                      <path d="M2 0 C10 -8 2 -16 10 -24 C18 -32 8 -40 14 -50 C22 -40 28 -34 20 -24 C14 -14 22 -8 16 0 Z" fill="#2F7D5A" stroke="#12324A" stroke-width="1.8" stroke-linejoin="round"/>
-                      <path d="M20 0 C26 -10 20 -18 26 -28 C32 -36 26 -44 30 -52 C38 -42 42 -34 34 -24 C28 -14 36 -8 30 0 Z" fill="#4FAE86" stroke="#12324A" stroke-width="1.8" stroke-linejoin="round"/>
+                      <path d="M2 0 C10 -8 2 -16 10 -24 C18 -32 8 -40 14 -50 C22 -40 28 -34 20 -24 C14 -14 22 -8 16 0 Z" fill="url(#dgAnAlgae)" stroke="#12324A" stroke-width="1.8" stroke-linejoin="round"/>
+                      <path d="M20 0 C26 -10 20 -18 26 -28 C32 -36 26 -44 30 -52 C38 -42 42 -34 34 -24 C28 -14 36 -8 30 0 Z" fill="url(#dgAnAlgae)" stroke="#12324A" stroke-width="1.8" stroke-linejoin="round"/>
                       <path d="M8 0 C6 -10 2 -16 4 -24 C10 -18 14 -10 14 0 Z" fill="#3E9B63" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/>
+                      <path d="M7 -6 C11 -12 8 -19 12 -26 M23 -5 C28 -12 25 -20 28 -29" fill="none" stroke="#B7F2CC" stroke-width="1.3" stroke-linecap="round" opacity=".55"/>
+                      <path d="M15 -30 C11 -34 10 -39 12 -44 M28 -33 C32 -38 32 -43 30 -47" fill="none" stroke="#226747" stroke-width="1" stroke-linecap="round" opacity=".45"/>
                     </g>
-                    <ellipse cx="16" cy="1" rx="24" ry="4" fill="#C9A46A" stroke="#B0925F" stroke-width="1.2"/>
+                    <ellipse cx="16" cy="1" rx="24" ry="4" fill="url(#dgAnSand)" stroke="#B0925F" stroke-width="1.2"/>
                   </g>
                 </g>
               </g>
@@ -286,18 +318,32 @@ document.getElementById("dworld").innerHTML = `
                   <g class="dl-bob dl-anim" style="--dur:6.5s">
                     <g class="dlife" data-ia="dl_whaleshark" tabindex="0" role="button">
                       <g class="dbody">
-                        <path d="M26 -8 C14 -12 4 -22 -2 -34 C-6 -41 -13 -46 -18 -42 C-23 -38 -17 -26 -11 -16 C-5 -6 -2 -1 -2 6 C-2 12 -6 20 -11 30 C-16 39 -19 46 -15 49 C-11 52 -5 46 -1 38 C5 26 14 15 26 10 C30 8 30 -4 26 -8 Z" fill="#4E7385" stroke="#12324A" stroke-width="2.3" stroke-linejoin="round"/>
-                        <path d="M96 -24 C92 -40 84 -54 70 -62 C66 -65 61 -63 62 -58 C66 -48 66 -38 60 -28 C70 -32 86 -30 96 -24 Z" fill="#4E7385" stroke="#12324A" stroke-width="2.2" stroke-linejoin="round"/>
-                        <path d="M44 -26 C42 -34 38 -40 33 -44 C31 -46 28 -44 29 -41 C32 -35 33 -30 32 -25 Z" fill="#4E7385" stroke="#12324A" stroke-width="1.8" stroke-linejoin="round"/>
-                        <path d="M96 16 C90 32 80 50 70 60 C67 64 61 62 62 56 C66 42 70 28 72 18 Z" fill="#4E7385" stroke="#12324A" stroke-width="2.2" stroke-linejoin="round"/>
-                        <path d="M56 20 C54 28 50 36 46 40 C44 42 41 41 42 38 C45 31 47 25 47 19 Z" fill="#4E7385" stroke="#12324A" stroke-width="1.8" stroke-linejoin="round"/>
-                        <path d="M20 -6 C28 -22 46 -32 70 -32 C94 -32 118 -26 136 -16 C148 -9 154 -1 152 7 C148 16 126 24 92 24 C58 24 32 16 22 6 C17 1 16 -2 20 -6 Z" fill="#567D90" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
-                        <path d="M20 2 C32 12 50 16 72 16 C96 16 116 12 128 4 C136 0 144 2 148 8 C150 14 144 20 132 24 C110 29 70 30 46 24 C30 19 18 10 20 2 Z" fill="#E3EDF1"/>
-                        <g stroke="#B8CBD4" stroke-width="1.3" fill="none" opacity=".9"><path d="M44 10 C70 6 104 5 132 4"/><path d="M42 18 C70 14 106 12 136 9"/><path d="M46 26 C72 23 106 21 130 18" opacity=".6"/></g>
+                        <path d="M26 -8 C14 -12 4 -22 -2 -34 C-6 -41 -13 -46 -18 -42 C-23 -38 -17 -26 -11 -16 C-5 -6 -2 -1 -2 6 C-2 12 -6 20 -11 30 C-16 39 -19 46 -15 49 C-11 52 -5 46 -1 38 C5 26 14 15 26 10 C30 8 30 -4 26 -8 Z" fill="url(#dgAnWSFin)" stroke="#12324A" stroke-width="2.3" stroke-linejoin="round"/>
+                        <g fill="none" stroke="#294756" stroke-width="1" opacity=".45" stroke-linecap="round">
+                          <path d="M3 -10 C-2 -19 -6 -28 -11 -35"/><path d="M8 -6 C4 -15 1 -24 -3 -32"/>
+                          <path d="M4 13 C0 21 -4 30 -8 37"/><path d="M10 8 C6 17 2 26 -1 34"/>
+                        </g>
+                        <path d="M96 -24 C92 -40 84 -54 70 -62 C66 -65 61 -63 62 -58 C66 -48 66 -38 60 -28 C70 -32 86 -30 96 -24 Z" fill="url(#dgAnWSFin)" stroke="#12324A" stroke-width="2.2" stroke-linejoin="round"/>
+                        <g fill="none" stroke="#D3E4EB" stroke-width="1" opacity=".45" stroke-linecap="round">
+                          <path d="M68 -56 L72 -40 M64 -55 L65 -42 M60 -53 L61 -43"/>
+                        </g>
+                        <path d="M44 -26 C42 -34 38 -40 33 -44 C31 -46 28 -44 29 -41 C32 -35 33 -30 32 -25 Z" fill="url(#dgAnWSFin)" stroke="#12324A" stroke-width="1.8" stroke-linejoin="round"/>
+                        <path d="M96 16 C90 32 80 50 70 60 C67 64 61 62 62 56 C66 42 70 28 72 18 Z" fill="url(#dgAnWSFin)" stroke="#12324A" stroke-width="2.2" stroke-linejoin="round"/>
+                        <g fill="none" stroke="#D3E4EB" stroke-width="1" opacity=".45" stroke-linecap="round">
+                          <path d="M70 57 L75 42 M65 55 L67 42 M61 53 L62 43"/>
+                        </g>
+                        <path d="M56 20 C54 28 50 36 46 40 C44 42 41 41 42 38 C45 31 47 25 47 19 Z" fill="url(#dgAnWSFin)" stroke="#12324A" stroke-width="1.8" stroke-linejoin="round"/>
+                        <path d="M20 -6 C28 -22 46 -32 70 -32 C94 -32 118 -26 136 -16 C148 -9 154 -1 152 7 C148 16 126 24 92 24 C58 24 32 16 22 6 C17 1 16 -2 20 -6 Z" fill="url(#dgAnWS)" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
+                        <path d="M20 2 C32 12 50 16 72 16 C96 16 116 12 128 4 C136 0 144 2 148 8 C150 14 144 20 132 24 C110 29 70 30 46 24 C30 19 18 10 20 2 Z" fill="url(#dgAnBelly)"/>
+                        <path d="M20 2 C32 12 50 16 72 16 C96 16 116 12 128 4" fill="none" stroke="#B8CBD4" stroke-width="1.2" opacity=".9"/>
+                        <path d="M27 -15 C41 -27 61 -32 82 -31 C104 -30 124 -23 138 -14" fill="none" stroke="#D5E8EF" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
                         <g stroke="#6E93A5" stroke-width="1.5" fill="none" opacity=".75"><path d="M42 -24 C38 -12 38 0 42 10"/><path d="M62 -29 C58 -14 58 2 62 13"/><path d="M86 -30 C82 -14 82 2 86 14"/><path d="M110 -26 C106 -12 106 2 110 14"/><path d="M132 -18 C128 -8 128 2 130 10"/></g>
                         <g fill="#F2F8FA" opacity=".95"><circle cx="38" cy="-12" r="2.4"/><circle cx="52" cy="-22" r="2"/><circle cx="68" cy="-12" r="2.6"/><circle cx="80" cy="-24" r="1.9"/><circle cx="96" cy="-14" r="2.5"/><circle cx="110" cy="-24" r="2"/><circle cx="124" cy="-14" r="2.2"/><circle cx="126" cy="-16" r="1.7"/><circle cx="142" cy="-8" r="1.6"/><circle cx="58" cy="-3" r="2.1"/><circle cx="74" cy="-3" r="2.2"/><circle cx="90" cy="-4" r="2.4"/><circle cx="106" cy="-4" r="2.1"/><circle cx="120" cy="-3" r="2"/><circle cx="46" cy="-3" r="1.9"/><circle cx="134" cy="-4" r="1.7"/></g>
+                        <g fill="#FFFFFF" opacity=".55"><circle cx="39" cy="-12.8" r=".7"/><circle cx="69" cy="-12.8" r=".8"/><circle cx="97" cy="-14.8" r=".7"/><circle cx="75" cy="-3.8" r=".7"/></g>
                         <path d="M134 2 C142 10 149 10 152 4" fill="none" stroke="#12324A" stroke-width="2.2" stroke-linecap="round"/>
-                        <circle cx="139" cy="-9" r="2.6" fill="#12324A"/><circle cx="139.8" cy="-9.8" r=".9" fill="#fff"/>
+                        <path d="M137 4 C141 7 145 8 148 6" fill="none" stroke="#5A7A89" stroke-width="1" stroke-linecap="round" opacity=".7"/>
+                        <circle cx="139" cy="-9" r="2.8" fill="#12324A"/><circle cx="139.9" cy="-9.9" r="1" fill="#fff"/>
+                        <circle cx="148" cy="-15" r="1.2" fill="#2D4C5D" opacity=".8"/>
                       </g>
                     </g>
                   </g>
@@ -309,19 +355,25 @@ document.getElementById("dworld").innerHTML = `
                     <g class="dlife" data-ia="dl_hammerhead" tabindex="0" role="button">
                       <g class="dbody">
                         <g transform="scale(.58)">
-                        <path d="M26 4 C14 -2 6 -12 0 -26 C-4 -36 -12 -42 -17 -38 C-22 -34 -17 -24 -11 -14 C-5 -4 -2 1 -2 7 C-2 13 -6 19 -12 30 C-18 41 -20 50 -15 53 C-10 56 -4 50 1 39 C7 26 16 15 26 11 C29 9 29 6 26 4 Z" fill="#5B8AA3" stroke="#12324A" stroke-width="2.2" stroke-linejoin="round"/>
-                        <path d="M58 -30 C54 -45 48 -57 42 -63 C39 -66 35 -64 36 -60 C40 -49 40 -40 38 -30 Z" fill="#5B8AA3" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
-                        <path d="M72 42 C68 54 62 66 56 72 C53 75 49 73 50 68 C54 58 56 50 56 42 Z" fill="#5B8AA3" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
-                        <path d="M22 -8 C34 -30 52 -44 78 -44 C100 -44 114 -41 121 -34 C127 -27 129 -16 127 -4 C124 12 112 32 94 42 C72 52 44 50 32 38 C22 28 18 8 22 -8 Z" fill="#5B8AA3" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
-                        <path d="M22 2 C38 14 56 18 72 16 C88 14 100 6 108 -4 C114 -12 120 -14 124 -8 C127 -2 126 4 124 10 C120 26 108 38 88 44 C66 50 44 48 33 38 C24 29 20 12 22 2 Z" fill="#C7DAE1"/>
-                        <path d="M102 -36 C98 -58 90 -78 78 -88 C74 -91 70 -89 71 -84 C74 -68 72 -52 64 -38 C74 -42 90 -43 102 -36 Z" fill="#5B8AA3" stroke="#12324A" stroke-width="2.2" stroke-linejoin="round"/>
-                        <path d="M118 16 C108 30 98 48 90 64 C87 70 79 68 80 61 C83 46 88 32 92 22 Z" fill="#5B8AA3" stroke="#12324A" stroke-width="2.2" stroke-linejoin="round"/>
-                        <path d="M92 -42 L164 -44 C175 -45 184 -36 184 -24 C184 -12 176 -3 165 -4 L94 -2 C89 -2 86 -5 86 -10 L86 -34 C86 -39 89 -42 92 -42 Z" fill="#C7DAE1" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
-                        <path d="M78 2 C76 5 76 8 78 11 M83 1 C81 4 81 7 83 10 M88 0 C86 3 86 6 88 9" fill="none" stroke="#38607C" stroke-width="1.8" stroke-linecap="round"/>
-                        <circle cx="105" cy="-24" r="12" fill="#EAF6FB" stroke="#12324A" stroke-width="2.4"/><ellipse cx="105" cy="-23" rx="7" ry="7.5" fill="#16334C"/><circle cx="102" cy="-26" r="2.4" fill="#fff"/>
-                        <circle cx="162" cy="-26" r="12" fill="#EAF6FB" stroke="#12324A" stroke-width="2.4"/><ellipse cx="162" cy="-25" rx="7" ry="7.5" fill="#16334C"/><circle cx="159" cy="-28" r="2.4" fill="#fff"/>
+                        <path d="M26 4 C14 -2 6 -12 0 -26 C-4 -36 -12 -42 -17 -38 C-22 -34 -17 -24 -11 -14 C-5 -4 -2 1 -2 7 C-2 13 -6 19 -12 30 C-18 41 -20 50 -15 53 C-10 56 -4 50 1 39 C7 26 16 15 26 11 C29 9 29 6 26 4 Z" fill="url(#dgAnWSFin)" stroke="#12324A" stroke-width="2.2" stroke-linejoin="round"/>
+                        <g fill="none" stroke="#294756" stroke-width=".9" opacity=".45" stroke-linecap="round"><path d="M4 -8 C0 -16 -5 -24 -10 -32"/><path d="M9 -4 C5 -13 2 -21 -2 -29"/><path d="M6 15 C1 23 -4 32 -8 40"/><path d="M11 9 C7 18 2 27 -2 36"/></g>
+                        <path d="M58 -30 C54 -45 48 -57 42 -63 C39 -66 35 -64 36 -60 C40 -49 40 -40 38 -30 Z" fill="url(#dgAnWSFin)" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M72 42 C68 54 62 66 56 72 C53 75 49 73 50 68 C54 58 56 50 56 42 Z" fill="url(#dgAnWSFin)" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M22 -8 C34 -30 52 -44 78 -44 C100 -44 114 -41 121 -34 C127 -27 129 -16 127 -4 C124 12 112 32 94 42 C72 52 44 50 32 38 C22 28 18 8 22 -8 Z" fill="url(#dgAnHam)" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
+                        <path d="M22 2 C38 14 56 18 72 16 C88 14 100 6 108 -4 C114 -12 120 -14 124 -8 C127 -2 126 4 124 10 C120 26 108 38 88 44 C66 50 44 48 33 38 C24 29 20 12 22 2 Z" fill="url(#dgAnBelly)"/>
+                        <path d="M22 2 C38 14 56 18 72 16 C88 14 100 6 108 -4" fill="none" stroke="#B8CBD4" stroke-width="1.2" opacity=".85"/>
+                        <path d="M28 -17 C42 -32 59 -41 79 -41 C97 -41 111 -37 119 -31" fill="none" stroke="#D5E8EF" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+                        <path d="M102 -36 C98 -58 90 -78 78 -88 C74 -91 70 -89 71 -84 C74 -68 72 -52 64 -38 C74 -42 90 -43 102 -36 Z" fill="url(#dgAnWSFin)" stroke="#12324A" stroke-width="2.2" stroke-linejoin="round"/>
+                        <path d="M118 16 C108 30 98 48 90 64 C87 70 79 68 80 61 C83 46 88 32 92 22 Z" fill="url(#dgAnWSFin)" stroke="#12324A" stroke-width="2.2" stroke-linejoin="round"/>
+                        <path d="M92 -42 L164 -44 C175 -45 184 -36 184 -24 C184 -12 176 -3 165 -4 L94 -2 C89 -2 86 -5 86 -10 L86 -34 C86 -39 89 -42 92 -42 Z" fill="url(#dgAnHam)" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
+                        <path d="M92 -38 L160 -40 C170 -41 177 -34 178 -25" fill="none" stroke="#CFE6EF" stroke-width="1.8" stroke-linecap="round" opacity=".5"/>
+                        <path d="M92 -6 C120 -5 146 -4 166 -8" fill="none" stroke="#2F4E60" stroke-width="1.6" stroke-linecap="round" opacity=".35"/>
+                        <g stroke="#38607C" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".85"><path d="M78 2 C76 5 76 8 78 11"/><path d="M83 1 C81 4 81 7 83 10"/><path d="M88 0 C86 3 86 6 88 9"/></g>
+                        <circle cx="106" cy="-23" r="8.6" fill="#F4FBFD" stroke="#12324A" stroke-width="2.2"/><circle cx="107" cy="-22" r="5" fill="#16334C"/><circle cx="105.2" cy="-24.6" r="1.8" fill="#fff"/>
+                        <circle cx="162" cy="-26" r="8.6" fill="#F4FBFD" stroke="#12324A" stroke-width="2.2"/><circle cx="163" cy="-25" r="5" fill="#16334C"/><circle cx="161.2" cy="-27.6" r="1.8" fill="#fff"/>
                         <path d="M96 2 C104 14 116 12 124 0" fill="none" stroke="#16334C" stroke-width="2.6" stroke-linecap="round"/>
                         <path d="M99.5 7.6 L101.2 12.2 L102.9 7.6 Z M103.8 9.5 L105.5 14.1 L107.2 9.5 Z M108.3 9.9 L110 14.5 L111.7 9.9 Z M112.8 8.7 L114.5 13.3 L116.2 8.7 Z M116.9 6.1 L118.8 10.7 L120.5 6.1 Z" fill="#FFFEF7" stroke="#12324A" stroke-width=".9" stroke-linejoin="round"/>
+                        <circle cx="177" cy="-17" r="1.4" fill="#12324A" opacity=".75"/><circle cx="94" cy="-35" r="1.3" fill="#12324A" opacity=".75"/>
                         </g>
                       </g>
                     </g>
@@ -333,13 +385,16 @@ document.getElementById("dworld").innerHTML = `
                   <g class="dl-bob dl-anim" style="--dur:5s">
                     <g class="dlife" data-ia="dl_ray" tabindex="0" role="button">
                       <g class="dbody">
-                        <path d="M-4 0 L-46 12" fill="none" stroke="#7C8896" stroke-width="3" stroke-linecap="round"/>
-                        <path d="M-4 0 L-40 18" fill="none" stroke="#7C8896" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
-                        <path d="M-6 -2 C-2 -18 22 -28 50 -22 C66 -18 74 -8 68 0 C60 10 40 16 18 12 C4 9 -7 5 -6 -2 Z" fill="#8A97A3" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
-                        <path d="M0 -4 C6 -12 26 -18 48 -16 C28 -12 10 -8 4 -2 Z" fill="#B7C3CC" opacity=".7"/>
-                        <path d="M30 6 C38 10 48 9 54 4 M26 12 C34 15 44 14 50 10" fill="none" stroke="#5A6673" stroke-width="1.5" opacity=".8"/>
-                        <circle cx="58" cy="-12" r="2.4" fill="#12324A"/><circle cx="63" cy="-6" r="2" fill="#12324A"/>
-                        <circle cx="58.7" cy="-12.7" r=".8" fill="#fff"/>
+                        <path d="M-4 0 L-46 12" fill="none" stroke="url(#dgAnRay)" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M-8 1 L-40 17" fill="none" stroke="#8A97A3" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
+                        <path d="M-6 -2 C-2 -18 22 -28 50 -22 C66 -18 74 -8 68 0 C60 10 40 16 18 12 C4 9 -7 5 -6 -2 Z" fill="url(#dgAnRay)" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
+                        <path d="M-2 -4 C6 -14 26 -20 48 -18 C30 -14 12 -10 4 -2 Z" fill="#F2F8FA" opacity=".55"/>
+                        <path d="M-4 3 C10 10 38 16 62 7" fill="none" stroke="#D7E2E8" stroke-width="1.6" stroke-linecap="round" opacity=".55"/>
+                        <g fill="#6C7985" opacity=".55"><circle cx="22" cy="-8" r="2"/><circle cx="34" cy="-2" r="1.6"/><circle cx="44" cy="-9" r="1.4"/><circle cx="16" cy="4" r="1.3"/><circle cx="30" cy="7" r="1.5"/><circle cx="52" cy="0" r="1.2"/></g>
+                        <path d="M30 6 C38 10 48 9 54 4 M26 12 C34 15 44 14 50 10" fill="none" stroke="#5A6673" stroke-width="1.4" opacity=".65"/>
+                        <circle cx="58" cy="-12" r="2.6" fill="#12324A"/><circle cx="58.9" cy="-12.9" r=".9" fill="#fff"/>
+                        <circle cx="64" cy="-6" r="2.1" fill="#12324A"/><circle cx="64.7" cy="-6.7" r=".7" fill="#fff"/>
+                        <circle cx="66" cy="-13" r="1.5" fill="#5A6673" opacity=".8"/>
                       </g>
                     </g>
                   </g>
@@ -350,13 +405,17 @@ document.getElementById("dworld").innerHTML = `
                   <g class="dl-bob dl-anim" style="--dur:3.2s">
                     <g class="dlife" data-ia="dl_seasnake" tabindex="0" role="button">
                       <g class="dbody">
-                        <path d="M-2 4 C12 -10 26 12 40 0 C54 -12 68 10 82 0 C96 -10 110 8 124 -2" fill="none" stroke="#D9B96A" stroke-width="9" stroke-linecap="round"/>
-                        <path d="M-2 4 C12 -10 26 12 40 0 C54 -12 68 10 82 0 C96 -10 110 8 124 -2" fill="none" stroke="#12324A" stroke-width="9" stroke-linecap="round" stroke-dasharray="6 15" opacity=".85"/>
-                        <path d="M-2 4 C12 -10 26 12 40 0 C54 -12 68 10 82 0 C96 -10 110 8 124 -2" fill="none" stroke="#F0D9A8" stroke-width="2" stroke-linecap="round" opacity=".45"/>
-                        <path d="M-2 4 L-16 10 L-8 0 Z" fill="#D9B96A" stroke="#12324A" stroke-width="1.4" stroke-linejoin="round"/>
-                        <ellipse cx="130" cy="-4" rx="9" ry="6.4" fill="#D9B96A" stroke="#12324A" stroke-width="1.8"/>
-                        <circle cx="133" cy="-6" r="1.8" fill="#12324A"/><circle cx="133.6" cy="-6.6" r=".7" fill="#fff"/>
+                        <path d="M-2 4 C12 -10 26 12 40 0 C54 -12 68 10 82 0 C96 -10 110 8 124 -2" fill="none" stroke="#12324A" stroke-width="11" stroke-linecap="round"/>
+                        <path d="M-2 4 C12 -10 26 12 40 0 C54 -12 68 10 82 0 C96 -10 110 8 124 -2" fill="none" stroke="url(#dgAnSnake)" stroke-width="8" stroke-linecap="round"/>
+                        <path d="M-2 4 C12 -10 26 12 40 0 C54 -12 68 10 82 0 C96 -10 110 8 124 -2" fill="none" stroke="#8A6A2A" stroke-width="8" stroke-linecap="round" stroke-dasharray="3 16" opacity=".38"/>
+                        <path d="M-2 2 C12 -12 26 10 40 -2 C54 -14 68 8 82 -2 C96 -12 110 6 124 -4" fill="none" stroke="#FFF3CC" stroke-width="1.6" stroke-linecap="round" opacity=".6"/>
+                        <path d="M-2 4 L-16 10 L-8 0 Z" fill="url(#dgAnSnake)" stroke="#12324A" stroke-width="1.4" stroke-linejoin="round"/>
+                        <ellipse cx="130" cy="-4" rx="9.6" ry="7" fill="url(#dgAnSnake)" stroke="#12324A" stroke-width="1.8"/>
+                        <path d="M126 -9 C129 -12 134 -11 137 -7" fill="none" stroke="#FFF3CC" stroke-width="1.2" stroke-linecap="round" opacity=".6"/>
+                        <circle cx="133" cy="-6" r="2" fill="#12324A"/><circle cx="133.7" cy="-6.8" r=".75" fill="#fff"/>
                         <path d="M137 -1 C139 1 138 2 136 2" fill="none" stroke="#12324A" stroke-width="1.4" stroke-linecap="round"/>
+                        <path d="M139 0 L146 -1 M139 1 L146 4" fill="none" stroke="#D9484A" stroke-width="1.2" stroke-linecap="round"/>
+                        <circle cx="129" cy="-9" r=".9" fill="#12324A" opacity=".65"/>
                       </g>
                     </g>
                   </g>
@@ -366,14 +425,16 @@ document.getElementById("dworld").innerHTML = `
                 <g class="dlife" data-ia="dl_sponge" tabindex="0" role="button">
                   <g class="dbody">
                     <g class="dl-sway dl-anim" style="--dur:7.2s">
-                      <path d="M-20 10 C-24 0 -22 -10 -15 -16 C-10 -20 -6 -19 -4 -13 C-2 -6 -6 2 -8 10 Z" fill="#E8A87C" stroke="#12324A" stroke-width="1.8" stroke-linejoin="round"/>
-                      <path d="M-6 10 C-8 -2 -6 -14 0 -20 C5 -25 10 -24 12 -18 C14 -10 10 0 8 10 Z" fill="#F2BE96" stroke="#12324A" stroke-width="1.8" stroke-linejoin="round"/>
-                      <path d="M8 10 C8 2 12 -6 18 -10 C23 -13 27 -11 27 -6 C27 0 24 6 22 10 Z" fill="#E8A87C" stroke="#12324A" stroke-width="1.8" stroke-linejoin="round"/>
-                      <ellipse cx="-12" cy="-15" rx="4" ry="2" fill="#B96A45" stroke="#12324A" stroke-width="1.2"/>
-                      <ellipse cx="4" cy="-19" rx="4" ry="2" fill="#B96A45" stroke="#12324A" stroke-width="1.2"/>
-                      <ellipse cx="21" cy="-9" rx="3.4" ry="1.8" fill="#B96A45" stroke="#12324A" stroke-width="1.2"/>
+                      <path d="M-20 10 C-24 0 -22 -10 -15 -16 C-10 -20 -6 -19 -4 -13 C-2 -6 -6 2 -8 10 Z" fill="url(#dgAnSponge)" stroke="#12324A" stroke-width="1.8" stroke-linejoin="round"/>
+                      <path d="M-6 10 C-8 -2 -6 -14 0 -20 C5 -25 10 -24 12 -18 C14 -10 10 0 8 10 Z" fill="url(#dgAnSponge)" stroke="#12324A" stroke-width="1.8" stroke-linejoin="round"/>
+                      <path d="M8 10 C8 2 12 -6 18 -10 C23 -13 27 -11 27 -6 C27 0 24 6 22 10 Z" fill="url(#dgAnSponge)" stroke="#12324A" stroke-width="1.8" stroke-linejoin="round"/>
+                      <ellipse cx="-12" cy="-15" rx="4.2" ry="2.2" fill="#A95634" stroke="#12324A" stroke-width="1.2"/>
+                      <ellipse cx="4" cy="-19" rx="4.2" ry="2.2" fill="#A95634" stroke="#12324A" stroke-width="1.2"/>
+                      <ellipse cx="21" cy="-9" rx="3.4" ry="1.8" fill="#A95634" stroke="#12324A" stroke-width="1.2"/>
+                      <g fill="#FFE0C8" opacity=".55"><circle cx="-17" cy="-4" r="1"/><circle cx="-11" cy="-7" r=".8"/><circle cx="-2" cy="-8" r="1.1"/><circle cx="5" cy="-13" r=".8"/><circle cx="14" cy="-3" r=".9"/><circle cx="20" cy="-5" r=".7"/><circle cx="-7" cy="2" r=".8"/></g>
+                      <path d="M-19 2 C-21 -4 -19 -9 -15 -13 M-3 2 C-4 -6 -1 -13 3 -16 M12 3 C13 -3 16 -7 20 -8" fill="none" stroke="#FFE6D2" stroke-width="1.4" stroke-linecap="round" opacity=".45"/>
                     </g>
-                    <ellipse cx="2" cy="12" rx="30" ry="5" fill="#C9A46A" stroke="#B0925F" stroke-width="1.2"/>
+                    <ellipse cx="2" cy="12" rx="30" ry="5" fill="url(#dgAnSand)" stroke="#B0925F" stroke-width="1.2"/>
                   </g>
                 </g>
               </g>
@@ -382,14 +443,26 @@ document.getElementById("dworld").innerHTML = `
                   <g class="dl-bob dl-anim" style="--dur:4.6s">
                     <g class="dlife" data-ia="dl_turtle" tabindex="0" role="button">
                       <g class="dbody">
-                        <path d="M24 -16 C12 -28 0 -26 5 -18 C8 -13 16 -12 24 -16 Z" fill="#4FAE86" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
-                        <path d="M24 10 C14 22 3 20 7 12 C10 8 17 7 24 10 Z" fill="#4FAE86" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
-                        <path d="M4 0 L-6 2 L2 5 Z" fill="#4FAE86" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/>
-                        <ellipse cx="74" cy="0" rx="11" ry="8" fill="#5BB98A" stroke="#12324A" stroke-width="2.2"/>
-                        <path d="M14 -18 C0 -22 -10 -12 -3 -4 C-10 4 -2 15 14 12 C32 16 52 12 62 4 C70 -2 66 -14 52 -18 C36 -22 22 -22 14 -18 Z" fill="#2F7D5A" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
-                        <path d="M13 -12 C26 -20 46 -18 58 -10 M11 -3 H58 M15 6 C30 11 48 10 58 3" fill="none" stroke="#1E5B41" stroke-width="2"/>
-                        <circle cx="77" cy="-2" r="2.2" fill="#12324A"/><circle cx="77.7" cy="-2.8" r=".8" fill="#fff"/>
-                        <path d="M80 3 C84 4 86 3 86 1" fill="none" stroke="#12324A" stroke-width="1.4" stroke-linecap="round"/>
+                        <path d="M20 -8 C12 -18 2 -20 3 -14 C4 -9 12 -8 20 -10 Z" fill="url(#dgAnSkin)" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M20 8 C13 18 3 21 -1 16 C-4 12 4 8 12 5 Z" fill="url(#dgAnSkin)" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M44 8 C50 20 64 24 72 18 C76 14 70 10 62 7 C56 5 48 5 44 8 Z" fill="url(#dgAnSkin)" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M4 0 L-6 2 L2 5 Z" fill="url(#dgAnSkin)" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/>
+                        <path d="M58 -9 C65 -15 76 -15 83 -9 C89 -3 85 4 77 6 C70 7 63 4 59 0 Z" fill="url(#dgAnSkin)" stroke="#12324A" stroke-width="2.2" stroke-linejoin="round"/>
+                        <path d="M14 -18 C0 -22 -10 -12 -3 -4 C-10 4 -2 15 14 12 C32 16 52 12 62 4 C70 -2 66 -14 52 -18 C36 -22 22 -22 14 -18 Z" fill="url(#dgAnTurtle)" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
+                        <g fill="none" stroke="#1E5B41" stroke-width="1.5" stroke-linejoin="round" opacity=".82">
+                          <path d="M26 -15 L36 -18 L44 -14 L43 -6 L34 -3 L26 -7 Z"/>
+                          <path d="M44 -14 L54 -12 L58 -5 L52 1 L43 -1 L43 -6 Z"/>
+                          <path d="M24 -6 L34 -3 L34 5 L25 8 L18 3 L20 -3 Z"/>
+                          <path d="M34 -3 L43 -1 L47 6 L37 10 L34 5 Z"/>
+                          <path d="M47 6 L52 1 L58 3 L58 8 L50 11 Z"/>
+                          <path d="M15 -10 L20 -14 L26 -15 L26 -7 L20 -3 Z"/>
+                        </g>
+                        <g fill="#1E5B41" opacity=".4"><circle cx="31" cy="-10" r=".8"/><circle cx="39" cy="-9" r=".7"/><circle cx="48" cy="-5" r=".8"/><circle cx="30" cy="1" r=".7"/><circle cx="42" cy="3" r=".8"/><circle cx="53" cy="6" r=".6"/></g>
+                        <path d="M16 -13 C24 -18 36 -19 44 -16" fill="none" stroke="#B7F2CC" stroke-width="1.8" stroke-linecap="round" opacity=".55"/>
+                        <path d="M64 -10 C70 -13 77 -12 81 -7" fill="none" stroke="#B7F2CC" stroke-width="1.4" stroke-linecap="round" opacity=".55"/>
+                        <circle cx="78" cy="-3" r="2.4" fill="#12324A"/><circle cx="78.9" cy="-3.9" r=".85" fill="#fff"/>
+                        <path d="M82 2 C85 3 87 2 87 0" fill="none" stroke="#12324A" stroke-width="1.5" stroke-linecap="round"/>
+                        <circle cx="72" cy="-11" r="1" fill="#2F7D5A" opacity=".65"/>
                       </g>
                     </g>
                   </g>
@@ -400,12 +473,17 @@ document.getElementById("dworld").innerHTML = `
                   <g class="dl-bob dl-anim" style="--dur:3.8s">
                     <g class="dlife" data-ia="dl_dolphin" tabindex="0" role="button">
                       <g class="dbody">
-                        <path d="M34 -16 C40 -28 50 -28 50 -15 Z" fill="#4AA0C4" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
-                        <path d="M4 2 C-6 -8 -16 -8 -12 0 C-16 8 -6 8 0 4 Z" fill="#4AA0C4" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
-                        <path d="M4 2 C10 -14 34 -24 56 -18 C68 -15 76 -8 78 -2 C80 4 74 8 64 7 C44 5 20 10 10 8 C4 7 2 5 4 2 Z" fill="#63B9DC" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
-                        <path d="M22 4 C34 8 52 6 66 2 C56 10 34 12 24 8 Z" fill="#BFE9F0" opacity=".85"/>
-                        <path d="M18 6 C16 12 25 14 31 10 C27 8 22 6 18 6 Z" fill="#4AA0C4" stroke="#12324A" stroke-width="1.8" stroke-linejoin="round"/>
-                        <circle cx="62" cy="-4" r="2.6" fill="#12324A"/><circle cx="62.8" cy="-5" r=".9" fill="#fff"/>
+                        <path d="M33 -15 C38 -32 52 -33 53 -14 C47 -20 40 -20 33 -15 Z" fill="url(#dgAnDol)" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M4 2 C-6 -8 -16 -8 -12 0 C-16 8 -6 8 0 4 Z" fill="url(#dgAnDol)" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M4 2 C10 -14 34 -24 56 -18 C68 -15 76 -8 78 -2 C80 4 74 8 64 7 C44 5 20 10 10 8 C4 7 2 5 4 2 Z" fill="url(#dgAnDol)" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
+                        <path d="M76 0 C82 -2 87 -4 90 -6 C91 -7 91 -4 89 -2 C85 1 80 4 76 4 Z" fill="url(#dgAnDol)" stroke="#12324A" stroke-width="1.8" stroke-linejoin="round"/>
+                        <path d="M77 4 C82 2 86 0 89 -2" fill="none" stroke="#2E7DA3" stroke-width="1.1" stroke-linecap="round" opacity=".85"/>
+                        <path d="M22 4 C34 8 52 6 66 2 C56 10 34 12 24 8 Z" fill="url(#dgAnBelly)" opacity=".95"/>
+                        <path d="M18 6 C16 12 25 14 31 10 C27 8 22 6 18 6 Z" fill="url(#dgAnDol)" stroke="#12324A" stroke-width="1.8" stroke-linejoin="round"/>
+                        <path d="M20 -9 C32 -18 48 -19 60 -14" fill="none" stroke="#DFF8FF" stroke-width="2.2" stroke-linecap="round" opacity=".55"/>
+                        <path d="M70 1 C73 0 76 -2 77 -5" fill="none" stroke="#12324A" stroke-width="1.6" stroke-linecap="round"/>
+                        <path d="M64 7 C70 6 74 4 76 1" fill="none" stroke="#2E7DA3" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+                        <circle cx="62" cy="-5" r="2.7" fill="#12324A"/><circle cx="62.9" cy="-6" r=".95" fill="#fff"/>
                         <path d="M70 0 C74 1 76 0 77 -2" fill="none" stroke="#12324A" stroke-width="1.6" stroke-linecap="round"/>
                       </g>
                     </g>
@@ -417,13 +495,19 @@ document.getElementById("dworld").innerHTML = `
                   <g class="dl-bob dl-anim" style="--dur:4.2s">
                     <g class="dlife" data-ia="dl_hamour" tabindex="0" role="button">
                       <g class="dbody">
-                        <path d="M28 -20 L32 -30 L40 -22 L46 -32 L54 -22 L62 -30 L66 -19" fill="#8A5A38" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
-                        <path d="M12 0 L-4 -12 L0 0 L-4 12 Z" fill="#8A5A38" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
-                        <path d="M52 10 C50 20 62 22 66 14 C60 14 56 10 52 10 Z" fill="#8A5A38" stroke="#12324A" stroke-width="1.8" stroke-linejoin="round"/>
-                        <path d="M10 0 C16 -18 40 -26 60 -20 C74 -16 84 -8 86 0 C88 8 78 16 60 18 C36 22 14 14 10 0 Z" fill="#A9714B" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
-                        <g fill="#7C4E2E" opacity=".8"><circle cx="34" cy="-6" r="2.4"/><circle cx="46" cy="2" r="2"/><circle cx="30" cy="8" r="1.8"/><circle cx="58" cy="-8" r="2.2"/><circle cx="54" cy="10" r="1.8"/><circle cx="70" cy="4" r="1.8"/></g>
+                        <path d="M28 -20 L32 -30 L40 -22 L46 -32 L54 -22 L62 -30 L66 -19 C60 -22 54 -22 48 -21 C40 -20 34 -20 28 -20 Z" fill="url(#dgAnGrouper)" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M12 0 L-4 -12 L0 0 L-4 12 Z" fill="url(#dgAnGrouper)" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M52 10 C50 20 62 22 66 14 C60 14 56 10 52 10 Z" fill="url(#dgAnGrouper)" stroke="#12324A" stroke-width="1.8" stroke-linejoin="round"/>
+                        <path d="M10 0 C16 -18 40 -26 60 -20 C74 -16 84 -8 86 0 C88 8 78 16 60 18 C36 22 14 14 10 0 Z" fill="url(#dgAnGrouper)" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
+                        <path d="M20 6 C32 14 54 14 74 4 C70 12 52 18 36 16 C28 15 22 11 20 6 Z" fill="#F0C79C" opacity=".55"/>
+                        <path d="M18 -12 C30 -21 50 -22 66 -16" fill="none" stroke="#F5D3AE" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+                        <path d="M62 -18 C60 -6 60 6 62 14" fill="none" stroke="#6E4427" stroke-width="1.7" stroke-linecap="round" opacity=".8"/>
+                        <path d="M66 -14 C64 -5 64 4 66 11" fill="none" stroke="#6E4427" stroke-width="1.2" stroke-linecap="round" opacity=".55"/>
+                        <g fill="#7C4E2E" opacity=".75"><circle cx="34" cy="-6" r="2.4"/><circle cx="46" cy="2" r="2"/><circle cx="30" cy="8" r="1.8"/><circle cx="58" cy="-8" r="2.2"/><circle cx="54" cy="10" r="1.8"/><circle cx="70" cy="4" r="1.8"/></g>
+                        <g fill="#F0C79C" opacity=".55"><circle cx="40" cy="-1" r="1"/><circle cx="50" cy="-5" r="1.1"/><circle cx="28" cy="2" r=".9"/><circle cx="62" cy="12" r="1"/><circle cx="66" cy="-2" r=".8"/></g>
                         <path d="M74 6 C80 8 84 6 85 3" fill="none" stroke="#12324A" stroke-width="2" stroke-linecap="round"/>
-                        <circle cx="70" cy="-6" r="4" fill="#fff" stroke="#12324A" stroke-width="1.6"/><circle cx="71" cy="-6" r="2" fill="#12324A"/>
+                        <path d="M84 2 C87 3 88 5 87 7" fill="none" stroke="#12324A" stroke-width="1.4" stroke-linecap="round"/>
+                        <circle cx="70" cy="-6" r="4.4" fill="#FFFFFF" stroke="#12324A" stroke-width="1.6"/><circle cx="71" cy="-6" r="2.2" fill="#12324A"/><circle cx="71.7" cy="-6.9" r=".8" fill="#fff"/>
                       </g>
                     </g>
                   </g>
@@ -433,19 +517,21 @@ document.getElementById("dworld").innerHTML = `
                 <g class="dl-drift dl-anim" style="--dur:10s">
                   <g class="dlife" data-ia="dl_butterfly" tabindex="0" role="button">
                     <g class="dbody">
-                      <path d="M36 -30 C40 -46 50 -56 62 -56 C70 -56 76 -50 75 -42 C74 -35 70 -30 66 -26 Z" fill="#FFC234" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
+                      <path d="M36 -30 C40 -46 50 -56 62 -56 C70 -56 76 -50 75 -42 C74 -35 70 -30 66 -26 Z" fill="url(#dgAnButterfly)" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
                       <path d="M38 -32 C42 -46 51 -54 62 -54 C69 -54 73 -49 72 -43" fill="none" stroke="#FDF6E8" stroke-width="2.6" stroke-linecap="round"/>
-                      <path d="M38 26 C42 42 52 52 64 52 C72 52 78 46 77 38 C76 31 72 26 68 22 Z" fill="#FFC234" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
+                      <path d="M38 26 C42 42 52 52 64 52 C72 52 78 46 77 38 C76 31 72 26 68 22 Z" fill="url(#dgAnButterfly)" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
                       <path d="M40 29 C44 42 53 50 64 50 C71 50 75 45 74 39" fill="none" stroke="#FDF6E8" stroke-width="2.6" stroke-linecap="round"/>
-                      <path d="M14 -18 C4 -24 -6 -26 -12 -22 C-16 -19 -16 -13 -13 -8 C-10 -4 -10 4 -13 8 C-16 13 -16 19 -12 22 C-6 26 4 24 14 18 C9 10 7 5 7 0 C7 -5 9 -11 14 -18 Z" fill="#FFC234" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
-                      <path d="M12 0 C12 -20 28 -34 48 -34 C66 -34 80 -20 80 0 C80 20 66 34 48 34 C28 34 12 20 12 0 Z" fill="#F7FBFD" stroke="#12324A" stroke-width="2.2" stroke-linejoin="round"/>
-                      <path d="M26 -33 C30 -12 30 12 26 33 L34 33 C38 12 38 -12 34 -33 Z" fill="#FFC234" stroke="#2B2B33" stroke-width="1.2" stroke-linejoin="round"/>
-                      <path d="M44 -33 C48 -12 48 12 44 33 L52 33 C56 12 56 -12 52 -33 Z" fill="#FFC234" stroke="#2B2B33" stroke-width="1.2" stroke-linejoin="round"/>
+                      <path d="M14 -18 C4 -24 -6 -26 -12 -22 C-16 -19 -16 -13 -13 -8 C-10 -4 -10 4 -13 8 C-16 13 -16 19 -12 22 C-6 26 4 24 14 18 C9 10 7 5 7 0 C7 -5 9 -11 14 -18 Z" fill="url(#dgAnButterfly)" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
+                      <path d="M12 0 C12 -20 28 -34 48 -34 C66 -34 80 -20 80 0 C80 20 66 34 48 34 C28 34 12 20 12 0 Z" fill="#FDF8EA" stroke="#12324A" stroke-width="2.2" stroke-linejoin="round"/>
+                      <path d="M26 -33 C30 -12 30 12 26 33 L34 33 C38 12 38 -12 34 -33 Z" fill="url(#dgAnButterfly)" stroke="#2B2B33" stroke-width="1.2" stroke-linejoin="round"/>
+                      <path d="M44 -33 C48 -12 48 12 44 33 L52 33 C56 12 56 -12 52 -33 Z" fill="url(#dgAnButterfly)" stroke="#2B2B33" stroke-width="1.2" stroke-linejoin="round"/>
+                      <path d="M57 -33 C54 -12 54 12 57 32 L66 31 C69 12 69 -12 66 -33 Z" fill="#2B2B33" opacity=".92"/>
                       <ellipse cx="21" cy="-19" rx="5.5" ry="6.5" fill="#2B2B33"/>
                       <ellipse cx="21" cy="19" rx="4.5" ry="5.5" fill="#2B2B33"/>
                       <path d="M58 -32 C61 -14 61 14 58 32" fill="none" stroke="#2B2B33" stroke-width="2.4"/>
                       <path d="M68 -31 C71 -14 71 14 68 31 L74 30 C77 14 77 -14 74 -30 Z" fill="#2B2B33"/>
-                      <circle cx="63" cy="-12" r="5.4" fill="#F7FBFD" stroke="#2B2B33" stroke-width="1.2"/><circle cx="64" cy="-12" r="3" fill="#2B2B33"/>
+                      <path d="M17 -20 C21 -28 31 -32 40 -32" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" opacity=".7"/>
+                      <circle cx="63" cy="-12" r="5.6" fill="#FFFFFF" stroke="#2B2B33" stroke-width="1.4"/><circle cx="64" cy="-12" r="3.1" fill="#2B2B33"/><circle cx="64.9" cy="-13" r="1" fill="#fff"/>
                       <path d="M78 -6 C90 -9 102 -7 110 -1 C113 1 113 4 109 5 C100 7 88 7 80 5 Z" fill="#FDF6E8" stroke="#2B2B33" stroke-width="1.4" stroke-linejoin="round"/>
                       <path d="M80 -6 C90 -8 101 -6 109 -1" fill="none" stroke="#F5B32C" stroke-width="3" stroke-linecap="round"/>
                       <path d="M110 2 C112 2 112 3 110 3" fill="none" stroke="#2B2B33" stroke-width="1.4" stroke-linecap="round"/>
@@ -458,13 +544,15 @@ document.getElementById("dworld").innerHTML = `
                 <g class="dl-drift dl-anim" style="--dur:12s">
                   <g class="dlife" data-ia="dl_angelfish" tabindex="0" role="button">
                     <g class="dbody">
-                      <path d="M64 -34 C58 -48 46 -58 30 -60 C20 -61 8 -56 0 -46 C-4 -41 -6 -36 -8 -32 C0 -34 12 -30 24 -30 C40 -30 56 -33 64 -34 Z" fill="#3040A0" stroke="#12324A" stroke-width="2.2" stroke-linejoin="round"/>
-                      <path d="M62 34 C56 48 44 58 28 60 C18 61 6 56 -2 46 C-6 41 -8 36 -10 32 C-2 34 10 30 22 30 C38 30 54 33 62 34 Z" fill="#3040A0" stroke="#12324A" stroke-width="2.2" stroke-linejoin="round"/>
-                      <path d="M14 -18 C4 -24 -6 -26 -12 -22 C-16 -19 -16 -13 -14 -8 C-13 -3 -13 3 -14 8 C-16 13 -16 19 -12 22 C-6 26 4 24 14 18 C9 10 7 5 7 0 C7 -5 9 -11 14 -18 Z" fill="#FFC234" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
-                      <path d="M4 0 C6 -22 24 -40 48 -40 C66 -40 80 -26 82 -4 C84 18 68 36 46 38 C26 40 8 24 4 0 Z" fill="#3040A0" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
-                      <path d="M48 -40 C54 -24 56 -10 56 0 C56 10 54 24 48 38 L62 34 C66 20 68 -20 62 -36 Z" fill="#FFC234"/>
+                      <path d="M64 -34 C58 -48 46 -58 30 -60 C20 -61 8 -56 0 -46 C-4 -41 -6 -36 -8 -32 C0 -34 12 -30 24 -30 C40 -30 56 -33 64 -34 Z" fill="url(#dgAnAngel)" stroke="#12324A" stroke-width="2.2" stroke-linejoin="round"/>
+                      <path d="M62 34 C56 48 44 58 28 60 C18 61 6 56 -2 46 C-6 41 -8 36 -10 32 C-2 34 10 30 22 30 C38 30 54 33 62 34 Z" fill="url(#dgAnAngel)" stroke="#12324A" stroke-width="2.2" stroke-linejoin="round"/>
+                      <path d="M14 -18 C4 -24 -6 -26 -12 -22 C-16 -19 -16 -13 -14 -8 C-13 -3 -13 3 -14 8 C-16 13 -16 19 -12 22 C-6 26 4 24 14 18 C9 10 7 5 7 0 C7 -5 9 -11 14 -18 Z" fill="url(#dgAnButterfly)" stroke="#12324A" stroke-width="2" stroke-linejoin="round"/>
+                      <path d="M4 0 C6 -22 24 -40 48 -40 C66 -40 80 -26 82 -4 C84 18 68 36 46 38 C26 40 8 24 4 0 Z" fill="url(#dgAnAngel)" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
+                      <path d="M48 -40 C54 -24 56 -10 56 0 C56 10 54 24 48 38 L62 34 C66 20 68 -20 62 -36 Z" fill="url(#dgAnButterfly)"/>
                       <path d="M58 -34 C68 -26 76 -16 80 -2 C82 14 74 28 60 35 C68 22 72 8 70 -6 C68 -20 64 -28 58 -34 Z" fill="#232F73"/>
-                      <circle cx="70" cy="-6" r="4.6" fill="#EAF6FB" stroke="#12324A" stroke-width="1.4"/><circle cx="70.8" cy="-6" r="2.4" fill="#12324A"/>
+                      <path d="M22 -30 C28 -42 36 -50 46 -54 M18 32 C24 44 34 51 44 54" fill="none" stroke="#8C9BE8" stroke-width="1.6" stroke-linecap="round" opacity=".55"/>
+                      <path d="M12 -22 C20 -34 32 -38 44 -38" fill="none" stroke="#AFC2FF" stroke-width="2.2" stroke-linecap="round" opacity=".45"/>
+                      <circle cx="70" cy="-6" r="4.8" fill="#F4FBFF" stroke="#12324A" stroke-width="1.4"/><circle cx="70.9" cy="-6" r="2.5" fill="#12324A"/><circle cx="71.8" cy="-7.1" r=".9" fill="#fff"/>
                       <path d="M56 12 C64 16 70 22 72 28 C73 31 70 32 67 30 C61 26 56 20 52 14 Z" fill="#FFC234" stroke="#12324A" stroke-width="1.5" stroke-linejoin="round"/>
                       <path d="M80 2 C83 3 84 5 82 6" fill="none" stroke="#12324A" stroke-width="1.5" stroke-linecap="round"/>
                     </g>
@@ -474,12 +562,21 @@ document.getElementById("dworld").innerHTML = `
               <g transform="translate(420 344)">
                 <g class="dlife" data-ia="dl_oyster" tabindex="0" role="button">
                   <g class="dbody">
-                    <path d="M-24 0 C-24 12 -8 20 10 18 C22 17 28 12 26 6 C24 2 16 4 10 6 C-4 10 -16 6 -24 0 Z" fill="#C9B8A3" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
-                    <path d="M-24 0 C-22 -12 -4 -18 12 -14 C20 -12 26 -8 26 -2 C18 4 2 6 -10 4 C-16 3 -21 2 -24 0 Z" fill="#DCCDB6" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
-                    <path d="M-16 -5 q 9 -4 18 -2 M-12 4 q 11 4 22 1" fill="none" stroke="#B0A08B" stroke-width="1.4" stroke-linecap="round"/>
-                    <circle cx="-1" cy="0" r="7" fill="#F6F9FB" stroke="#9FB6C0" stroke-width="1.8"/>
-                    <circle cx="-3" cy="-2.6" r="2.1" fill="#fff"/>
-                    <g class="dglint" fill="#FFF6D2"><circle cx="15" cy="-8" r="1.6"/><circle cx="-15" cy="11" r="1.4" style="animation-delay:.8s"/></g>
+                    <ellipse cx="1" cy="17" rx="25" ry="4" fill="#B0925F" opacity=".28"/>
+                    <path d="M-24 0 C-24 12 -8 20 10 18 C22 17 28 12 26 6 C24 2 16 4 10 6 C-4 10 -16 6 -24 0 Z" fill="url(#dgAnOyster)" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
+                    <path d="M-24 0 C-22 -12 -4 -18 12 -14 C20 -12 26 -8 26 -2 C18 4 2 6 -10 4 C-16 3 -21 2 -24 0 Z" fill="url(#dgAnOyster)" stroke="#12324A" stroke-width="2.4" stroke-linejoin="round"/>
+                    <g fill="none" stroke="#B0A08B" stroke-width="1.2" stroke-linecap="round" opacity=".9">
+                      <path d="M-20 -2 C-14 -8 -2 -12 10 -11"/>
+                      <path d="M-20 1 C-12 -3 0 -6 12 -6"/>
+                      <path d="M-19 5 C-10 4 0 5 10 8"/>
+                      <path d="M-15 9 C-6 9 3 11 12 13"/>
+                      <path d="M-10 -12 L-4 4 M0 -14 L4 5 M10 -12 L10 7"/>
+                    </g>
+                    <path d="M-20 -4 C-14 -10 -4 -13 6 -12" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+                    <circle cx="-1" cy="0" r="8.4" fill="url(#dgAnPearl)" opacity=".35"/>
+                    <circle cx="-1" cy="0" r="6.6" fill="url(#dgAnPearl)" stroke="#9FB6C0" stroke-width="1.6"/>
+                    <circle cx="-3.3" cy="-2.8" r="2.3" fill="#fff"/>
+                    <g class="dglint" fill="#FFF6D2"><circle cx="15" cy="-8" r="1.8"/><circle cx="-15" cy="11" r="1.5" style="animation-delay:.8s"/><circle cx="20" cy="1" r="1.2" style="animation-delay:.4s"/></g>
                   </g>
                 </g>
               </g>
@@ -488,22 +585,28 @@ document.getElementById("dworld").innerHTML = `
                   <g class="dlife" data-ia="dl_seabream" tabindex="0" role="button">
                     <g class="dbody">
                       <g transform="translate(-6 18) scale(.72)">
-                        <path d="M0 0 C6 -8 18 -8 24 0 C18 8 6 8 0 0 Z" fill="#DCE9EF" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/>
-                        <path d="M1 0 L-6 -6 L-4 0 L-6 6 Z" fill="#C3D6DF" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/>
-                        <path d="M9 -7 L9 7 M15 -6 L15 6" stroke="#12324A" stroke-width="2.2"/>
-                        <circle cx="20" cy="-1.6" r="1.2" fill="#12324A"/>
+                        <path d="M0 0 C6 -8 18 -8 24 0 C18 8 6 8 0 0 Z" fill="url(#dgAnSilver)" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/>
+                        <path d="M11 -6 C13 -10 16 -10 17 -6" fill="#BFD8E4" stroke="#12324A" stroke-width="1" stroke-linejoin="round"/>
+                        <path d="M10 1 C13 5 17 6 19 3" fill="none" stroke="#8FB3C3" stroke-width="1.2" stroke-linecap="round" opacity=".8"/>
+                        <path d="M1 0 L-6 -6 L-4 0 L-6 6 Z" fill="url(#dgAnSilver)" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/>
+                        <path d="M9 -7 L9 7 M15 -6 L15 6" stroke="#4F7C90" stroke-width="2.2"/>
+                        <circle cx="20" cy="-1.6" r="1.4" fill="#12324A"/><circle cx="20.5" cy="-2.1" r=".5" fill="#fff"/>
                       </g>
                       <g transform="translate(18 12) scale(.82)">
-                        <path d="M0 0 C6 -8 18 -8 24 0 C18 8 6 8 0 0 Z" fill="#DCE9EF" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/>
-                        <path d="M1 0 L-6 -6 L-4 0 L-6 6 Z" fill="#C3D6DF" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/>
-                        <path d="M9 -7 L9 7 M15 -6 L15 6" stroke="#12324A" stroke-width="2.2"/>
-                        <circle cx="20" cy="-1.6" r="1.2" fill="#12324A"/>
+                        <path d="M0 0 C6 -8 18 -8 24 0 C18 8 6 8 0 0 Z" fill="url(#dgAnSilver)" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/>
+                        <path d="M11 -6 C13 -10 16 -10 17 -6" fill="#BFD8E4" stroke="#12324A" stroke-width="1" stroke-linejoin="round"/>
+                        <path d="M10 1 C13 5 17 6 19 3" fill="none" stroke="#8FB3C3" stroke-width="1.2" stroke-linecap="round" opacity=".8"/>
+                        <path d="M1 0 L-6 -6 L-4 0 L-6 6 Z" fill="url(#dgAnSilver)" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/>
+                        <path d="M9 -7 L9 7 M15 -6 L15 6" stroke="#4F7C90" stroke-width="2.2"/>
+                        <circle cx="20" cy="-1.6" r="1.4" fill="#12324A"/><circle cx="20.5" cy="-2.1" r=".5" fill="#fff"/>
                       </g>
                       <g>
-                        <path d="M0 0 C6 -8 18 -8 24 0 C18 8 6 8 0 0 Z" fill="#DCE9EF" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/>
-                        <path d="M1 0 L-6 -6 L-4 0 L-6 6 Z" fill="#C3D6DF" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/>
-                        <path d="M9 -7 L9 7 M15 -6 L15 6" stroke="#12324A" stroke-width="2.2"/>
-                        <circle cx="20" cy="-1.6" r="1.2" fill="#12324A"/>
+                        <path d="M0 0 C6 -8 18 -8 24 0 C18 8 6 8 0 0 Z" fill="url(#dgAnSilver)" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/>
+                        <path d="M11 -6 C13 -10 16 -10 17 -6" fill="#BFD8E4" stroke="#12324A" stroke-width="1" stroke-linejoin="round"/>
+                        <path d="M10 1 C13 5 17 6 19 3" fill="none" stroke="#8FB3C3" stroke-width="1.2" stroke-linecap="round" opacity=".8"/>
+                        <path d="M1 0 L-6 -6 L-4 0 L-6 6 Z" fill="url(#dgAnSilver)" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/>
+                        <path d="M9 -7 L9 7 M15 -6 L15 6" stroke="#4F7C90" stroke-width="2.2"/>
+                        <circle cx="20" cy="-1.6" r="1.4" fill="#12324A"/><circle cx="20.5" cy="-2.1" r=".5" fill="#fff"/>
                       </g>
                     </g>
                   </g>
@@ -513,22 +616,31 @@ document.getElementById("dworld").innerHTML = `
                 <g class="dl-crawl dl-anim" style="--dur:3.4s">
                   <g class="dlife" data-ia="dl_brittlestar" tabindex="0" role="button">
                     <g class="dbody">
-                      <g fill="none" stroke="#12324A" stroke-width="5.4" stroke-linecap="round">
+                      <g fill="none" stroke="#12324A" stroke-width="6" stroke-linecap="round">
                         <path d="M0 0 C-3 -8 -1 -15 -7 -21"/>
                         <path d="M0 0 C7 -6 13 -7 20 -13"/>
                         <path d="M0 0 C9 3 17 4 25 2"/>
                         <path d="M0 0 C7 8 10 12 8 20"/>
                         <path d="M0 0 C-9 4 -16 3 -22 -3"/>
                       </g>
-                      <g fill="none" stroke="#E8B48C" stroke-width="3" stroke-linecap="round">
+                      <g fill="none" stroke="url(#dgAnCoral)" stroke-width="3.6" stroke-linecap="round">
                         <path d="M0 0 C-3 -8 -1 -15 -7 -21"/>
                         <path d="M0 0 C7 -6 13 -7 20 -13"/>
                         <path d="M0 0 C9 3 17 4 25 2"/>
                         <path d="M0 0 C7 8 10 12 8 20"/>
                         <path d="M0 0 C-9 4 -16 3 -22 -3"/>
                       </g>
-                      <circle cx="0" cy="0" r="4.6" fill="#F2BE96" stroke="#12324A" stroke-width="1.8"/>
+                      <g fill="none" stroke="#FFE2D1" stroke-width="1" stroke-linecap="round" opacity=".6">
+                        <path d="M0 -1 C-2 -8 0 -14 -5 -19"/>
+                        <path d="M1 -1 C7 -5 12 -7 18 -11"/>
+                        <path d="M1 1 C8 3 15 4 22 2"/>
+                        <path d="M1 1 C6 7 9 11 8 18"/>
+                        <path d="M-1 1 C-8 4 -14 3 -20 -2"/>
+                      </g>
+                      <g fill="#C4664B" opacity=".6"><circle cx="-3" cy="-10" r="1.1"/><circle cx="9" cy="-7" r="1"/><circle cx="13" cy="3" r="1"/><circle cx="6" cy="10" r=".9"/><circle cx="-10" cy="2" r="1"/></g>
+                      <circle cx="0" cy="0" r="4.8" fill="url(#dgAnCoral)" stroke="#12324A" stroke-width="1.8"/>
                       <circle cx="-1.4" cy="-1" r="1" fill="#12324A"/><circle cx="1.6" cy="-1" r="1" fill="#12324A"/>
+                      <circle cx="-1.7" cy="-1.4" r=".4" fill="#fff"/>
                     </g>
                   </g>
                 </g>
@@ -537,14 +649,17 @@ document.getElementById("dworld").innerHTML = `
                 <g class="dlife" data-ia="dl_coral" tabindex="0" role="button">
                   <g class="dbody">
                     <g class="dl-sway dl-anim" style="--dur:6.6s">
-                      <path d="M-2 0 C-4 -8 -10 -12 -18 -16 C-10 -16 -4 -12 -1 -6 C0 -14 4 -20 12 -26 C10 -16 6 -10 4 0 Z" fill="#E08A6E" stroke="#12324A" stroke-width="1.7" stroke-linejoin="round"/>
-                      <path d="M6 0 C8 -8 14 -14 24 -18 C18 -10 13 -5 11 0 Z" fill="#E8A87C" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/>
-                      <path d="M-10 0 C-14 -6 -20 -8 -28 -9 C-22 -3 -17 0 -13 1 Z" fill="#D97757" stroke="#12324A" stroke-width="1.5" stroke-linejoin="round"/>
+                      <path d="M-2 0 C-4 -8 -10 -12 -18 -16 C-10 -16 -4 -12 -1 -6 C0 -14 4 -20 12 -26 C10 -16 6 -10 4 0 Z" fill="url(#dgAnCoral)" stroke="#12324A" stroke-width="1.7" stroke-linejoin="round"/>
+                      <path d="M6 0 C8 -8 14 -14 24 -18 C18 -10 13 -5 11 0 Z" fill="url(#dgAnCoral)" stroke="#12324A" stroke-width="1.6" stroke-linejoin="round"/>
+                      <path d="M-10 0 C-14 -6 -20 -8 -28 -9 C-22 -3 -17 0 -13 1 Z" fill="url(#dgAnCoral)" stroke="#12324A" stroke-width="1.5" stroke-linejoin="round"/>
+                      <path d="M-4 -7 C-1 -12 2 -17 7 -21 M-14 -12 C-17 -14 -21 -16 -25 -18" fill="none" stroke="#FFD8C4" stroke-width="1.2" stroke-linecap="round" opacity=".55"/>
                     </g>
-                    <g fill="#F2BE96" stroke="#12324A" stroke-width="1.1">
+                    <g fill="#FFD9C4" stroke="#12324A" stroke-width="1.1">
                       <circle cx="-18" cy="-17" r="2.4"/><circle cx="11" cy="-26" r="2.4"/><circle cx="25" cy="-18" r="2.1"/><circle cx="-28" cy="-9" r="2"/>
+                      <circle cx="-18.6" cy="-17.6" r=".8" fill="#fff" stroke="none"/><circle cx="10.4" cy="-26.7" r=".8" fill="#fff" stroke="none"/>
                     </g>
-                    <ellipse cx="-2" cy="2" rx="30" ry="5" fill="#C9A46A" stroke="#B0925F" stroke-width="1.2"/>
+                    <g fill="#C4664B" opacity=".55"><circle cx="-10" cy="-6" r="1"/><circle cx="0" cy="-10" r=".8"/><circle cx="18" cy="-12" r=".9"/><circle cx="-22" cy="-6" r=".8"/></g>
+                    <ellipse cx="-2" cy="2" rx="30" ry="5" fill="url(#dgAnSand)" stroke="#B0925F" stroke-width="1.2"/>
                   </g>
                 </g>
               </g>
